@@ -1,28 +1,45 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
+  .react-typeahead-options {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    border: 1px solid #ccc;
+    cursor: default;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 100%;
+  }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
+  .react-typeahead-options {
+    margin-left: -8px;
+  }
 
-.App-title {
-  font-size: 1.5em;
-}
+  .react-typeahead-options li[role="option"] {
+    padding: 5px;
+    text-align: left;
+    cursor: pointer;
+  }
 
-.App-intro {
-  font-size: large;
-}
+  .react-typeahead-options li[role="option"][aria-selected="true"] {
+    background: #00bcd4;
+    color: white;
+    font-weight: bold;
+  }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+  .react-typeahead-container {
+    border: 1px solid #024e6a;
+    padding: 5px 8px;
+    border-radius: 0px;
+    background-color: white;
+    margin: 0 auto
+  }
+
+  .react-typeahead-input {
+    position: relative;
+    background: white;
+    outline: none;
+    width: 100%;
+    font-size: 24px;
+    line-height: 30px;
+    border: none;
+  }
