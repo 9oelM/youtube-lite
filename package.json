@@ -3,16 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^1.3.0",
+    "@material-ui/icons": "^1.1.0",
     "ajv": "^6.5.1",
+    "material-ui-youtube-autocomplete": "^2.0.0",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
     "react-scripts": "1.1.4",
-    "react-youtube-autocomplete": "^1.0.20"
+    "react-youtube": "^7.6.0",
+    "typeface-roboto": "0.0.54"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sass": "node-sass-chokidar ./src/styles/source/master.sass -o ./src/styles/output --watch --output-style \"compressed\"",
+    "start-and-watch": "npm-run-all --parallel sass start"
+  },
+  "devDependencies": {
+    "node-sass-chokidar": "^1.3.0",
+    "npm-run-all": "^4.1.3"
   }
 }
