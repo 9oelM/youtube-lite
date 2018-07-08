@@ -1,22 +1,29 @@
-import React, { Component } from 'react'
 // components
-import SearchField from './components/SearchField'
+
+import React, { Component } from "react";
+import "typeface-roboto";
+
+// pages
+
+import Home from "./pages/Home";
+import SearchResultView from "./pages/SearchResultView";
+import VideoPlayerView from "./pages/VideoPlayerView";
+
 // misc
-import "./styles/output/master.css"
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Route, Link } from "react-router-dom";
+import "./styles/output/master.css";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 class App extends Component {
   render() {
     return (
       <div>
-      <CssBaseline />
-      <SearchField />
+        <CssBaseline />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/searchResultView" component={SearchResultView} />
+        <Route exact path="/videoPlayerView" component={VideoPlayerView} />
       </div>
-    )
-  }
-  
-  showResults(results) {
-    console.log(results)
+    );
   }
 }
 
