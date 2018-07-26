@@ -1,27 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import SearchField from "./SearchField";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import SearchField from './SearchField'
+import YoutubeAutocomplete from 'new-material-react-youtube-autocomplete'
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   menuButton: {
-    marginLeft: -12
-  }
-};
+    marginLeft: -12,
+  },
+}
 
 class TopNav extends React.Component {
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
 
     return (
       <div className={classes.root}>
@@ -34,16 +35,19 @@ class TopNav extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <SearchField />
+            <YoutubeAutocomplete
+              apiKey="AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28"
+              placeholderText="Search youtube"
+            />
           </Toolbar>
         </AppBar>
       </div>
-    );
+    )
   }
 }
 
 TopNav.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+  classes: PropTypes.object.isRequired,
+}
 
-export default withStyles(styles)(TopNav);
+export default withStyles(styles)(TopNav)

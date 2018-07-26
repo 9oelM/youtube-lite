@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react'
 
-const SearchResultView = () => {};
+const SearchResultView = () => {}
 
-export default SearchResultView;
+export default SearchResultView
