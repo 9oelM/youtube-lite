@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles, createMuiTheme } from '@material-ui/core/styles'
+import Colors from '@material-ui/core/colors'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
-import SearchField from './SearchField'
 import YoutubeAutocomplete from 'new-material-react-youtube-autocomplete'
 
 const styles = {
@@ -19,7 +19,6 @@ const styles = {
     marginLeft: -12,
   },
 }
-
 class TopNav extends React.Component {
   render() {
     const { classes } = this.props
@@ -36,8 +35,13 @@ class TopNav extends React.Component {
               <MenuIcon />
             </IconButton>
             <YoutubeAutocomplete
-              apiKey="AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28"
+              option={{
+                maxResults: 15,
+                type: ['video', 'playlist'],
+                key: 'AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28',
+              }}
               placeholderText="Search youtube"
+              onSearchResults={results=>console.log(results)}
             />
           </Toolbar>
         </AppBar>
