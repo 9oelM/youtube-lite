@@ -10,7 +10,7 @@
     "downshift": "^2.0.10",
     "es6-promise": "^4.2.4",
     "isomorphic-fetch": "^2.2.1",
-    "new-material-react-youtube-autocomplete": "^0.3.0",
+    "new-material-react-youtube-autocomplete": "^0.3.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router": "^4.3.1",
@@ -26,7 +26,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "sass": "node-sass-chokidar ./src/styles/source/master.sass -o ./src/styles/output --watch --output-style \"compressed\"",
-    "prettier": "onchange '**/*.js' -- prettier --write {{changed}}",
+    "prettier": "onchange 'src/**/*.js' -- prettier --write {{changed}}",
     "watch": "npm-run-all --parallel sass prettier",
     "sw": "npm-run-all --parallel start watch"
   },
