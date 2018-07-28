@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "sass": "node-sass-chokidar ./src/styles/source/master.sass -o ./src/styles/output --watch --output-style \"compressed\"",
+    "sass": "node-sass-chokidar ./src/styles/source/ -o ./src/styles/output --watch --output-style \"compressed\"",
     "prettier": "onchange '**/*.js' -- prettier --write {{changed}}",
     "watch": "npm-run-all --parallel sass prettier",
     "sw": "npm-run-all --parallel start watch"
