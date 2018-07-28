@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react'
+import AnimatedWrapper from '../wrapper/AnimatedWrapper'
+const VideoPlayerView = () => {}
 
-const VideoPlayerView = () => {};
-
-export default VideoPlayerView;
+export default AnimatedWrapper(VideoPlayerView)

@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import AnimatedWrapper from '../wrapper/AnimatedWrapper'
 
 const Home = ({ isEng = true }) => {
   const captionEng = `No more wasting time on watching random, irrelevant videos on youtube. Feel guilty by looking at the statistics you generate.`
@@ -20,4 +21,4 @@ const Home = ({ isEng = true }) => {
   )
 }
 
-export default Home
+export default AnimatedWrapper(Home)
