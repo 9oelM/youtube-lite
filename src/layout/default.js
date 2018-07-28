@@ -4,7 +4,7 @@ import TopNav from '../components/TopNav/TopNav'
 
 const defaultLayout = ({ children }) => {
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} id="layout">
       <TopNav />
       {children}
     </Grid>
