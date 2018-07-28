@@ -5,7 +5,6 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
-import SearchField from './SearchField'
 import YoutubeAutocomplete from 'new-material-react-youtube-autocomplete'
 
 const styles = {
@@ -36,7 +35,11 @@ class TopNav extends React.Component {
               <MenuIcon />
             </IconButton>
             <YoutubeAutocomplete
-              apiKey="AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28"
+              option={{
+                key: 'AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28',
+                type: ['video', 'playist'],
+                maxResults: 15,
+              }}
               placeholderText="Search youtube"
             />
           </Toolbar>
