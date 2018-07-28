@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles, createMuiTheme } from '@material-ui/core/styles'
+import Colors from '@material-ui/core/colors'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -18,7 +19,6 @@ const styles = {
     marginLeft: -12,
   },
 }
-
 class TopNav extends React.Component {
   render() {
     const { classes } = this.props
@@ -41,6 +41,7 @@ class TopNav extends React.Component {
                 maxResults: 15,
               }}
               placeholderText="Search youtube"
+              onSearchResults={results => console.log(results)}
             />
           </Toolbar>
         </AppBar>

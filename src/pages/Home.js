@@ -12,7 +12,7 @@ const Home = ({ isEng = true }) => {
     <Grid style={{ padding: 16 }}>
       <Card>
         <CardContent>
-          <Typography variant="headline">Limited Youtube</Typography>
+          <Typography variant="headline">Youtube Lite</Typography>
           <Typography variant="caption">{caption}</Typography>
         </CardContent>
       </Card>
