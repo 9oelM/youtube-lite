@@ -30,7 +30,7 @@ class TopNav extends React.Component {
     } = this.props
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} id="TopNav">
         <Drawer isDrawerOpen={isDrawerOpen} onToggle={onToggle} />
         <AppBar position="static">
           <Toolbar>
