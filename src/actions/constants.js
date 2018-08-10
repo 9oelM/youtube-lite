@@ -1,6 +1,7 @@
-const constants = {
+const C = {
   GET_SEARCH_RESULTS: 'GET_SEARCH_RESULTS',
   REQUEST_SEARCH: 'REQUEST_SEARCH',
+  TOGGLE_DRAWER: 'TOGGLE_DRAWER',
 }
 
-export default constants
+export default C

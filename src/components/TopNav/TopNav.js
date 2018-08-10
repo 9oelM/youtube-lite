@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import YoutubeAutocomplete from 'new-material-react-youtube-autocomplete'
+import Drawer from '../Drawer/Drawer'
 
 const styles = {
   root: {
@@ -20,16 +21,18 @@ const styles = {
 }
 class TopNav extends React.Component {
   render() {
-    const { classes, onSearchResults, onSearchError } = this.props
+    const { classes, onToggle, isDrawerOpen } = this.props
 
     return (
       <div className={classes.root}>
+        <Drawer isDrawerOpen={isDrawerOpen} onToggle={onToggle} />
         <AppBar position="static">
           <Toolbar>
             <IconButton
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
+              onClick={onToggle}
             >
               <MenuIcon />
             </IconButton>

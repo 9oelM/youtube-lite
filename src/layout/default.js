@@ -1,11 +1,11 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import TopNav from '../components/TopNav/TopNav'
+import { TopNavContainer } from '../components/Containers/index.js'
 
 const defaultLayout = ({ children }) => {
   return (
     <Grid item xs={12} id="layout">
-      <TopNav />
+      <TopNavContainer />
       {children}
     </Grid>
   )

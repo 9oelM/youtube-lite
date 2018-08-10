@@ -3,6 +3,7 @@ import C from '../actions/constants'
 
 const initialState = {
   searchResults: [], // nothing is received as a result yet
+  isDrawerOpen: false,
 }
 
 function youtubeLiteView(state = initialState, action) {
@@ -10,7 +11,12 @@ function youtubeLiteView(state = initialState, action) {
     // return new objects instead of modifying them
     case C.GET_SEARCH_RESULTS:
       return {
-        state,
+        ...state,
+      }
+    case C.TOGGLE_DRAWER:
+      return {
+        ...state,
+        isDrawerOpen: !state.isDrawerOpen,
       }
     default:
       return state
