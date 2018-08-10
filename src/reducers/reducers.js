@@ -1,19 +1,15 @@
 import { combineReducers } from 'redux'
-import C from '../actions/constants'
+import {
+  REQUEST_SEARCH,
+  RECEIVE_SEARCH,
+  TOGGLE_DRAWER
+} from '../actions/constants'
 
-const initialState = {
-  searchResults: [], // nothing is received as a result yet
+function viewReducer(state = {
   isDrawerOpen: false,
-}
-
-function youtubeLiteView(state = initialState, action) {
+}, action) {
   switch (action.type) {
-    // return new objects instead of modifying them
-    case C.GET_SEARCH_RESULTS:
-      return {
-        ...state,
-      }
-    case C.TOGGLE_DRAWER:
+    case TOGGLE_DRAWER:
       return {
         ...state,
         isDrawerOpen: !state.isDrawerOpen,
@@ -26,8 +22,32 @@ function youtubeLiteView(state = initialState, action) {
   }
 }
 
-const App = combineReducers({
-  youtubeLiteView,
+function searchReducer(state = {
+  searchResults: [], // nothing is received as a result yet
+  isFetching: false,
+  searchWord: ''
+}, action){
+  switch(action.type){
+    // return new objects instead of modifying them
+    case REQUEST_SEARCH:
+      return {
+        ...state,
+        isFetching: true,
+        searchWord: action.searchWord
+      }
+    case RECEIVE_SEARCH:
+      return {
+        ...state,
+        isFetching: false,
+        searchResults: action.searchResults
+      }
+    default:
+      return state
+  }
+}
+const rootReducer = combineReducers({
+  viewReducer,
+  searchReducer
 })
 
-export default App
+export default rootReducer
