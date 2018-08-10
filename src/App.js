@@ -15,6 +15,7 @@ import { Route, Link } from 'react-router-dom'
 import 'typeface-roboto'
 import './styles/output/master.css'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import './modules/resize'
 
 class App extends Component {
   render() {
