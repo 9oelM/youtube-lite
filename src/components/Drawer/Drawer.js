@@ -6,7 +6,7 @@ import DrawerItems from './DrawerItems'
 
 const Drawer2 = ({ isDrawerOpen, onToggle }) => {
   return (
-    <Drawer open={isDrawerOpen} anchor="left" onClose={onToggle}>
+    <Drawer open={isDrawerOpen} anchor="left" onClose={onToggle} id="drawer">
       <div tabIndex={0} role="button" onClick={onToggle} onKeyDown={onToggle}>
         <DrawerItems />
       </div>
