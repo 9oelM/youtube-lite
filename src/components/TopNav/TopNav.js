@@ -21,7 +21,13 @@ const styles = {
 }
 class TopNav extends React.Component {
   render() {
-    const { classes, onToggle, isDrawerOpen } = this.props
+    const {
+      classes,
+      onToggle,
+      isDrawerOpen,
+      onSearchTrigger,
+      onSearchResults,
+    } = this.props
 
     return (
       <div className={classes.root}>
@@ -43,8 +49,8 @@ class TopNav extends React.Component {
                 maxResults: 15,
               }}
               placeholderText="Search youtube"
-              onSearchResults={results => console.log(results)}
-              onSearchError={error => console.log(error)}
+              onSearchResults={results => onSearchResults(results)}
+              onSearchTrigger={searchWord => onSearchTrigger(searchWord)}
             />
           </Toolbar>
         </AppBar>

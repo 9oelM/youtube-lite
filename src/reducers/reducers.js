@@ -1,15 +1,14 @@
 import { combineReducers } from 'redux'
-import {
-  REQUEST_SEARCH,
-  RECEIVE_SEARCH,
-  TOGGLE_DRAWER
-} from '../actions/constants'
+import C from '../actions/constants'
 
-function viewReducer(state = {
-  isDrawerOpen: false,
-}, action) {
+function viewReducer(
+  state = {
+    isDrawerOpen: false,
+  },
+  action
+) {
   switch (action.type) {
-    case TOGGLE_DRAWER:
+    case C.TOGGLE_DRAWER:
       return {
         ...state,
         isDrawerOpen: !state.isDrawerOpen,
@@ -22,24 +21,27 @@ function viewReducer(state = {
   }
 }
 
-function searchReducer(state = {
-  searchResults: [], // nothing is received as a result yet
-  isFetching: false,
-  searchWord: ''
-}, action){
-  switch(action.type){
+function searchReducer(
+  state = {
+    searchResults: [], // nothing is received as a result yet
+    isFetching: false,
+    searchWord: '',
+  },
+  action
+) {
+  switch (action.type) {
     // return new objects instead of modifying them
-    case REQUEST_SEARCH:
+    case C.REQUEST_SEARCH:
       return {
         ...state,
         isFetching: true,
-        searchWord: action.searchWord
+        searchWord: action.searchWord,
       }
-    case RECEIVE_SEARCH:
+    case C.RECEIVE_SEARCH:
       return {
         ...state,
         isFetching: false,
-        searchResults: action.searchResults
+        searchResults: action.searchResults,
       }
     default:
       return state
@@ -47,7 +49,7 @@ function searchReducer(state = {
 }
 const rootReducer = combineReducers({
   viewReducer,
-  searchReducer
+  searchReducer,
 })
 
 export default rootReducer
