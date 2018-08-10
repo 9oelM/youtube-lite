@@ -4,13 +4,18 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import { AppContainer } from 'react-hot-loader'
+import { Provider } from 'react-redux'
+import store from './store/index'
+
 const render = Component =>
   ReactDOM.render(
-    <AppContainer>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AppContainer>,
+    <Provider store={store}>
+      <AppContainer>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AppContainer>
+    </Provider>,
     document.getElementById('root')
   )
 registerServiceWorker()
