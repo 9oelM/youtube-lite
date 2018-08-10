@@ -15,7 +15,7 @@ const AnimatedWrapper = WrappedComponent =>
     componentWillEnter(cb) {
       setTimeout(
         () => Animated.spring(this.state.animate, { toValue: 1 }).start(),
-        250,
+        250
       )
       cb()
     }
