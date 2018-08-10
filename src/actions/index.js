@@ -14,10 +14,3 @@ export const toggleDrawer = isDrawerOpen => ({
   type: C.TOGGLE_DRAWER,
   isDrawerOpen,
 })
-
-// Thunk action creator
-export function fetchSearchResults(searchWord){
-  return (dispatch) => {
-    dispatch(requestSearch(searchWord))
-  }
-}
