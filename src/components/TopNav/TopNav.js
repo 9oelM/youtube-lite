@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import YoutubeAutocomplete from 'new-material-react-youtube-autocomplete'
 import Drawer from '../Drawer/Drawer'
+import { withRouter } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -20,6 +21,10 @@ const styles = {
   },
 }
 class TopNav extends React.Component {
+  handleRedirection = () => {
+    this.props.history.push('/searchResultView')
+  }
+
   render() {
     const {
       classes,
@@ -49,8 +54,13 @@ class TopNav extends React.Component {
                 maxResults: 15,
               }}
               placeholderText="Search youtube"
-              onSearchResults={results => onSearchResults(results)}
-              onSearchTrigger={searchWord => onSearchTrigger(searchWord)}
+              onSearchResults={results => {
+                onSearchResults(results)
+                this.handleRedirection()
+              }}
+              onSearchTrigger={searchWord => {
+                onSearchTrigger(searchWord)
+              }}
             />
           </Toolbar>
         </AppBar>
@@ -63,4 +73,4 @@ TopNav.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(TopNav)
+export default withStyles(styles)(withRouter(TopNav))

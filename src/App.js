@@ -9,7 +9,7 @@ import VideoPlayerView from './pages/VideoPlayerView'
 
 // react
 import React, { Component, Fragment } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 // styles
 import 'typeface-roboto'
@@ -21,12 +21,10 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Layout>
-          <CssBaseline />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/searchResultView" component={SearchResultView} />
-          <Route exact path="/videoPlayerView" component={VideoPlayerView} />
-        </Layout>
+        <CssBaseline />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/searchResultView" component={SearchResultView} />
+        <Route exact path="/videoPlayerView" component={VideoPlayerView} />
       </Fragment>
     )
   }
