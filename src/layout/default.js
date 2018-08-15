@@ -5,7 +5,6 @@ import { TopNavContainer } from '../components/Containers/index.js'
 const defaultLayout = ({ children }) => {
   return (
     <Grid item xs={12} id="layout">
-      <TopNavContainer />
       {children}
     </Grid>
   )

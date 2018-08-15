@@ -1,5 +1,5 @@
 // layout
-import Layout from './layout/default'
+import OuterLayout from './layout/default'
 
 // pages
 
@@ -21,10 +21,12 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <CssBaseline />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/searchResultView" component={SearchResultView} />
-        <Route exact path="/videoPlayerView" component={VideoPlayerView} />
+        <OuterLayout>
+          <CssBaseline />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/searchResultView" component={SearchResultView} />
+          <Route exact path="/videoPlayerView" component={VideoPlayerView} />
+        </OuterLayout>
       </Fragment>
     )
   }

@@ -4,10 +4,12 @@ import React from 'react'
 
 const ContentPage = ({ children }) => {
   return (
-    <Grid id="ContentPage" style={{ padding: 16 }}>
+    <React.Fragment>
       <TopNavContainer />
-      {children}
-    </Grid>
+      <Grid id="ContentPage" style={{ padding: 16 }}>
+        {children}
+      </Grid>
+    </React.Fragment>
   )
 }
 
