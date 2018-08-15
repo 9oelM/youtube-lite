@@ -9,13 +9,12 @@ import VideoPlayerView from './pages/VideoPlayerView'
 
 // react
 import React, { Component, Fragment } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 
 // styles
 import 'typeface-roboto'
 import './styles/output/master.css'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import './modules/resize'
 
 class App extends Component {
   render() {
@@ -32,4 +31,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withRouter(App)
