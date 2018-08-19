@@ -13,7 +13,7 @@ const searchResultCard = ({ title, author, img, description, onClick, id }) => {
         <Card square className="searchResultCardInner">
           <CardContent>
             <Typography align="left" variant="title">
-              {title.length > 60 ? `${title.substring(0.6)}...` : title}
+              {title.length > 60 ? `${title.substring(0, 60)}...` : title}
             </Typography>
             <Typography
               align="left"
@@ -23,8 +23,8 @@ const searchResultCard = ({ title, author, img, description, onClick, id }) => {
           <CardMedia className="searchResultMedia" image={img} title={title} />
           <CardContent>
             <Typography align="left" variant="body1">
-              {description.length > 100
-                ? `${description.substring(0, 100)}...`
+              {description.length > 80
+                ? `${description.substring(0, 80)}...`
                 : description}
             </Typography>
           </CardContent>
