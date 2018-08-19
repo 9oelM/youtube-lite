@@ -8,12 +8,12 @@ import Grid from '@material-ui/core/Grid'
 
 const searchResultCard = ({ title, author, img, description, onClick, id }) => {
   return (
-    <Grid item>
+    <Grid className="searchResultCardWrapper">
       <ButtonBase className="searchResultCard" id={id} onClick={onClick}>
-        <Card square>
+        <Card square className="searchResultCardInner">
           <CardContent>
             <Typography align="left" variant="title">
-              {title}
+              {title.length > 60 ? `${title.substring(0.6)}...` : title}
             </Typography>
             <Typography
               align="left"
@@ -23,7 +23,9 @@ const searchResultCard = ({ title, author, img, description, onClick, id }) => {
           <CardMedia className="searchResultMedia" image={img} title={title} />
           <CardContent>
             <Typography align="left" variant="body1">
-              {description}
+              {description.length > 100
+                ? `${description.substring(0, 100)}...`
+                : description}
             </Typography>
           </CardContent>
         </Card>

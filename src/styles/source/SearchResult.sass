@@ -1,14 +1,28 @@
+$defaultWidth: 320px
+$defaultHeight: 420px
+$defaultMediaHeight: 180px
+$ratio: 0.8
+$oneColumnListBreakPoint: 591px
+
 .searchResultMedia
-    width: 320px
-    height: 180px
+    width: $defaultWidth
+    height: $defaultMediaHeight
     
-.searchResultCard
-    width: 320px
+.searchResultCardWrapper
+    height: $defaultHeight
+    width: $defaultWidth
     
-@media screen and (max-width: 320px) 
+.searchResultCardInner, .searchResultCard
+    height: $defaultHeight * 0.95
+    width: $defaultWidth * 0.95
+
+@media screen and (max-width: $defaultWidth) 
     .searchResultMedia
-        width: calc(320px * 0.8)
-        height: calc(180px * 0.8)
+        width: calc($defaultWidth * $ratio)
+        height: calc($defaultMediaHeight * $ratio)
     .searchResultCard
-        width: calc(320px * 0.8)
+        width: calc($defaultWidth * $ratio)
  
+@media screen and (max-width: $oneColumnListBreakPoint)
+ .searchResultCardWrapper
+     width: auto
