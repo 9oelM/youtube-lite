@@ -1,19 +1,29 @@
 import React from 'react'
 import YouTube from 'react-youtube'
+import Paper from '@material-ui/core/Paper'
 
 class VideoPlayer extends React.Component {
   render() {
     const opts = {
-      height: '390',
-      width: '640',
+      height: '100%',
+      width: '100%',
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
       },
     }
-    const { vId } = this.props
+    const { videoId } = this.props
 
-    return <YouTube videoId={vId} opts={opts} onReady={this._onReady} />
+    return (
+      <Paper
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <YouTube videoId={videoId} opts={opts} onReady={this._onReady} />
+      </Paper>
+    )
   }
 
   _onReady(event) {

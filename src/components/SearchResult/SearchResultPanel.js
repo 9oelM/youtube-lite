@@ -10,6 +10,7 @@ class SearchResultPanel extends React.Component {
     super()
     this.state = {
       anchor: null,
+      videoId: '',
       cards: [],
       maxCardNum: 0,
     }
@@ -25,6 +26,7 @@ class SearchResultPanel extends React.Component {
     let clickedCard = this.findClickedCard(event, this.state.cards)
     console.log(`left: ${clickedCard.offsetLeft + clickedCard.clientWidth / 2}
     top: ${clickedCard.offsetTop + clickedCard.clientHeight / 2}
+    id: ${clickedCard.id}
     `)
 
     this.setState({
@@ -32,12 +34,14 @@ class SearchResultPanel extends React.Component {
         left: clickedCard.offsetLeft + clickedCard.clientWidth / 2,
         top: clickedCard.offsetTop + clickedCard.clientHeight / 2,
       },
+      videoId: clickedCard.id,
     })
   }
 
   handleClose = () => {
     this.setState({
       anchor: null,
+      videoId: '',
     })
   }
 
@@ -49,7 +53,8 @@ class SearchResultPanel extends React.Component {
 
   render() {
     const { searchResults } = this.props
-    const { anchor } = this.state
+    console.log(searchResults)
+    const { anchor, videoId } = this.state
     let open = Boolean(anchor)
     console.log('A: ' + this.state.anchor)
     return (
@@ -63,8 +68,7 @@ class SearchResultPanel extends React.Component {
                 author={item.channelTitle}
                 description={item.description}
                 img={item.thumbnails.medium.url}
-                id={`card-${i}`}
-                vId={item.id}
+                id={item.id}
                 onClick={e => this.handleClick(e, i)}
               />
             )
@@ -84,7 +88,7 @@ class SearchResultPanel extends React.Component {
               horizontal: 'center',
             }}
           >
-            <VideoPlayer />
+            <VideoPlayer videoId={videoId} />
           </Popover>
         </Grid>
       </Grid>
