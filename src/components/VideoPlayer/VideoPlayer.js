@@ -5,8 +5,8 @@ import Paper from '@material-ui/core/Paper'
 class VideoPlayer extends React.Component {
   render() {
     const opts = {
-      height: '100%',
-      width: '100%',
+      height: '500px',
+      width: '500px',
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
@@ -14,16 +14,7 @@ class VideoPlayer extends React.Component {
     }
     const { videoId } = this.props
 
-    return (
-      <Paper
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
-      >
-        <YouTube videoId={videoId} opts={opts} onReady={this._onReady} />
-      </Paper>
-    )
+    return <YouTube videoId={videoId} opts={opts} onReady={this._onReady} />
   }
 
   _onReady(event) {
