@@ -1,6 +1,8 @@
 import React from 'react'
-const VideoPlayerView = () => {
-  return <h1>hi</h1>
+import { withRouter } from 'react-router-dom'
+import VideoPlayerPanel from '../components/VideoPlayer/VideoPlayerPanel'
+const VideoPlayerView = ({ match }) => {
+  return <VideoPlayerPanel vId={match.params.id} />
 }
 
-export default VideoPlayerView
+export default withRouter(VideoPlayerView)
