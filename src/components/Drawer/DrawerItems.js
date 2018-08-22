@@ -8,27 +8,39 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import SettingsIcon from '@material-ui/icons/Settings'
+
+import DashboardIcon from '@material-ui/icons/Dashboard'
 import FavBorderIcon from '@material-ui/icons/FavoriteBorder'
+import { Link } from 'react-router-dom'
 
 const DrawerItems = () => {
   return (
     <div>
       <List>
-        <Divider />
         <ListItem button>
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
+          <Link to="/">
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </Link>
         </ListItem>
-        <Divider />
         <ListItem button>
-          <ListItemIcon>
-            <FavBorderIcon />
-          </ListItemIcon>
-          <ListItemText primary="About" />
+          <Link to="/Settings">
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </Link>
         </ListItem>
-        <Divider />
+        <ListItem button>
+          <Link to="/About">
+            <ListItemIcon>
+              <FavBorderIcon />
+            </ListItemIcon>
+            <ListItemText primary="About" />
+          </Link>
+        </ListItem>
       </List>
     </div>
   )
