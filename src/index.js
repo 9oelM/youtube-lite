@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import { AppContainer } from 'react-hot-loader'
@@ -11,9 +11,9 @@ const render = Component =>
   ReactDOM.render(
     <Provider store={store}>
       <AppContainer>
-        <BrowserRouter>
+        <HashRouter>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </AppContainer>
     </Provider>,
     document.getElementById('root')
