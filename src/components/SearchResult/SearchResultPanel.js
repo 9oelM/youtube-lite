@@ -12,6 +12,7 @@ class SearchResultPanel extends React.Component {
           {searchResults.map(item => {
             return (
               <Card
+                key={shortid.generate()}
                 title={item.title}
                 author={item.channelTitle}
                 description={item.description}
