@@ -24,7 +24,7 @@ class App extends Component {
           <CssBaseline />
           <Route exact path="/" component={Home} />
           <Route exact path="/searchResultView" component={SearchResultView} />
-          <Route path="/videoPlayerView:id" component={VideoPlayerView} />
+          <Route path="/videoPlayerView/:id" component={VideoPlayerView} />
         </OuterLayout>
       </Fragment>
     )

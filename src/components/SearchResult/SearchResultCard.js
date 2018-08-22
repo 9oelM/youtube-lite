@@ -5,11 +5,24 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import ButtonBase from '@material-ui/core/ButtonBase'
 import Grid from '@material-ui/core/Grid'
-
-const searchResultCard = ({ title, author, img, description, onClick, id }) => {
+import { withRouter } from 'react-router-dom'
+const searchResultCard = ({
+  title,
+  author,
+  img,
+  description,
+  onClick,
+  vId,
+  history,
+}) => {
   return (
     <Grid className="searchResultCardWrapper">
-      <ButtonBase className="searchResultCard" id={id} onClick={onClick}>
+      <ButtonBase
+        className="searchResultCard"
+        onClick={() => {
+          history.push(`/videoPlayerView/${vId}`)
+        }}
+      >
         <Card square className="searchResultCardInner">
           <CardContent>
             <Typography align="left" variant="title">
@@ -34,4 +47,4 @@ const searchResultCard = ({ title, author, img, description, onClick, id }) => {
   )
 }
 
-export default searchResultCard
+export default withRouter(searchResultCard)

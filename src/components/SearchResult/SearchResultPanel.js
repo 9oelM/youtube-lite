@@ -17,6 +17,7 @@ class SearchResultPanel extends React.Component {
                 author={item.channelTitle}
                 description={item.description}
                 img={item.thumbnails.medium.url}
+                vId={item.id}
               />
             )
           })}
