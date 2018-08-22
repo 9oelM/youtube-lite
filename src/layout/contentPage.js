@@ -8,15 +8,17 @@ class ContentPage extends React.Component {
     setContentPagePaddingEqual()
   }
 
+  componentDidUpdate() {
+    setContentPagePaddingEqual()
+  }
+
   render() {
     const { children } = this.props
 
     return (
       <React.Fragment>
         <TopNavContainer />
-        <Grid id="ContentPage" style={{ padding: 16 }}>
-          {children}
-        </Grid>
+        <Grid id="ContentPage">{children}</Grid>
       </React.Fragment>
     )
   }
