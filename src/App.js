@@ -23,7 +23,10 @@ class App extends Component {
         <OuterLayout>
           <CssBaseline />
           <Route exact path="/" component={Home} />
-          <Route exact path="/searchResultView" component={SearchResultView} />
+          <Route
+            path="/searchResultView/:searchWord"
+            component={SearchResultView}
+          />
           <Route path="/videoPlayerView/:id" component={VideoPlayerView} />
         </OuterLayout>
       </Fragment>
