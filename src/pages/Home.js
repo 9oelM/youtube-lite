@@ -9,12 +9,14 @@ const Home = ({ isEng = true }) => {
   const caption = isEng ? captionEng : captionKor
   return (
     <ContentGrid>
-      <Card>
-        <CardContent>
-          <Typography variant="headline">Youtube Lite</Typography>
-          <Typography variant="caption">{caption}</Typography>
-        </CardContent>
-      </Card>
+      <div style={{ padding: '16px' }}>
+        <Card>
+          <CardContent>
+            <Typography variant="headline">Youtube Lite</Typography>
+            <Typography variant="subheading">{caption}</Typography>
+          </CardContent>
+        </Card>
+      </div>
     </ContentGrid>
   )
 }
