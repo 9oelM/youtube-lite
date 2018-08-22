@@ -56,10 +56,10 @@ class TopNav extends React.Component {
               placeholderText="Search youtube"
               onSearchResults={results => {
                 onSearchResults(results)
-                history.push('/searchResultView')
               }}
               onSearchTrigger={searchWord => {
                 onSearchTrigger(searchWord)
+                history.push(`/searchResultView/${searchWord}`)
               }}
             />
           </Toolbar>
