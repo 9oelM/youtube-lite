@@ -24,11 +24,11 @@ class App extends Component {
           <CssBaseline />
           <Route exact path="/" component={Home} />
           <Route exact path="/searchResultView" component={SearchResultView} />
-          <Route exact path="/videoPlayerView" component={VideoPlayerView} />
+          <Route path="/videoPlayerView:id" component={VideoPlayerView} />
         </OuterLayout>
       </Fragment>
     )
   }
 }
 
-export default withRouter(App)
+export default App
