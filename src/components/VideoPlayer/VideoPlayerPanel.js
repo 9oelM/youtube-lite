@@ -1,12 +1,12 @@
 import React from 'react'
 import VideoPlayer from './VideoPlayer'
-import Paper from '@material-ui/core/Paper'
+import Card from '@material-ui/core/Card'
 
 const videoPlayerPanel = ({ vId }) => {
   return (
-    <Paper>
+    <Card>
       <VideoPlayer videoId={vId} />
-    </Paper>
+    </Card>
   )
 }
 
