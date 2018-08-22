@@ -23,9 +23,6 @@ const styles = {
 class TopNav extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      search: false,
-    }
   }
 
   render() {
@@ -35,12 +32,8 @@ class TopNav extends React.Component {
       isDrawerOpen,
       onSearchTrigger,
       onSearchResults,
+      history,
     } = this.props
-    const { search } = this.state
-
-    if (search) {
-      return <Redirect push to="/searchResultView" />
-    }
     return (
       <div className={classes.root} id="TopNav">
         <Drawer isDrawerOpen={isDrawerOpen} onToggle={onToggle} />
@@ -63,7 +56,7 @@ class TopNav extends React.Component {
               placeholderText="Search youtube"
               onSearchResults={results => {
                 onSearchResults(results)
-                this.setState({ search: true })
+                history.push('/searchResultView')
               }}
               onSearchTrigger={searchWord => {
                 onSearchTrigger(searchWord)
