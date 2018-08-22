@@ -8,10 +8,6 @@ class ContentPage extends React.Component {
     setContentPagePaddingEqual()
   }
 
-  componentDidUpdate() {
-    setContentPagePaddingEqual()
-  }
-
   render() {
     const { children } = this.props
 
