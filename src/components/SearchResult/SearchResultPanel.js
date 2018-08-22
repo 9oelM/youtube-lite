@@ -7,7 +7,7 @@ class SearchResultPanel extends React.Component {
   render() {
     const { searchResults } = this.props
     return (
-      <Grid style={{ padding: 16 }}>
+      <Grid id="SearchResultPanel">
         <Grid spacing={16} container justify="center">
           {searchResults.map(item => {
             return (
