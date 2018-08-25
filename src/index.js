@@ -1,11 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { AppContainer } from "react-hot-loader"
+import { Provider } from "react-redux"
 import { HashRouter } from "react-router-dom"
 import App from "./App"
 import registerServiceWorker from "./registerServiceWorker"
-import { AppContainer } from "react-hot-loader"
-import { Provider } from "react-redux"
 import store from "./store/index"
+
+/* global document */
 
 const render = Component =>
   ReactDOM.render(
@@ -18,6 +20,7 @@ const render = Component =>
     </Provider>,
     document.getElementById("root")
   )
+
 registerServiceWorker()
 render(App)
 

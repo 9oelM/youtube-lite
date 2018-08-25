@@ -13,17 +13,30 @@ module.exports = Object.assign({}, eslintConfigAirbnb, {
   /*
     your custom rules here.
   */
-  "rules": {
-    "no-extra-semi": error,
-    "semi": off,
-    "react/jsx-filename-extension": [warn, { "extensions": [".js", ".jsx"] }]
-  },
   "overrides": [
     {
-      "files": ["*.test.js","*.spec.js"],
+      "files": ["*.js"],
       "rules": {
         "no-unused-expressions": off,
-        "no-undef": off
+        "no-unused-vars": warn,
+        "implicit-arrow-linebreak": off,
+        "no-undef": off,
+        "no-extra-semi": error,
+        "semi": off,
+        "comma-dangle": off,
+        "no-new": warn,
+        "quotes": ["error", "double"],
+        "no-underscore-dangle": off,
+        "operator-linebreak": off,
+        "arrow-parens": off,
+        "class-methods-use-this": warn,
+        "react/jsx-one-expression-per-line": warn,
+        "react/jsx-filename-extension": [warn, { "extensions": [".js", ".jsx"] }],
+        "react/forbid-prop-types": warn,
+        
+      },
+      "globals": {
+        "document": true
       }
     }
   ]

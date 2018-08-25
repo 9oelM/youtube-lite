@@ -1,12 +1,27 @@
-const gulp = require('gulp'),
-  run = require('gulp-run-command').default,
-  prettier = require('gulp-prettier'),
-  eslint = require('gulp-eslint'),
-  sass = require('gulp-sass'),
-  sourcemaps = require('gulp-sourcemaps'),
-  prettierrc = require('./.prettierrc'),
-  eslintrc = require('./.eslintrc'),
-  eslintAirbnb = require('eslint-config-airbnb')
+const gulp = require('gulp');
+
+
+const run = require('gulp-run-command').default;
+
+
+const prettier = require('gulp-prettier');
+
+
+const eslint = require('gulp-eslint');
+
+
+const sass = require('gulp-sass');
+
+
+const sourcemaps = require('gulp-sourcemaps');
+
+
+const eslintAirbnb = require('eslint-config-airbnb')
+const prettierrc = require('./.prettierrc');
+
+
+const eslintrc = require('./.eslintrc');
+
 
 /*
     customize your paths to get it working.
@@ -21,25 +36,25 @@ const paths = {
 }
 
 function format() {
-    return gulp
-      .src(paths.js, {base: '.',  since: gulp.lastRun(format) })
-      .pipe(prettier(prettierrc))
-      .pipe(gulp.dest('.'))
+  return gulp
+    .src(paths.js, { base: '.', since: gulp.lastRun(format) })
+    .pipe(prettier(prettierrc))
+    .pipe(gulp.dest('.'))
 }
 
 
-function lint(){
-    return gulp
-    .src(paths.js, {base: '.',  since: gulp.lastRun(lint) })
-      // eslint() attaches the lint output to the "eslint" property
-        // of the file object so it can be used by other modules.
-        .pipe(eslint(eslintrc))
-        // eslint.format() outputs the lint results to the console.
-        // Alternatively use eslint.formatEach() (see Docs).
-        .pipe(eslint.format())
-        // To have the process exit with an error code (1) on
-        // lint error, return the stream and pipe to failAfterError last.
-        .pipe(eslint.failAfterError())
+function lint() {
+  return gulp
+    .src(paths.js, { base: '.', since: gulp.lastRun(lint) })
+  // eslint() attaches the lint output to the "eslint" property
+  // of the file object so it can be used by other modules.
+    .pipe(eslint(eslintrc))
+  // eslint.format() outputs the lint results to the console.
+  // Alternatively use eslint.formatEach() (see Docs).
+    .pipe(eslint.format())
+  // To have the process exit with an error code (1) on
+  // lint error, return the stream and pipe to failAfterError last.
+    .pipe(eslint.failAfterError())
 }
 
 function compileSass() {
@@ -76,9 +91,9 @@ function eject() {
 */
 
 function watch() {
-  const watchers = [gulp.watch(paths.js, format),gulp.watch(paths.js, lint),gulp.watch(paths.sass.src, compileSass)]
-  watchers.forEach(watcher => watcher.on('change', function(path, stats) {
-  console.log(path + ' was changed');
+  const watchers = [gulp.watch(paths.js, format), gulp.watch(paths.js, lint), gulp.watch(paths.sass.src, compileSass)]
+  watchers.forEach(watcher => watcher.on('change', (path, stats) => {
+    console.log(`${path} was changed`);
   }))
 }
 

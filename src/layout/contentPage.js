@@ -1,7 +1,8 @@
 import Grid from "@material-ui/core/Grid"
-import { TopNavContainer } from "../components/Containers/index.js"
 import React from "react"
-import { setContentPagePaddingEqual } from "../modules/resize"
+import PropTypes from "prop-types"
+import { TopNavContainer } from "../components/Containers/index"
+import setContentPagePaddingEqual from "../modules/resize"
 
 class ContentPage extends React.Component {
   componentDidMount() {
@@ -22,6 +23,13 @@ class ContentPage extends React.Component {
       </React.Fragment>
     )
   }
+}
+
+ContentPage.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 }
 
 export default ContentPage

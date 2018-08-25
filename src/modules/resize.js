@@ -4,11 +4,13 @@ const setIdenticalHeight = (fromElem, toElem) => {
   toElem.setAttribute("style", `padding-top: ${fromElem.clientHeight}px`)
 }
 
-export const setContentPagePaddingEqual = function() {
-  let TopNav = document.getElementById("TopNav")
-  let ContentPage = document.getElementById("ContentPage")
+const setContentPagePaddingEqual = () => {
+  const TopNav = document.getElementById("TopNav")
+  const ContentPage = document.getElementById("ContentPage")
   setIdenticalHeight(TopNav, ContentPage)
-  new ResizeSensor(TopNav, function() {
+  new ResizeSensor(TopNav, () => {
     setIdenticalHeight(TopNav, ContentPage)
   })
 }
+
+export default setContentPagePaddingEqual
