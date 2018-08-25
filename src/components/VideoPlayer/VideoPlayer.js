@@ -1,12 +1,17 @@
-import React from 'react'
-import YouTube from 'react-youtube'
-import Paper from '@material-ui/core/Paper'
+import React from "react"
+import PropTypes from "prop-types"
+import YouTube from "react-youtube"
 
 class VideoPlayer extends React.Component {
+  _onReady(event) {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo()
+  }
+
   render() {
     const opts = {
-      height: '80%',
-      width: '100%',
+      height: "80%",
+      width: "100%",
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
@@ -16,11 +21,10 @@ class VideoPlayer extends React.Component {
 
     return <YouTube videoId={videoId} opts={opts} onReady={this._onReady} />
   }
+}
 
-  _onReady(event) {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo()
-  }
+VideoPlayer.propTypes = {
+  videoId: PropTypes.string.isRequired,
 }
 
 export default VideoPlayer

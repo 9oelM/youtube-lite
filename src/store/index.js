@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware } from 'redux'
-import reducers from '../reducers/reducers'
+import { createStore, applyMiddleware } from "redux"
+import reducers from "../reducers/reducers"
 
 const store = createStore(
   reducers,
