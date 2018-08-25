@@ -1,9 +1,9 @@
-import React from 'react'
-import Grid from '@material-ui/core/Grid'
-import Card from './SearchResultCard.js'
-import shortid from 'shortid'
-import Typography from '@material-ui/core/Typography'
-import { withRouter } from 'react-router-dom'
+import React from "react"
+import Grid from "@material-ui/core/Grid"
+import Card from "./SearchResultCard.js"
+import shortid from "shortid"
+import Typography from "@material-ui/core/Typography"
+import { withRouter } from "react-router-dom"
 
 class SearchResultPanel extends React.Component {
   render() {

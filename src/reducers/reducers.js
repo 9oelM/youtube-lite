@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux'
-import C from '../actions/constants'
+import { combineReducers } from "redux"
+import C from "../actions/constants"
 
 function viewReducer(
   state = {
@@ -25,7 +25,7 @@ function searchReducer(
   state = {
     searchResults: [], // nothing is received as a result yet
     isFetching: false,
-    searchWord: '',
+    searchWord: "",
   },
   action
 ) {

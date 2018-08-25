@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { HashRouter } from 'react-router-dom'
-import App from './App'
-import registerServiceWorker from './registerServiceWorker'
-import { AppContainer } from 'react-hot-loader'
-import { Provider } from 'react-redux'
-import store from './store/index'
+import React from "react"
+import ReactDOM from "react-dom"
+import { HashRouter } from "react-router-dom"
+import App from "./App"
+import registerServiceWorker from "./registerServiceWorker"
+import { AppContainer } from "react-hot-loader"
+import { Provider } from "react-redux"
+import store from "./store/index"
 
 const render = Component =>
   ReactDOM.render(
@@ -16,14 +16,14 @@ const render = Component =>
         </HashRouter>
       </AppContainer>
     </Provider>,
-    document.getElementById('root')
+    document.getElementById("root")
   )
 registerServiceWorker()
 render(App)
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./App', () => {
+  module.hot.accept("./App", () => {
     render(App)
   })
 }

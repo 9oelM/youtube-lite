@@ -1,4 +1,4 @@
-import C from './constants'
+import C from "./constants"
 
 export const requestSearch = searchWord => ({
   type: C.REQUEST_SEARCH,

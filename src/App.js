@@ -1,20 +1,20 @@
 // layout
-import OuterLayout from './layout/default'
+import OuterLayout from "./layout/default"
 
 // pages
 
-import Home from './pages/Home'
-import SearchResultView from './pages/SearchResultView'
-import VideoPlayerView from './pages/VideoPlayerView'
+import Home from "./pages/Home"
+import SearchResultView from "./pages/SearchResultView"
+import VideoPlayerView from "./pages/VideoPlayerView"
 
 // react
-import React, { Component, Fragment } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import React, { Component, Fragment } from "react"
+import { Route, withRouter } from "react-router-dom"
 
 // styles
-import 'typeface-roboto'
-import './styles/output/master.css'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import "typeface-roboto"
+import "./styles/output/master.css"
+import CssBaseline from "@material-ui/core/CssBaseline"
 
 class App extends Component {
   render() {

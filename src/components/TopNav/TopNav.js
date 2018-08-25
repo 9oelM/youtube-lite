@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles, createMuiTheme } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-import YoutubeAutocomplete from 'new-material-react-youtube-autocomplete'
-import Drawer from '../Drawer/Drawer'
-import { withRouter, Redirect } from 'react-router-dom'
+import React from "react"
+import PropTypes from "prop-types"
+import { withStyles, createMuiTheme } from "@material-ui/core/styles"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import IconButton from "@material-ui/core/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import YoutubeAutocomplete from "new-material-react-youtube-autocomplete"
+import Drawer from "../Drawer/Drawer"
+import { withRouter, Redirect } from "react-router-dom"
 
 const styles = {
   root: {
@@ -49,8 +49,8 @@ class TopNav extends React.Component {
             </IconButton>
             <YoutubeAutocomplete
               option={{
-                key: 'AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28',
-                type: ['video', 'playist'],
+                key: "AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28",
+                type: ["video", "playist"],
                 maxResults: 15,
               }}
               placeholderText="Search youtube"

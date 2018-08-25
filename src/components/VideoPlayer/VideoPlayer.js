@@ -1,12 +1,12 @@
-import React from 'react'
-import YouTube from 'react-youtube'
-import Paper from '@material-ui/core/Paper'
+import React from "react"
+import YouTube from "react-youtube"
+import Paper from "@material-ui/core/Paper"
 
 class VideoPlayer extends React.Component {
   render() {
     const opts = {
-      height: '80%',
-      width: '100%',
+      height: "80%",
+      width: "100%",
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
