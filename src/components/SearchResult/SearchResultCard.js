@@ -35,7 +35,7 @@ const searchResultCard = ({
         </CardContent>
         <CardMedia className="searchResultMedia" image={img} title={title} />
         <CardContent>
-          <Typography align="left" variant="body1">
+          <Typography align="left" variant="caption">
             {description.length > 80
               ? `${description.substring(0, 80)}...`
               : description}
