@@ -79,7 +79,7 @@ function build() {
 }
 
 function test() {
-  return run('npm run test')
+  return run('react-app-rewired test --env=jsdom')
 }
 
 function eject() {
