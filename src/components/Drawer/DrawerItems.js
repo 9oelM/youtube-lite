@@ -7,7 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import SettingsIcon from "@material-ui/icons/Settings"
 import DashboardIcon from "@material-ui/icons/Dashboard"
 import FavBorderIcon from "@material-ui/icons/FavoriteBorder"
-import { Link } from "react-router-dom"
+import DrawerItem from "./DrawerItem"
 import shortid from "shortid"
 
 const DrawerItems = () => (
@@ -25,23 +25,5 @@ const DrawerItems = () => (
     </List>
   </div>
 )
-
-const DrawerItem = ({ link, name, children }) => (
-  <ListItem button>
-    <Link to={link}>
-      <ListItemIcon>{children}</ListItemIcon>
-      <ListItemText primary={name} />
-    </Link>
-  </ListItem>
-)
-
-DrawerItem.propTypes = {
-  link: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-}
 
 export default DrawerItems
