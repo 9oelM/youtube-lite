@@ -17,7 +17,7 @@ const BottomNav = ({ TotalVids, TotalTime }) => (
           className="bottom-nav-status"
         >
           Videos watched: {5}
-          &nbsp;| &nbsp;
+          &nbsp;|&nbsp;
         </Typography>
         <Typography
           variant="caption"
