@@ -33,7 +33,8 @@ module.exports = Object.assign({}, eslintConfigAirbnb, {
         "react/jsx-one-expression-per-line": warn,
         "react/jsx-filename-extension": [warn, { "extensions": [".js", ".jsx"] }],
         "react/forbid-prop-types": warn,
-        
+        "no-multi-assign": warn,
+        "arrow-body-style": warn,
       },
       "globals": {
         "document": true
