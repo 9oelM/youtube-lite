@@ -10,7 +10,7 @@ class VideoPlayer extends React.Component {
 
   render() {
     const opts = {
-      height: "80%",
+      height: "100%",
       width: "100%",
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
