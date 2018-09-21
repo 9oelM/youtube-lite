@@ -1,5 +1,5 @@
-import rootReducer from "../../reducers/reducers"
 import { createStore } from "redux"
+import rootReducer from "../../reducers/reducers"
 import C from "../../actions/constants"
 import { toggleDrawer, requestSearch, receiveSearch } from "../../actions/index"
 
