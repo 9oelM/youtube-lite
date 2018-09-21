@@ -10,6 +10,7 @@ import OuterLayout from "./layout/default"
 import Home from "./pages/Home"
 import SearchResultView from "./pages/SearchResultView"
 import VideoPlayerView from "./pages/VideoPlayerView"
+import SettingsView from "./pages/SettingsView"
 
 // styles
 import "typeface-roboto"
@@ -21,6 +22,7 @@ const App = () => (
     <Route exact path="/" component={Home} />
     <Route path="/searchResultView/:searchWord" component={SearchResultView} />
     <Route path="/videoPlayerView/:id" component={VideoPlayerView} />
+    <Route path="/settings" component={SettingsView} />
   </OuterLayout>
 )
 
