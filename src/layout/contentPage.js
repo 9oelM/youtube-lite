@@ -2,6 +2,7 @@ import Grid from "@material-ui/core/Grid"
 import React from "react"
 import PropTypes from "prop-types"
 import { TopNavContainer } from "../components/Containers/index"
+import BottomNav from "../components/BottomNav/BottomNav"
 import setContentPagePaddingEqual from "../modules/resize"
 
 class ContentPage extends React.Component {
@@ -20,6 +21,7 @@ class ContentPage extends React.Component {
       <React.Fragment>
         <TopNavContainer />
         <Grid id="ContentPage">{children}</Grid>
+        <BottomNav />
       </React.Fragment>
     )
   }
