@@ -11,8 +11,8 @@ const DrawerItems = () => (
     <List>
       {[
         ["/", "Dashboard", <DashboardIcon />],
-        ["/settings", "Settings", <SettingsIcon />],
-        ["/about", "About", <FavBorderIcon />],
+        ["/Settings", "Settings", <SettingsIcon />],
+        ["/About", "About", <FavBorderIcon />],
       ].map(item => (
         <DrawerItem key={shortid.generate()} link={item[0]} name={item[1]}>
           {item[2]}
