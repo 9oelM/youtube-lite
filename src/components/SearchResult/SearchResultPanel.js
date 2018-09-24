@@ -5,10 +5,11 @@ import { withRouter } from "react-router-dom"
 import Grid from "@material-ui/core/Grid"
 import shortid from "shortid"
 import Typography from "@material-ui/core/Typography"
+import Paper from "@material-ui/core/Paper"
 import Card from "./SearchResultCard"
 
 const SearchResultPanel = ({ searchResults, match }) => (
-  <Grid id="SearchResultPanel">
+  <Paper className="comfort-grid">
     <Grid id="SearchWord">
       <Typography variant="display1" align="center">{`Results for "${
         match.params.searchWord
@@ -28,7 +29,7 @@ const SearchResultPanel = ({ searchResults, match }) => (
         )
       })}
     </Grid>
-  </Grid>
+  </Paper>
 )
 
 SearchResultPanel.propTypes = {
