@@ -10,7 +10,7 @@ import Switch from "@material-ui/core/Switch"
 import Paper from "@material-ui/core/Paper"
 import Button from "@material-ui/core/Button"
 import Grid from "@material-ui/core/Grid"
-import ContentGrid from "../layout/contentGrid"
+import ContentGrid from "../layout/ContentGrid"
 
 const Settings = ({ apiKey, maxSearchResult }) => (
   <ContentGrid _className="padBottom">

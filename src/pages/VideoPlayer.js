@@ -2,7 +2,7 @@ import React from "react"
 import ReactRouterPropTypes from "react-router-prop-types"
 import { withRouter } from "react-router-dom"
 import VideoPlayerPanel from "../components/VideoPlayer/VideoPlayerPanel"
-import ContentGrid from "../layout/contentGrid"
+import ContentGrid from "../layout/ContentGrid"
 
 const VideoPlayer = ({ match }) => (
   <ContentGrid _className="padBottom">

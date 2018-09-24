@@ -1,11 +1,11 @@
 import React from "react"
-import ContentGrid from "../layout/contentGrid"
+import { ContentGridContainer } from "../components/Containers/index"
 import { SearchResultPanelContainer } from "../components/Containers/index"
 
 const SearchResult = () => (
-  <ContentGrid>
+  <ContentGridContainer>
     <SearchResultPanelContainer />
-  </ContentGrid>
+  </ContentGridContainer>
 )
 
 export default SearchResult
