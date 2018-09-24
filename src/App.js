@@ -8,9 +8,10 @@ import OuterLayout from "./layout/default"
 
 // pages
 import Home from "./pages/Home"
-import SearchResultView from "./pages/SearchResultView"
-import VideoPlayerView from "./pages/VideoPlayerView"
-import SettingsView from "./pages/SettingsView"
+import SearchResult from "./pages/SearchResult"
+import VideoPlayer from "./pages/VideoPlayer"
+import Settings from "./pages/Settings"
+import About from "./pages/About"
 
 // styles
 import "typeface-roboto"
@@ -20,9 +21,10 @@ const App = () => (
   <OuterLayout>
     <CssBaseline />
     <Route exact path="/" component={Home} />
-    <Route path="/searchResultView/:searchWord" component={SearchResultView} />
-    <Route path="/videoPlayerView/:id" component={VideoPlayerView} />
-    <Route path="/settings" component={SettingsView} />
+    <Route path="/SearchResultView/:searchWord" component={SearchResult} />
+    <Route path="/VideoPlayerView/:id" component={VideoPlayer} />
+    <Route path="/Settings" component={Settings} />
+    <Route path="/About" component={About} />
   </OuterLayout>
 )
 
