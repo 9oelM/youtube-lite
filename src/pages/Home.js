@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import ContentGrid from "../layout/contentPage"
+import ContentGrid from "../layout/contentGrid"
 
 const Home = ({ isEng = true }) => {
   const captionEng =
