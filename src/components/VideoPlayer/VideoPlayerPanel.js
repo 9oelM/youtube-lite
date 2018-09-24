@@ -11,7 +11,7 @@ import Drawer from "../Drawer/Drawer"
 import Button from "@material-ui/core/Button"
 import VideoPlayer from "./VideoPlayer"
 
-const VideoPlayerPanel = ({ vId, description }) => (
+const VideoPlayerPanel = ({ vId }) => (
   <Grid className="comfort-grid" style={{ padding: 0, height: "100%" }}>
     <Paper id="video-paper">
       <VideoPlayer videoId={vId} />
