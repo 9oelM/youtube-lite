@@ -1,8 +1,16 @@
 import React from "react"
+import ReactDOM from "react-dom"
 import PropTypes from "prop-types"
 import YouTube from "react-youtube"
 import Progress from "../Progress/Progress"
 let Timer = require("easytimer.js")
+
+const selectors = {
+  frame: "#video-paper > span > iframe",
+  watchMoreClipsButton: "div.ytp-pause-overlay.ytp-scroll-min",
+  endScreen:
+    "div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-show-tiles",
+}
 
 class VideoPlayer extends React.Component {
   constructor(props) {
@@ -17,19 +25,35 @@ class VideoPlayer extends React.Component {
   _onReady = event => {
     // onReady is only called once.
     this.setState({ ready: true })
-    let self = this
-    this.state.timer.addEventListener("secondsUpdated", function(e) {
-      self.setState({ time: self.state.timer.getTimeValues().seconds })
-      console.log(`time: ${self.state.timer.getTimeValues().seconds}`)
-    })
+    this.handleTiming("secondsUpdated")
   }
-
   _onPlay = event => {
     this.state.timer.start()
   }
 
   _onPause = event => {
     this.state.timer.pause()
+  }
+
+  handleTiming = timeUnit => {
+    let self = this
+    this.state.timer.addEventListener(timeUnit, function(e) {
+      self.setState({ time: self.state.timer.getTimeValues().seconds })
+      console.log(`time: ${self.state.timer.getTimeValues().seconds}`)
+    })
+  }
+
+  removeTemptations = (targetFrame, ...selectors) => {
+    // still working on this
+    const targetHtml = targetFrame.contentDocument || targetFrame.contentWindow
+    console.log(targetHtml)
+  }
+
+  onNextFrame = callback => {
+    // works to delay the callback to the last queue, hopefully after the render finished
+    setTimeout(function() {
+      window.requestAnimationFrame(callback)
+    }, 0)
   }
 
   render() {
@@ -45,8 +69,8 @@ class VideoPlayer extends React.Component {
     const { ready } = this.state
     return (
       <React.Fragment>
-        <Progress isLoading={!ready} />
         <YouTube
+          ref={this.youtubeSpanElem}
           videoId={videoId}
           opts={opts}
           onReady={() => {
@@ -55,6 +79,7 @@ class VideoPlayer extends React.Component {
           onPlay={this._onPlay}
           onPause={this._onPause}
         />
+        <Progress isLoading={!ready} />
       </React.Fragment>
     )
   }
