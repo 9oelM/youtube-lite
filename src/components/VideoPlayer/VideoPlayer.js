@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import YouTube from "react-youtube"
+import Progress from "../Progress/Progress"
 let Timer = require("easytimer.js")
 
 class VideoPlayer extends React.Component {
@@ -9,12 +10,13 @@ class VideoPlayer extends React.Component {
     this.state = {
       timer: new Timer(),
       time: 0,
+      ready: false,
     }
   }
 
   _onReady = event => {
     // onReady is only called once.
-    event.target.pauseVideo()
+    this.setState({ ready: true })
     let self = this
     this.state.timer.addEventListener("secondsUpdated", function(e) {
       self.setState({ time: self.state.timer.getTimeValues().seconds })
@@ -40,15 +42,20 @@ class VideoPlayer extends React.Component {
       },
     }
     const { videoId } = this.props
-
+    const { ready } = this.state
     return (
-      <YouTube
-        videoId={videoId}
-        opts={opts}
-        onReady={this._onReady}
-        onPlay={this._onPlay}
-        onPause={this._onPause}
-      />
+      <React.Fragment>
+        <Progress isLoading={!ready} />
+        <YouTube
+          videoId={videoId}
+          opts={opts}
+          onReady={() => {
+            this._onReady()
+          }}
+          onPlay={this._onPlay}
+          onPause={this._onPause}
+        />
+      </React.Fragment>
     )
   }
 }
