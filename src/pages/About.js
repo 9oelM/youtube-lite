@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton"
 import Grid from "@material-ui/core/Grid"
+import shortid from "shortid"
 import ContentGrid from "../layout/ContentGrid"
 import GithubIcon from "../components/Icons/Github"
 import FeedIcon from "../components/Icons/Feed"
@@ -33,13 +34,17 @@ const About = () => (
               "Be very careful, then, how you live—not as unwise but as wise, making the most of every opportunity, because the days are evil. Therefore do not be foolish, but understand what the Lord’s will is."
             ) ? (
               <Typography
+                key={shortid.generate()}
                 parapgrah
                 style={{ padding: "10px", fontStyle: "italic" }}
               >
                 {paragraph}
               </Typography>
             ) : (
-              <Typography paragraph={i != arr.length - 1}>
+              <Typography
+                paragraph={i != arr.length - 1}
+                key={shortid.generate()}
+              >
                 {paragraph}
               </Typography>
             )
@@ -53,7 +58,9 @@ const About = () => (
             link: "https://www.linkedin.com/in/7oelm/",
           },
         ].map(obj => (
-          <IconButton href={obj.link}>{obj.icon}</IconButton>
+          <IconButton key={shortid.generate()} href={obj.link}>
+            {obj.icon}
+          </IconButton>
         ))}
       </Grid>
     </Paper>
