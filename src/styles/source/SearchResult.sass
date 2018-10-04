@@ -3,18 +3,27 @@ $defaultHeight: 420px
 $defaultMediaHeight: 180px
 $ratio: 0.8
 $oneColumnListBreakPoint: 591px
+$resultsContainerBreakPoint: 623px
 
 .searchResultMedia
     width: $defaultWidth
     height: $defaultMediaHeight
     
 .searchResultCardWrapper
-    height: $defaultHeight
+    height: 430px
     width: $defaultWidth
     
 .searchResultCardInner, .searchResultCard
     height: $defaultHeight * 0.95
     width: $defaultWidth * 0.95
+
+.searchResultCardInner
+    height: 422px
+    display: flex
+    flex-direction: column
+
+.searchResultCardInnerButton
+    flex-direction: column
 
 #SearchResultPanel
     height: 100%
@@ -22,11 +31,17 @@ $oneColumnListBreakPoint: 591px
     
 #SearchWord
     padding: 20px 5px 30px 5px
+
+.addToPlaylistContainer
+    margin-top: auto
+    .addToPlaylist
+        align-self: flex-end
     
-.addToPlaylist
-    position: absolute !important
-    right: 0
-    bottom: 0
+#resultsContainer
+    margin: 0 
+
+.cardHeading
+    width: 100%
 
 @media screen and (max-width: $defaultWidth) 
     .searchResultMedia
@@ -39,3 +54,7 @@ $oneColumnListBreakPoint: 591px
  .searchResultCardWrapper
      width: auto
      
+@media screen and (max-width: $resultsContainerBreakPoint)
+  #resultsContainer 
+      margin: -8px
+      

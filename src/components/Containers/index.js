@@ -15,6 +15,7 @@ export const TopNavContainer = connect(
     },
     onSearchResults(results) {
       dispatch(receiveSearch(results))
+      console.log(results)
     },
     onSearchTrigger(searchWord) {
       dispatch(requestSearch(searchWord))

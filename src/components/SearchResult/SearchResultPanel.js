@@ -15,7 +15,7 @@ const SearchResultPanel = ({ searchResults, match }) => (
         match.params.searchWord
       }"`}</Typography>
     </Grid>
-    <Grid spacing={16} container justify="center">
+    <Grid spacing={16} container justify="center" id="resultsContainer">
       {searchResults.map(item => {
         return (
           <Card

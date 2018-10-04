@@ -11,6 +11,7 @@ import ButtonBase from "@material-ui/core/ButtonBase"
 import IconButton from "@material-ui/core/IconButton"
 import AddIcon from "@material-ui/icons/PlaylistAdd"
 import Grid from "@material-ui/core/Grid"
+import Tooltip from "@material-ui/core/Tooltip"
 
 const searchResultCard = ({
   title,
@@ -21,34 +22,40 @@ const searchResultCard = ({
   history,
 }) => (
   <Grid className="searchResultCardWrapper">
-    <ButtonBase
-      className="searchResultCard"
-      onClick={() => {
-        history.push(`/videoPlayerView/${vId}`)
-      }}
-    >
+    <Grid className="searchResultCard">
       <Card square className="searchResultCardInner">
-        <CardContent>
-          <Typography align="left" variant="title">
-            {title.length > 60 ? `${title.substring(0, 60)}...` : title}
-          </Typography>
-          <Typography align="left" variant="subheading">
-            {`by ${author}`}
-          </Typography>
-        </CardContent>
-        <CardMedia className="searchResultMedia" image={img} title={title} />
-        <CardContent>
-          <Typography align="left" variant="caption">
-            {description.length > 80
-              ? `${description.substring(0, 80)}...`
-              : description}
-          </Typography>
-        </CardContent>
-        <IconButton className="addToPlaylist">
-          <AddIcon />
-        </IconButton>
+        <ButtonBase
+          onClick={() => {
+            history.push(`/videoPlayerView/${vId}`)
+          }}
+          className="searchResultCardInnerButton"
+        >
+          <CardContent className="cardHeading">
+            <Typography align="left" variant="title">
+              {title.length > 60 ? `${title.substring(0, 60)}...` : title}
+            </Typography>
+            <Typography align="left" variant="subheading">
+              {`by ${author}`}
+            </Typography>
+          </CardContent>
+          <CardMedia className="searchResultMedia" image={img} title={title} />
+          <CardContent>
+            <Typography align="left" variant="caption">
+              {description.length > 80
+                ? `${description.substring(0, 80)}...`
+                : description}
+            </Typography>
+          </CardContent>
+        </ButtonBase>
+        <Grid container justify="flex-end" className="addToPlaylistContainer">
+          <Tooltip title="Add to playlist">
+            <IconButton className="addToPlaylist">
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
+        </Grid>
       </Card>
-    </ButtonBase>
+    </Grid>
   </Grid>
 )
 
