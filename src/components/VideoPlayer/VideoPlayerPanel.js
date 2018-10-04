@@ -17,6 +17,7 @@ import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
 import Drawer from "../Drawer/Drawer"
 import VideoPlayer from "./VideoPlayer"
+import VideoPlaylists from "./VideoPlaylists"
 
 class VideoPlayerPanel extends React.Component {
   constructor(props) {
@@ -33,25 +34,28 @@ class VideoPlayerPanel extends React.Component {
     return (
       <Grid className="comfort-grid" style={{ padding: 0, height: "100%" }}>
         <Paper id="video-paper">
-          <VideoPlayer videoId={vId} />
-          <div style={{ width: "100%" }}>
-            <Button
-              className="control-button"
-              onClick={() => this.setState({ shuffle: !this.state.shuffle })}
-              color={shuffle ? "secondary" : "default"}
-            >
-              <ShuffleIcon />
-            </Button>
-            <Button
-              className="control-button"
-              onClick={() =>
-                this.setState({ repeatAll: !this.state.repeatAll })
-              }
-              color="secondary"
-            >
-              {repeatAll ? <RepeatIcon /> : <RepeatOneIcon />}
-            </Button>
-          </div>
+          <Grid id="video-wrapper">
+            <VideoPlayer videoId={vId} />
+            <Grid style={{ width: "100%" }}>
+              <Button
+                className="control-button"
+                onClick={() => this.setState({ shuffle: !this.state.shuffle })}
+                color={shuffle ? "secondary" : "default"}
+              >
+                <ShuffleIcon />
+              </Button>
+              <Button
+                className="control-button"
+                onClick={() =>
+                  this.setState({ repeatAll: !this.state.repeatAll })
+                }
+                color="secondary"
+              >
+                {repeatAll ? <RepeatIcon /> : <RepeatOneIcon />}
+              </Button>
+            </Grid>
+          </Grid>
+          <VideoPlaylists />
         </Paper>
       </Grid>
     )
