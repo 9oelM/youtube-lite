@@ -6,7 +6,10 @@ import Typography from "@material-ui/core/Typography"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import CardMedia from "@material-ui/core/CardMedia"
+import CardActions from "@material-ui/core/CardActions"
 import ButtonBase from "@material-ui/core/ButtonBase"
+import IconButton from "@material-ui/core/IconButton"
+import AddIcon from "@material-ui/icons/PlaylistAdd"
 import Grid from "@material-ui/core/Grid"
 
 const searchResultCard = ({
@@ -41,6 +44,9 @@ const searchResultCard = ({
               : description}
           </Typography>
         </CardContent>
+        <IconButton className="addToPlaylist">
+          <AddIcon />
+        </IconButton>
       </Card>
     </ButtonBase>
   </Grid>
