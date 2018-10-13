@@ -17,7 +17,7 @@ import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
 import Drawer from "../Drawer/Drawer"
 import VideoPlayer from "./VideoPlayer"
-import VideoPlaylists from "./VideoPlaylists"
+import { VideoPlaylistsContainer } from "../Containers/index"
 
 class VideoPlayerPanel extends React.Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class VideoPlayerPanel extends React.Component {
               </Button>
             </Grid>
           </Grid>
-          <VideoPlaylists />
+          <VideoPlaylistsContainer />
         </Paper>
       </Grid>
     )
