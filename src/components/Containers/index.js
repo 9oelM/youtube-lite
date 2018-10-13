@@ -4,6 +4,8 @@ import TopNav from "../TopNav/TopNav"
 import SearchResultPanel from "../SearchResult/SearchResultPanel"
 import ContentGrid from "../Layout/ContentGrid"
 import PlaylistDialog from "../PlaylistDialog/PlaylistDialog"
+import PlaylistsPanel from "../Playlists/PlaylistsPanel"
+import VideoPlaylists from "../VideoPlayer/VideoPlaylists"
 import {
   toggleDrawer,
   receiveSearch,
@@ -61,3 +63,17 @@ export const PlaylistDialogContainer = connect(
     },
   })
 )(PlaylistDialog)
+
+export const PlaylistsPanelContainer = connect(
+  state => ({
+    playlists: state.playlistReducer.playlists,
+  }),
+  null
+)(PlaylistsPanel)
+
+export const VideoPlaylistsContainer = connect(
+  state => ({
+    playlists: state.playlistReducer.playlists,
+  }),
+  null
+)(VideoPlaylists)
