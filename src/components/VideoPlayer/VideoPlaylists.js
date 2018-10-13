@@ -13,20 +13,45 @@ import shortid from "shortid"
 
 class VideoPlaylists extends React.Component {
   render() {
-    const { playlist = ["A", "B", "C", "D"] } = this.props
+    const {
+      playlist = [
+        "A",
+        "B",
+        "C",
+        "D",
+        "A",
+        "B",
+        "C",
+        "D",
+        "A",
+        "B",
+        "C",
+        "D",
+        "A",
+        "B",
+        "C",
+        "D",
+        "A",
+        "B",
+        "C",
+        "D",
+      ],
+    } = this.props
     return (
-      <Grid>
+      <Grid id="playlist">
         <ListItem button divider>
           <ListItemIcon>
             <AddIcon />
           </ListItemIcon>
           <ListItemText primary="Add to playlist" />
         </ListItem>
-        {playlist.map(video => (
-          <ListItem button key={shortid.generate()}>
-            {video}
-          </ListItem>
-        ))}
+        <div id="playlist-container">
+          {playlist.map(video => (
+            <ListItem button key={shortid.generate()}>
+              {video}
+            </ListItem>
+          ))}
+        </div>
       </Grid>
     )
   }

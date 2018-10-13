@@ -1,3 +1,5 @@
+$playlistBreakpoint: 1000px
+
 .comfort-grid
     padding: 0 0 50px 0
     #video-paper
@@ -8,3 +10,18 @@
             flex: 1
             .control-button
                 width: 50%
+        #playlist
+            display: flex
+            flex-direction: column
+            #playlist-container
+                overflow-y: scroll
+                
+
+@media screen and (max-width: $playlistBreakpoint) 
+    #video-paper
+        flex-direction: column
+        #video-wrapper
+            height: 50%
+        #playlist
+            height: 40%
+            padding: 10% 0 0 0
