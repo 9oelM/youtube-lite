@@ -63,16 +63,21 @@ function playlistReducer(
   action
 ) {
   const playlistIndex = getPlaylistIndex(state.playlists, action)
+  let updatedPlaylist = [...state.playlists]
   switch (action.type) {
     case C.ADD_PLAYLIST:
-      return {
-        playlists: [
-          ...state.playlists,
-          {
+      const sameNameExists = state.playlists.some(
+        elem => elem.playlistName == action.playlistName
+      )
+      sameNameExists
+        ? () => {}
+        : updatedPlaylist.push({
             playlistName: action.playlistName,
             videos: [],
-          },
-        ],
+          })
+      return {
+        ...state,
+        playlists: updatedPlaylist,
       }
     case C.DELETE_PLAYLIST:
       return {
@@ -80,7 +85,6 @@ function playlistReducer(
         playlists: [...state.playlists].splice(playlistIndex, 1),
       }
     case C.ADD_VIDEO:
-      let updatedPlaylist = [...state.playlists]
       // only add one unique video for a playlist
       updatedPlaylist[playlistIndex].videos.findIndex(
         elem => elem.vId == action.video.vId
