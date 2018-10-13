@@ -12,6 +12,7 @@ import SearchResult from "./pages/SearchResult"
 import VideoPlayer from "./pages/VideoPlayer"
 import Settings from "./pages/Settings"
 import About from "./pages/About"
+import Playlists from "./pages/Playlists"
 
 // styles
 import "typeface-roboto"
@@ -22,9 +23,10 @@ const App = () => (
     <CssBaseline />
     <Route exact path="/" component={Home} />
     <Route path="/SearchResultView/:searchWord" component={SearchResult} />
-    <Route path="/VideoPlayerView/:id" component={VideoPlayer} />
+    <Route path="/VideoPlayerView/:playlist/:id" component={VideoPlayer} />
     <Route path="/Settings" component={Settings} />
     <Route path="/About" component={About} />
+    <Route path="/Playlists" component={Playlists} />
   </OuterLayout>
 )
 
