@@ -3,13 +3,15 @@ import { connect } from "react-redux"
 import TopNav from "../TopNav/TopNav"
 import SearchResultPanel from "../SearchResult/SearchResultPanel"
 import ContentGrid from "../Layout/ContentGrid"
-import SearchResultCard from "../SearchResult/SearchResultCard"
+import PlaylistDialog from "../PlaylistDialog/PlaylistDialog"
 import {
   toggleDrawer,
   receiveSearch,
   requestSearch,
   addToPlaylist,
   deleteFromPlaylist,
+  addPlaylist,
+  deletePlaylist,
 } from "../../actions/index"
 
 export const TopNavContainer = connect(
@@ -44,12 +46,18 @@ export const ContentGridContainer = connect(
   null
 )(ContentGrid)
 
-export const SearchResultCardContainer = connect(
-  null,
+export const PlaylistDialogContainer = connect(
+  state => ({
+    playlists: state.playlistReducer.playlists,
+  }),
   dispatch => ({
-    onAddToPlaylist(video) {
-      dispatch(addToPlaylist(video))
+    onAddToPlaylist(video, playlistName) {
+      dispatch(addToPlaylist(video, playlistName))
       console.log("added: " + JSON.stringify(video))
     },
+    onAddPlaylist(playlistName) {
+      dispatch(addPlaylist(playlistName))
+      console.log("added playlist: " + playlistName)
+    },
   })
-)(SearchResultCard)
+)(PlaylistDialog)

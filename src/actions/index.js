@@ -15,12 +15,24 @@ export const toggleDrawer = isDrawerOpen => ({
   isDrawerOpen,
 })
 
-export const addToPlaylist = video => ({
+export const addToPlaylist = (video, playlistName) => ({
   type: C.ADD_VIDEO,
   video,
+  playlistName,
 })
 
-export const deleteFromPlaylist = videoId => ({
+export const deleteFromPlaylist = (videoId, playlistName) => ({
   type: C.DELETE_VIDEO,
   videoId,
+  playlistName,
+})
+
+export const addPlaylist = playlistName => ({
+  type: C.ADD_PLAYLIST,
+  playlistName,
+})
+
+export const deletePlaylist = playlistName => ({
+  type: C.DELETE_PLAYLIST,
+  playlistName,
 })

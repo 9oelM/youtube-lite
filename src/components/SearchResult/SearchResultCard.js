@@ -12,66 +12,85 @@ import IconButton from "@material-ui/core/IconButton"
 import AddIcon from "@material-ui/icons/PlaylistAdd"
 import Grid from "@material-ui/core/Grid"
 import Tooltip from "@material-ui/core/Tooltip"
+import { PlaylistDialogContainer } from "../Containers/index"
 
-const searchResultCard = ({
-  title,
-  author,
-  img,
-  description,
-  vId,
-  history,
-  onAddToPlaylist,
-}) => (
-  <Grid className="searchResultCardWrapper">
-    <Grid className="searchResultCard">
-      <Card square className="searchResultCardInner">
-        <ButtonBase
-          onClick={() => {
-            history.push(`/videoPlayerView/${vId}`)
-          }}
-          className="searchResultCardInnerButton"
-        >
-          <CardContent className="cardHeading">
-            <Typography align="left" variant="title">
-              {title.length > 60 ? `${title.substring(0, 60)}...` : title}
-            </Typography>
-            <Typography align="left" variant="subheading">
-              {`by ${author}`}
-            </Typography>
-          </CardContent>
-          <CardMedia className="searchResultMedia" image={img} title={title} />
-          <CardContent>
-            <Typography align="left" variant="caption">
-              {description.length > 80
-                ? `${description.substring(0, 80)}...`
-                : description}
-            </Typography>
-          </CardContent>
-        </ButtonBase>
-        <Grid container justify="flex-end" className="addToPlaylistContainer">
-          <Tooltip title="Add to playlist">
-            <IconButton
-              className="addToPlaylist"
-              onClick={() =>
-                onAddToPlaylist({
-                  id: vId,
-                  title,
-                  description,
-                  author,
-                  img,
-                })
-              }
+class SearchResultCard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false,
+    }
+  }
+
+  handleClose = () => {
+    this.setState({
+      open: false,
+    })
+  }
+
+  handleOpen = () => {
+    this.setState({
+      open: true,
+    })
+  }
+
+  render() {
+    const { title, author, img, description, vId, history } = this.props
+    return (
+      <Grid className="searchResultCardWrapper">
+        <Grid className="searchResultCard">
+          <Card square className="searchResultCardInner">
+            <ButtonBase
+              onClick={() => {
+                history.push(`/videoPlayerView/${vId}`)
+              }}
+              className="searchResultCardInnerButton"
             >
-              <AddIcon />
-            </IconButton>
-          </Tooltip>
+              <CardContent className="cardHeading">
+                <Typography align="left" variant="title">
+                  {title.length > 60 ? `${title.substring(0, 60)}...` : title}
+                </Typography>
+                <Typography align="left" variant="subheading">
+                  {`by ${author}`}
+                </Typography>
+              </CardContent>
+              <CardMedia
+                className="searchResultMedia"
+                image={img}
+                title={title}
+              />
+              <CardContent>
+                <Typography align="left" variant="caption">
+                  {description.length > 80
+                    ? `${description.substring(0, 80)}...`
+                    : description}
+                </Typography>
+              </CardContent>
+            </ButtonBase>
+            <Grid
+              container
+              justify="flex-end"
+              className="addToPlaylistContainer"
+            >
+              <Tooltip title="Add to playlist">
+                <IconButton className="addToPlaylist" onClick={this.handleOpen}>
+                  <AddIcon />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          </Card>
         </Grid>
-      </Card>
-    </Grid>
-  </Grid>
-)
+        <PlaylistDialogContainer
+          open={this.state.open}
+          onClose={this.handleClose}
+          video={{ title, author, img, description, vId }}
+        />
+      </Grid>
+    )
+  }
+}
 
-searchResultCard.propTypes = {
+SearchResultCard.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
@@ -80,4 +99,4 @@ searchResultCard.propTypes = {
   history: RouterPT.history.isRequired,
 }
 
-export default withRouter(searchResultCard)
+export default withRouter(SearchResultCard)

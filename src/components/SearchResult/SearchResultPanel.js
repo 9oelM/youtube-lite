@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid"
 import shortid from "shortid"
 import Typography from "@material-ui/core/Typography"
 import Paper from "@material-ui/core/Paper"
-import { SearchResultCardContainer } from "../Containers/index"
+import SearchResultCard from "./SearchResultCard"
 
 const SearchResultPanel = ({ searchResults, match }) => (
   <Paper className="comfort-grid">
@@ -18,7 +18,7 @@ const SearchResultPanel = ({ searchResults, match }) => (
     <Grid spacing={16} container justify="center" id="resultsContainer">
       {searchResults.map(item => {
         return (
-          <SearchResultCardContainer
+          <SearchResultCard
             key={shortid.generate()}
             title={item.title}
             author={item.channelTitle}

@@ -45,28 +45,66 @@ function searchReducer(
   }
 }
 
+const getPlaylistIndex = (playlists, action) =>
+  playlists.findIndex(elem => elem.playlistName == action.playlistName)
+
+const getVideoIndex = (playlists, playlistIndex, action) =>
+  playlists[playlistIndex].videos.findIndex(elem => elem.id == action.videoId)
+
 function playlistReducer(
   state = {
-    playlist: [],
+    playlists: [
+      {
+        playlistName: "Default",
+        videos: [],
+      },
+    ],
   },
   action
 ) {
+  const playlistIndex = getPlaylistIndex(state.playlists, action)
   switch (action.type) {
-    case C.ADD_VIDEO:
+    case C.ADD_PLAYLIST:
+      return {
+        playlists: [
+          ...state.playlists,
+          {
+            playlistName: action.playlistName,
+            videos: [],
+          },
+        ],
+      }
+    case C.DELETE_PLAYLIST:
       return {
         ...state,
-        playlist: [...state.playlist, action.video],
+        playlists: [...state.playlists].splice(playlistIndex, 1),
+      }
+    case C.ADD_VIDEO:
+      let updatedPlaylist = [...state.playlists]
+      // only add one unique video for a playlist
+      updatedPlaylist[playlistIndex].videos.findIndex(
+        elem => elem.vId == action.video.vId
+      ) >= 0
+        ? () => {}
+        : updatedPlaylist[playlistIndex].videos.push(action.video)
+      return {
+        ...state,
+        playlists: updatedPlaylist,
       }
     case C.DELETE_VIDEO:
-      const index = state.playlist.findIndex(elem => elem.id == action.videoId)
+      const videoIndex = getVideoIndex(state.playlists, playlistIndex, action)
       return {
         ...state,
-        playlist: [...state.playlist].splice(index, 1),
+        playlists: [...state.playlists][playlistIndex].videos.splice(
+          videoIndex,
+          1
+        ),
       }
     default:
       return state
   }
 }
+
 const rootReducer = combineReducers({
   viewReducer,
   searchReducer,
