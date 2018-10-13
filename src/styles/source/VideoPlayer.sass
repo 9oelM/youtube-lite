@@ -13,9 +13,11 @@ $playlistBreakpoint: 1000px
         #playlist
             display: flex
             flex-direction: column
+            max-width: 30%
             #playlist-container
-                overflow-y: scroll
-                
+                overflow-y: auto
+                overflow-x: hidden
+                height: 100%
 
 @media screen and (max-width: $playlistBreakpoint) 
     #video-paper
@@ -25,3 +27,4 @@ $playlistBreakpoint: 1000px
         #playlist
             height: 40%
             padding: 10% 0 0 0
+            max-width: 100% !important
