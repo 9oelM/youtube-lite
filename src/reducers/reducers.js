@@ -15,9 +15,6 @@ function viewReducer(
       }
     default:
       return state
-    /*
-        It's important to return the previous state for any unknown action.
-        */
   }
 }
 
@@ -47,9 +44,33 @@ function searchReducer(
       return state
   }
 }
+
+function playlistReducer(
+  state = {
+    playlist: [],
+  },
+  action
+) {
+  switch (action.type) {
+    case C.ADD_VIDEO:
+      return {
+        ...state,
+        playlist: [...state.playlist, action.video],
+      }
+    case C.DELETE_VIDEO:
+      const index = state.playlist.findIndex(elem => elem.id == action.videoId)
+      return {
+        ...state,
+        playlist: [...state.playlist].splice(index, 1),
+      }
+    default:
+      return state
+  }
+}
 const rootReducer = combineReducers({
   viewReducer,
   searchReducer,
+  playlistReducer,
 })
 
 export default rootReducer

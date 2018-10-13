@@ -14,3 +14,13 @@ export const toggleDrawer = isDrawerOpen => ({
   type: C.TOGGLE_DRAWER,
   isDrawerOpen,
 })
+
+export const addToPlaylist = video => ({
+  type: C.ADD_VIDEO,
+  video,
+})
+
+export const deleteFromPlaylist = videoId => ({
+  type: C.DELETE_VIDEO,
+  videoId,
+})

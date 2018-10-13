@@ -20,6 +20,7 @@ const searchResultCard = ({
   description,
   vId,
   history,
+  onAddToPlaylist,
 }) => (
   <Grid className="searchResultCardWrapper">
     <Grid className="searchResultCard">
@@ -49,7 +50,18 @@ const searchResultCard = ({
         </ButtonBase>
         <Grid container justify="flex-end" className="addToPlaylistContainer">
           <Tooltip title="Add to playlist">
-            <IconButton className="addToPlaylist">
+            <IconButton
+              className="addToPlaylist"
+              onClick={() =>
+                onAddToPlaylist({
+                  id: vId,
+                  title,
+                  description,
+                  author,
+                  img,
+                })
+              }
+            >
               <AddIcon />
             </IconButton>
           </Tooltip>
