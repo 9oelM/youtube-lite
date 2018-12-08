@@ -6,6 +6,7 @@ import ContentGrid from "../Layout/ContentGrid"
 import PlaylistDialog from "../PlaylistDialog/PlaylistDialog"
 import PlaylistsPanel from "../Playlists/PlaylistsPanel"
 import VideoPlaylists from "../VideoPlayer/VideoPlaylists"
+import SettingsLists from "../SettingsLists/SettingsLists"
 import {
   toggleDrawer,
   receiveSearch,
@@ -14,6 +15,7 @@ import {
   deleteFromPlaylist,
   addPlaylist,
   deletePlaylist,
+  adjustSettings,
 } from "../../actions/index"
 
 export const TopNavContainer = connect(
@@ -77,3 +79,14 @@ export const VideoPlaylistsContainer = connect(
   }),
   null
 )(VideoPlaylists)
+
+export const SettingsListsContainer = connect(
+  state => ({
+    settings: state.settingsReducer.settings,
+  }),
+  dispatch => ({
+    onAdjustSettings(settings) {
+      dispatch(adjustSettings(settings))
+    },
+  })
+)(SettingsLists)

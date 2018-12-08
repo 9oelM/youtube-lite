@@ -36,3 +36,8 @@ export const deletePlaylist = playlistName => ({
   type: C.DELETE_PLAYLIST,
   playlistName,
 })
+
+export const adjustSettings = settings => ({
+  type: C.ADJUST_SETTINGS,
+  settings,
+})
