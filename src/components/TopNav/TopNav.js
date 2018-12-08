@@ -28,6 +28,7 @@ const TopNav = ({
   onSearchTrigger,
   onSearchResults,
   history,
+  apiKey,
 }) => (
   <div className={classes.root} id="TopNav">
     <Drawer isDrawerOpen={isDrawerOpen} onToggle={onToggle} />
@@ -43,7 +44,7 @@ const TopNav = ({
         </IconButton>
         <YoutubeAutocomplete
           option={{
-            key: "AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28",
+            key: apiKey,
             type: ["video", "playist"],
             maxResults: 15,
           }}
