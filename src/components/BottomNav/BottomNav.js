@@ -7,7 +7,7 @@ import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 
-const BottomNav = ({ TotalVids, TotalTime, settings }) => {
+const BottomNav = ({ settings }) => {
   const { showStatsBar } = settings
   const elem = showStatsBar ? (
     <div id="bottom-nav">
@@ -33,6 +33,14 @@ const BottomNav = ({ TotalVids, TotalTime, settings }) => {
     </div>
   ) : null
   return elem
+}
+
+BottomNav.propTypes = {
+  settings: PropTypes.shape({
+    apiKey: PropTypes.string,
+    maxSearchResult: PropTypes.string,
+    showStatsBar: PropTypes.bool,
+  }).isRequired,
 }
 
 export default BottomNav
