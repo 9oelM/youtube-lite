@@ -21,7 +21,7 @@ import {
 export const TopNavContainer = connect(
   state => ({
     isDrawerOpen: state.viewReducer.isDrawerOpen,
-    apiKey: state.settingsReducer.settings.apiKey,
+    settings: state.settingsReducer.settings,
   }),
   dispatch => ({
     onToggle() {

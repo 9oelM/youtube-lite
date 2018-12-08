@@ -123,9 +123,11 @@ const settingsReducer = (
     case C.ADJUST_SETTINGS:
       return {
         ...state,
-        apiKey: state.settings.apiKey,
-        maxSearchResult: state.settings.maxSearchResult,
-        showStatsBar: state.settings.showStatsBar,
+        settings: {
+          apiKey: action.settings.apiKey,
+          maxSearchResult: action.settings.maxSearchResult,
+          showStatsBar: action.settings.showStatsBar,
+        },
       }
     default:
       return state

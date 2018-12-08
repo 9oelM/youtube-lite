@@ -28,37 +28,40 @@ const TopNav = ({
   onSearchTrigger,
   onSearchResults,
   history,
-  apiKey,
-}) => (
-  <div className={classes.root} id="TopNav">
-    <Drawer isDrawerOpen={isDrawerOpen} onToggle={onToggle} />
-    <AppBar position="static">
-      <Toolbar>
-        <IconButton
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="Menu"
-          onClick={onToggle}
-        >
-          <MenuIcon />
-        </IconButton>
-        <YoutubeAutocomplete
-          option={{
-            key: apiKey,
-            type: ["video", "playist"],
-            maxResults: 15,
-          }}
-          placeholderText="Search youtube"
-          onSearchResults={results => onSearchResults(results)}
-          onSearchTrigger={searchWord => {
-            onSearchTrigger(searchWord)
-            history.push(`/searchResultView/${searchWord}`)
-          }}
-        />
-      </Toolbar>
-    </AppBar>
-  </div>
-)
+  settings,
+}) => {
+  const { apiKey, maxSearchResult } = settings
+  return (
+    <div className={classes.root} id="TopNav">
+      <Drawer isDrawerOpen={isDrawerOpen} onToggle={onToggle} />
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Menu"
+            onClick={onToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+          <YoutubeAutocomplete
+            option={{
+              key: apiKey,
+              type: ["video", "playist"],
+              maxResults: Number(maxSearchResult),
+            }}
+            placeholderText="Search youtube"
+            onSearchResults={results => onSearchResults(results)}
+            onSearchTrigger={searchWord => {
+              onSearchTrigger(searchWord)
+              history.push(`/searchResultView/${searchWord}`)
+            }}
+          />
+        </Toolbar>
+      </AppBar>
+    </div>
+  )
+}
 
 TopNav.propTypes = {
   classes: PropTypes.object.isRequired,
