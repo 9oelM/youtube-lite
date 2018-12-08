@@ -7,6 +7,7 @@ import PlaylistDialog from "../PlaylistDialog/PlaylistDialog"
 import PlaylistsPanel from "../Playlists/PlaylistsPanel"
 import VideoPlaylists from "../VideoPlayer/VideoPlaylists"
 import SettingsLists from "../SettingsLists/SettingsLists"
+import BottomNav from "../BottomNav/BottomNav"
 import {
   toggleDrawer,
   receiveSearch,
@@ -91,3 +92,10 @@ export const SettingsListsContainer = connect(
     },
   })
 )(SettingsLists)
+
+export const BottomNavContainer = connect(
+  state => ({
+    settings: state.settingsReducer.settings,
+  }),
+  null
+)(BottomNav)

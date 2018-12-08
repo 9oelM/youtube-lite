@@ -1,8 +1,10 @@
 import React from "react"
 import Grid from "@material-ui/core/Grid"
 import PropTypes from "prop-types"
-import { TopNavContainer } from "../components/Containers/index"
-import BottomNav from "../components/BottomNav/BottomNav"
+import {
+  TopNavContainer,
+  BottomNavContainer,
+} from "../components/Containers/index"
 import Progress from "../components/Progress/Progress"
 import setContentPagePaddingEqual from "../modules/resize"
 
@@ -25,7 +27,7 @@ class ContentGrid extends React.Component {
         <Grid id="ContentPage" className={_className}>
           {children}
         </Grid>
-        <BottomNav />
+        <BottomNavContainer />
       </React.Fragment>
     )
   }

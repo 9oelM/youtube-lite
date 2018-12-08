@@ -38,6 +38,17 @@ class SettingsLists extends React.Component {
   }
 
   handleChange = name => event => {
+    const value = event.target.value
+    const NumberedValue = Number(value)
+    if (
+      typeof NumberedValue === "number" &&
+      !isNaN(NumberedValue) &&
+      name === "maxSearchResult"
+    ) {
+      if (NumberedValue > 50 || NumberedValue < 5) {
+        return
+      }
+    }
     name === "showStatsBar"
       ? this.setState({
           [name]: event.target.checked,
@@ -46,7 +57,12 @@ class SettingsLists extends React.Component {
           [name]: event.target.value,
         })
   }
-
+  //         original settings
+  restore = originalSettings => {
+    this.setState({
+      ...originalSettings,
+    })
+  }
   render() {
     const { settings, onAdjustSettings } = this.props
     const { triggered } = this.state
@@ -69,7 +85,7 @@ class SettingsLists extends React.Component {
             <ListItemSecondaryAction>
               <Switch
                 onChange={this.handleChange("showStatsBar")}
-                checked={this.state.showStatsBar}
+                checked={Boolean(this.state.showStatsBar)}
                 color="primary"
               />
             </ListItemSecondaryAction>
@@ -82,7 +98,7 @@ class SettingsLists extends React.Component {
               value={this.state.apiKey}
               onChange={this.handleChange("apiKey")}
               margin="normal"
-              helperText="It is strongly advised that you get your own API key. See https://developers.google.com/youtube/v3/getting-started for the steps!"
+              helperText="It is strongly advised that you get your own API key. See https://developers.google.com/youtube/v3/getting-started for the steps! For now, if you enter an invalid API key, the app's just going to crash, so be warned."
               fullWidth
             />
           </ListItem>
@@ -99,7 +115,7 @@ class SettingsLists extends React.Component {
               }}
               margin="normal"
               fullWidth
-              helperText="Maximum: 50"
+              helperText="Enter n, where 5 <= n <= 50"
             />
           </ListItem>
           <ListItem>
@@ -121,7 +137,13 @@ class SettingsLists extends React.Component {
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" color="secondary">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() =>
+                    this.restore({ showStatsBar, apiKey, maxSearchResult })
+                  }
+                >
                   Cancel
                 </Button>
               </Grid>
@@ -159,9 +181,10 @@ class SettingsLists extends React.Component {
 SettingsLists.propTypes = {
   settings: PropTypes.shape({
     apiKey: PropTypes.string,
-    maxSearchResult: PropTypes.number,
+    maxSearchResult: PropTypes.string,
     showStatsBar: PropTypes.bool,
-  }),
+  }).isRequired,
+  onAdjustSettings: PropTypes.func.isRequired,
 }
 
 export default SettingsLists

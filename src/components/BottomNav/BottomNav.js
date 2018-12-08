@@ -7,28 +7,32 @@ import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 
-const BottomNav = ({ TotalVids, TotalTime }) => (
-  <div id="bottom-nav">
-    <AppBar id="bottom-app-bar">
-      <Toolbar id="bottom-toolbar">
-        <Typography
-          variant="caption"
-          color="inherit"
-          className="bottom-nav-status"
-        >
-          Videos watched: {5}
-          &nbsp;|&nbsp;
-        </Typography>
-        <Typography
-          variant="caption"
-          color="inherit"
-          className="bottom-nav-status"
-        >
-          Total time watched: {"1.5 hr"}
-        </Typography>
-      </Toolbar>
-    </AppBar>
-  </div>
-)
+const BottomNav = ({ TotalVids, TotalTime, settings }) => {
+  const { showStatsBar } = settings
+  const elem = showStatsBar ? (
+    <div id="bottom-nav">
+      <AppBar id="bottom-app-bar">
+        <Toolbar id="bottom-toolbar">
+          <Typography
+            variant="caption"
+            color="inherit"
+            className="bottom-nav-status"
+          >
+            Videos watched: {5}
+            &nbsp;|&nbsp;
+          </Typography>
+          <Typography
+            variant="caption"
+            color="inherit"
+            className="bottom-nav-status"
+          >
+            Total time watched: {"1.5 hr"}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
+  ) : null
+  return elem
+}
 
 export default BottomNav
