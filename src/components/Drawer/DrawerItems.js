@@ -14,7 +14,7 @@ const DrawerItems = () => (
       {[
         ["/", "Dashboard", <DashboardIcon />],
         ["/Playlists", "Playlists", <PlaylistIcon />],
-        ["/Channels", "Channels", <ChannelIcon />],
+        //["/Channels", "Channels", <ChannelIcon />],
         ["/Settings", "Settings", <SettingsIcon />],
         ["/About", "About", <FavBorderIcon />],
       ].map(item => (
