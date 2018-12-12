@@ -41,3 +41,15 @@ export const adjustSettings = settings => ({
   type: C.ADJUST_SETTINGS,
   settings,
 })
+
+export const watchVideo = () => ({
+  type: C.WATCH_VIDEO,
+})
+
+export const startVideo = () => ({
+  type: C.START_VIDEO,
+})
+
+export const pauseVideo = () => ({
+  type: C.PAUSE_VIDEO,
+})
