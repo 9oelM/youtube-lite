@@ -9,6 +9,14 @@ import Typography from "@material-ui/core/Typography"
 import humanizeTime from "../../modules/humanizeTime"
 
 class BottomNav extends React.Component {
+  // used to force refresh the component
+  componentDidMount() {
+    this.interval = setInterval(() => this.setState({ time: Date.now() }), 1000)
+  }
+  // used to prevent memory leaks!
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
   render() {
     const { settings, timer, videoCount } = this.props
     const humanizedTime = humanizeTime(timer)
