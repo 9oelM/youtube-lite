@@ -9,6 +9,8 @@ import VideoPlaylists from "../VideoPlayer/VideoPlaylists"
 import SettingsLists from "../SettingsLists/SettingsLists"
 import BottomNav from "../BottomNav/BottomNav"
 import VideoPlayer from "../VideoPlayer/VideoPlayer"
+import TotalVideosWatched from "../Home/TotalVideosWatched"
+import TotalTimeWatched from "../Home/TotalTimeWatched"
 import {
   toggleDrawer,
   receiveSearch,
@@ -100,6 +102,8 @@ export const SettingsListsContainer = connect(
 export const BottomNavContainer = connect(
   state => ({
     settings: state.settingsReducer.settings,
+    timer: state.videoStatsReducer.timer,
+    videoCount: state.videoStatsReducer.videoCount,
   }),
   null
 )(BottomNav)
@@ -118,3 +122,17 @@ export const VideoPlayerContainer = connect(
     },
   })
 )(VideoPlayer)
+
+export const TotalTimeWatchedContainer = connect(
+  state => ({
+    timer: state.videoStatsReducer.timer,
+  }),
+  null
+)(TotalTimeWatched)
+
+export const TotalVideosWatchedContainer = connect(
+  state => ({
+    videoCount: state.videoStatsReducer.videoCount,
+  }),
+  null
+)(TotalVideosWatched)
