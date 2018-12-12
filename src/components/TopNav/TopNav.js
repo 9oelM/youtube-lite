@@ -7,7 +7,7 @@ import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
-import YoutubeAutocomplete from "new-material-react-youtube-autocomplete"
+import Autocomplete from "./Autocomplete"
 import Drawer from "../Drawer/Drawer"
 
 const styles = {
@@ -44,7 +44,7 @@ const TopNav = ({
           >
             <MenuIcon />
           </IconButton>
-          <YoutubeAutocomplete
+          <Autocomplete
             option={{
               key: apiKey,
               type: ["video", "playist"],
