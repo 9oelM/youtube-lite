@@ -6,33 +6,37 @@ import { withStyles } from "@material-ui/core/styles"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
+import humanizeTime from "../../modules/humanizeTime"
 
-const BottomNav = ({ settings }) => {
-  const { showStatsBar } = settings
-  const elem = showStatsBar ? (
-    <div id="bottom-nav">
-      <AppBar id="bottom-app-bar">
-        <Toolbar id="bottom-toolbar">
-          <Typography
-            variant="caption"
-            color="inherit"
-            className="bottom-nav-status"
-          >
-            Videos watched: {5}
-            &nbsp;|&nbsp;
-          </Typography>
-          <Typography
-            variant="caption"
-            color="inherit"
-            className="bottom-nav-status"
-          >
-            Total time watched: {"1.5 hr"}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
-  ) : null
-  return elem
+class BottomNav extends React.Component {
+  render() {
+    const { settings, timer, videoCount } = this.props
+    const humanizedTime = humanizeTime(timer)
+    const { showStatsBar } = settings
+    const elem = showStatsBar ? (
+      <div id="bottom-nav">
+        <AppBar id="bottom-app-bar">
+          <Toolbar id="bottom-toolbar">
+            <Typography
+              variant="caption"
+              color="inherit"
+              className="bottom-nav-status"
+            >
+              {videoCount} {videoCount < 2 ? "video" : "videos"} &nbsp;|&nbsp;
+            </Typography>
+            <Typography
+              variant="caption"
+              color="inherit"
+              className="bottom-nav-status"
+            >
+              {humanizedTime}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </div>
+    ) : null
+    return elem
+  }
 }
 
 BottomNav.propTypes = {
