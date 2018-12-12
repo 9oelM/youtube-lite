@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
 import C from "../actions/constants"
-
+const Timer = require("easytimer.js")
 const viewReducer = (
   state = {
     isDrawerOpen: false,
@@ -134,11 +134,38 @@ const settingsReducer = (
   }
 }
 
+const videoStatsReducer = (
+  state = {
+    timer: new Timer(),
+    videoCount: 0,
+  },
+  action
+) => {
+  switch (action.type) {
+    case C.START_VIDEO:
+      state.timer.addEventListener("secondsUpdated")
+      state.timer.start()
+      return state
+    case C.PAUSE_VIDEO:
+      state.timer.pause()
+      console.log(state.timer.getTimeValues().seconds)
+      return state
+    case C.WATCH_VIDEO:
+      return {
+        ...state,
+        videoCount: state.videoCount + 1,
+      }
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   viewReducer,
   searchReducer,
   playlistReducer,
   settingsReducer,
+  videoStatsReducer,
 })
 
 export default rootReducer
