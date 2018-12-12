@@ -16,8 +16,6 @@ class VideoPlayer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      timer: new Timer(),
-      time: 0,
       ready: false,
     }
   }
@@ -41,7 +39,7 @@ class VideoPlayer extends React.Component {
       window.requestAnimationFrame(callback)
     }, 0)
   }
-*/
+  */
 
   componentWillUnmount() {
     this.props.onPauseVideo()
@@ -61,7 +59,6 @@ class VideoPlayer extends React.Component {
     return (
       <React.Fragment>
         <YouTube
-          ref={this.youtubeSpanElem}
           videoId={videoId}
           opts={opts}
           onReady={this.onReady}
