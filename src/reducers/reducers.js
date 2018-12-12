@@ -147,7 +147,7 @@ const videoStatsReducer = (
       return state
     case C.PAUSE_VIDEO:
       state.timer.pause()
-      console.log(state.timer.getTimeValues().seconds)
+      console.log(state.timer.getTotalTimeValues().seconds)
       return state
     case C.WATCH_VIDEO:
       return {
