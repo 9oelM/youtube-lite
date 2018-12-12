@@ -16,8 +16,10 @@ import IconButton from "@material-ui/core/IconButton"
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
 import Drawer from "../Drawer/Drawer"
-import VideoPlayer from "./VideoPlayer"
-import { VideoPlaylistsContainer } from "../Containers/index"
+import {
+  VideoPlaylistsContainer,
+  VideoPlayerContainer,
+} from "../Containers/index"
 
 class VideoPlayerPanel extends React.Component {
   constructor(props) {
@@ -35,7 +37,7 @@ class VideoPlayerPanel extends React.Component {
       <Grid className="comfort-grid" style={{ padding: 0, height: "100%" }}>
         <Paper id="video-paper">
           <Grid id="video-wrapper">
-            <VideoPlayer videoId={vId} />
+            <VideoPlayerContainer videoId={vId} />
             <Grid style={{ width: "100%" }}>
               <Button
                 className="control-button"
