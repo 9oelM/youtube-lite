@@ -46,16 +46,19 @@ class VideoPlayer extends React.Component {
   }
 
   render() {
+    const { videoId, repeatSingle, onStartVideo, onPauseVideo } = this.props
+    const { ready } = this.state
     const opts = {
       height: "95%",
       width: "100%",
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
+        loop: repeatSingle ? 1 : 0,
+        playlist: videoId,
+        rel: 0,
       },
     }
-    const { videoId, onStartVideo, onPauseVideo } = this.props
-    const { ready } = this.state
     return (
       <React.Fragment>
         <YouTube

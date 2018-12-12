@@ -25,7 +25,7 @@ class VideoPlayerPanel extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      repeatAll: true,
+      repeatAll: false,
       shuffle: false,
     }
   }
@@ -37,7 +37,7 @@ class VideoPlayerPanel extends React.Component {
       <Grid className="comfort-grid" style={{ padding: 0, height: "100%" }}>
         <Paper id="video-paper">
           <Grid id="video-wrapper">
-            <VideoPlayerContainer videoId={vId} />
+            <VideoPlayerContainer videoId={vId} repeatSingle={!repeatAll} />
             <Grid style={{ width: "100%" }}>
               <Button
                 className="control-button"
