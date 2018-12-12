@@ -143,7 +143,6 @@ const videoStatsReducer = (
 ) => {
   switch (action.type) {
     case C.START_VIDEO:
-      state.timer.addEventListener("secondsUpdated")
       state.timer.start()
       return state
     case C.PAUSE_VIDEO:
