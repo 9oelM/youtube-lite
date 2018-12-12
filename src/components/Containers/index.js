@@ -8,6 +8,7 @@ import PlaylistsPanel from "../Playlists/PlaylistsPanel"
 import VideoPlaylists from "../VideoPlayer/VideoPlaylists"
 import SettingsLists from "../SettingsLists/SettingsLists"
 import BottomNav from "../BottomNav/BottomNav"
+import VideoPlayer from "../VideoPlayer/VideoPlayer"
 import {
   toggleDrawer,
   receiveSearch,
@@ -17,6 +18,9 @@ import {
   addPlaylist,
   deletePlaylist,
   adjustSettings,
+  watchVideo,
+  startVideo,
+  pauseVideo,
 } from "../../actions/index"
 
 export const TopNavContainer = connect(
@@ -99,3 +103,18 @@ export const BottomNavContainer = connect(
   }),
   null
 )(BottomNav)
+
+export const VideoPlayerContainer = connect(
+  null,
+  dispatch => ({
+    onStartVideo() {
+      dispatch(startVideo())
+    },
+    onPauseVideo() {
+      dispatch(pauseVideo())
+    },
+    onWatchVideo() {
+      dispatch(watchVideo())
+    },
+  })
+)(VideoPlayer)
