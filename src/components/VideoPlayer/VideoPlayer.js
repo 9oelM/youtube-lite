@@ -22,27 +22,13 @@ class VideoPlayer extends React.Component {
     }
   }
 
-  _onReady = event => {
+  onReady = event => {
     // onReady is only called once.
     this.setState({ ready: true })
-    this.handleTiming("secondsUpdated")
-  }
-  _onPlay = event => {
-    this.state.timer.start()
+    this.props.onWatchVideo()
   }
 
-  _onPause = event => {
-    this.state.timer.pause()
-  }
-
-  handleTiming = timeUnit => {
-    let self = this
-    this.state.timer.addEventListener(timeUnit, function(e) {
-      self.setState({ time: self.state.timer.getTimeValues().seconds })
-      console.log(`time: ${self.state.timer.getTimeValues().seconds}`)
-    })
-  }
-
+  /*
   removeTemptations = (targetFrame, ...selectors) => {
     // still working on this
     const targetHtml = targetFrame.contentDocument || targetFrame.contentWindow
@@ -55,6 +41,11 @@ class VideoPlayer extends React.Component {
       window.requestAnimationFrame(callback)
     }, 0)
   }
+*/
+
+  componentWillUnmount() {
+    this.props.onPauseVideo()
+  }
 
   render() {
     const opts = {
@@ -65,7 +56,7 @@ class VideoPlayer extends React.Component {
         autoplay: 1,
       },
     }
-    const { videoId } = this.props
+    const { videoId, onStartVideo, onPauseVideo } = this.props
     const { ready } = this.state
     return (
       <React.Fragment>
@@ -73,11 +64,11 @@ class VideoPlayer extends React.Component {
           ref={this.youtubeSpanElem}
           videoId={videoId}
           opts={opts}
-          onReady={() => {
-            this._onReady()
-          }}
-          onPlay={this._onPlay}
-          onPause={this._onPause}
+          onReady={this.onReady}
+          onPlay={onStartVideo}
+          onPause={onPauseVideo}
+          onEnd={onPauseVideo}
+          onError={onPauseVideo}
         />
         <Progress isLoading={!ready} />
       </React.Fragment>
