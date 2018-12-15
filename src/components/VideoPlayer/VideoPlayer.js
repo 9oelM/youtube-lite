@@ -24,12 +24,13 @@ class VideoPlayer extends React.Component {
 
   _onReady = event => {
     // onReady is only called once.
-    const { onWatchingVideoRefs } = this.state
+    // const { onWatchingVideoRefs } = this.state
     const { onWatchVideo } = this.props
     onWatchVideo()
     this.setState({
       ready: true,
-      onWatchingVideoRefs: [...onWatchingVideoRefs, this.onKeepWatchingVideo()],
+      // onWatchingVideoRefs: [...onWatchingVideoRefs, this.onKeepWatchingVideo()],
+      // TODO: The user cannot see the most updated time in BottomNav because onKeepWatchingVideo() will not fire until the video actually starts playin after a length of loading. In short, the user will see "0 seconds" in the bottom while the video is loading.
     })
   }
 
