@@ -1,5 +1,8 @@
 import { combineReducers } from "redux"
 import C from "../actions/constants"
+import storage from "redux-persist/lib/storage"
+import { persistReducer } from "redux-persist"
+
 const Timer = require("easytimer.js")
 const viewReducer = (
   state = {
@@ -137,34 +140,87 @@ const settingsReducer = (
 const videoStatsReducer = (
   state = {
     timer: new Timer(),
+    time: 0,
     videoCount: 0,
   },
   action
 ) => {
   switch (action.type) {
-    case C.START_VIDEO:
-      state.timer.start()
+    case C.START_VIDEO: {
+      let recoveredTime = 0
+      let config = {}
+      if (state.time > 0) {
+        recoveredTime = state.time
+        config = {
+          startValues: {
+            seconds: recoveredTime,
+          },
+        }
+      }
+      state.timer.start(config)
       return state
-    case C.PAUSE_VIDEO:
+    }
+    case C.PAUSE_VIDEO: {
       state.timer.pause()
-      console.log(state.timer.getTotalTimeValues().seconds)
       return state
-    case C.WATCH_VIDEO:
+    }
+    case C.WATCH_VIDEO: {
       return {
         ...state,
         videoCount: state.videoCount + 1,
       }
+    }
+    // keeps track of the most updated time
+    case C.WATCHING_VIDEO: {
+      const elapsedTime = state.timer.getTotalTimeValues().seconds
+      return {
+        ...state,
+        time: elapsedTime,
+      }
+    }
     default:
       return state
   }
 }
 
+//const persistedVideoStatsReducer =
 const rootReducer = combineReducers({
-  viewReducer,
-  searchReducer,
-  playlistReducer,
-  settingsReducer,
-  videoStatsReducer,
+  viewReducer: persistReducer(
+    {
+      key: "view",
+      storage: storage,
+    },
+    viewReducer
+  ),
+  searchReducer: persistReducer(
+    {
+      key: "search",
+      storage: storage,
+    },
+    searchReducer
+  ),
+  playlistReducer: persistReducer(
+    {
+      key: "playlist",
+      storage: storage,
+    },
+    playlistReducer
+  ),
+  settingsReducer: persistReducer(
+    {
+      key: "settings",
+      storage: storage,
+    },
+    settingsReducer
+  ),
+  videoStatsReducer: persistReducer(
+    {
+      key: "videoStats",
+      storage: storage,
+      whitelist: ["time", "videoCount"],
+    },
+    videoStatsReducer
+  ),
 })
 
 export default rootReducer
