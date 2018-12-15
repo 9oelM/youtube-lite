@@ -5,23 +5,26 @@ import { Provider } from "react-redux"
 import { HashRouter } from "react-router-dom"
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider"
 import { createMuiTheme } from "@material-ui/core/styles"
+import { PersistGate } from "redux-persist/integration/react"
 import App from "./App"
 import theme from "./Theme"
 import registerServiceWorker from "./registerServiceWorker"
-import store from "./store/index"
+import { store, persistor } from "./store/index"
 
 /* global document */
 
 const render = Component =>
   ReactDOM.render(
     <Provider store={store}>
-      <AppContainer>
-        <HashRouter>
-          <MuiThemeProvider theme={theme}>
-            <App />
-          </MuiThemeProvider>
-        </HashRouter>
-      </AppContainer>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppContainer>
+          <HashRouter>
+            <MuiThemeProvider theme={theme}>
+              <App />
+            </MuiThemeProvider>
+          </HashRouter>
+        </AppContainer>
+      </PersistGate>
     </Provider>,
     document.getElementById("root")
   )
