@@ -97,6 +97,9 @@ class SettingsLists extends React.Component {
               id="api-key"
               value={this.state.apiKey}
               onChange={this.handleChange("apiKey")}
+              InputLabelProps={{
+                shrink: true,
+              }}
               margin="normal"
               helperText="It is strongly advised that you get your own API key. See https://developers.google.com/youtube/v3/getting-started for the steps! For now, if you enter an invalid API key, the app's just going to crash, so be warned."
               fullWidth
@@ -181,7 +184,7 @@ class SettingsLists extends React.Component {
 SettingsLists.propTypes = {
   settings: PropTypes.shape({
     apiKey: PropTypes.string,
-    maxSearchResult: PropTypes.string,
+    maxSearchResult: PropTypes.number,
     showStatsBar: PropTypes.bool,
   }).isRequired,
   onAdjustSettings: PropTypes.func.isRequired,
