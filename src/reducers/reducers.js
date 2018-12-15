@@ -146,11 +146,14 @@ const videoStatsReducer = (
   action
 ) => {
   switch (action.type) {
+    /*
+     * When the user starts the video, it is ESSENTIAL that START_VIDEO fires first, then WATCHING_VIDEO.
+     */
     case C.START_VIDEO: {
       let recoveredTime = 0
       let config = {}
-      if (state.time > 0) {
-        recoveredTime = state.time
+      if (Number(state.time) > 0) {
+        recoveredTime = Number(state.time)
         config = {
           startValues: {
             seconds: recoveredTime,
@@ -192,13 +195,7 @@ const rootReducer = combineReducers({
     },
     viewReducer
   ),
-  searchReducer: persistReducer(
-    {
-      key: "search",
-      storage: storage,
-    },
-    searchReducer
-  ),
+  searchReducer,
   playlistReducer: persistReducer(
     {
       key: "playlist",
