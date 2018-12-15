@@ -17,9 +17,10 @@ class BottomNav extends React.Component {
   componentWillUnmount() {
     clearInterval(this.interval)
   }
+
   render() {
-    const { settings, timer, videoCount } = this.props
-    const humanizedTime = humanizeTime(timer)
+    const { settings, time, videoCount } = this.props
+    const humanizedTime = humanizeTime(time)
     const { showStatsBar } = settings
     const elem = showStatsBar ? (
       <div id="bottom-nav">
@@ -50,7 +51,6 @@ class BottomNav extends React.Component {
 BottomNav.propTypes = {
   settings: PropTypes.shape({
     apiKey: PropTypes.string,
-    maxSearchResult: PropTypes.string,
     showStatsBar: PropTypes.bool,
   }).isRequired,
 }
