@@ -21,6 +21,7 @@ import {
   deletePlaylist,
   adjustSettings,
   watchVideo,
+  watchingVideo,
   startVideo,
   pauseVideo,
 } from "../../actions/index"
@@ -102,6 +103,7 @@ export const SettingsListsContainer = connect(
 export const BottomNavContainer = connect(
   state => ({
     settings: state.settingsReducer.settings,
+    time: state.videoStatsReducer.time,
     timer: state.videoStatsReducer.timer,
     videoCount: state.videoStatsReducer.videoCount,
   }),
@@ -120,11 +122,15 @@ export const VideoPlayerContainer = connect(
     onWatchVideo() {
       dispatch(watchVideo())
     },
+    onWatchingVideo() {
+      dispatch(watchingVideo())
+    },
   })
 )(VideoPlayer)
 
 export const TotalTimeWatchedContainer = connect(
   state => ({
+    time: state.videoStatsReducer.time,
     timer: state.videoStatsReducer.timer,
   }),
   null

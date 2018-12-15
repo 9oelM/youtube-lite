@@ -46,6 +46,10 @@ export const watchVideo = () => ({
   type: C.WATCH_VIDEO,
 })
 
+export const watchingVideo = () => ({
+  type: C.WATCHING_VIDEO,
+})
+
 export const startVideo = () => ({
   type: C.START_VIDEO,
 })

@@ -17,36 +17,67 @@ class VideoPlayer extends React.Component {
     super(props)
     this.state = {
       ready: false,
+      onWatchingVideoRefs: [],
+      started: false,
     }
   }
 
-  onReady = event => {
+  _onReady = event => {
     // onReady is only called once.
-    this.setState({ ready: true })
-    this.props.onWatchVideo()
+    const { onWatchingVideoRefs } = this.state
+    const { onWatchVideo } = this.props
+    onWatchVideo()
+    this.setState({
+      ready: true,
+      onWatchingVideoRefs: [...onWatchingVideoRefs, this.onKeepWatchingVideo()],
+    })
   }
 
-  /*
-  removeTemptations = (targetFrame, ...selectors) => {
-    // still working on this
-    const targetHtml = targetFrame.contentDocument || targetFrame.contentWindow
-    console.log(targetHtml)
+  _onPauseVideo = () => {
+    const { onWatchingVideoRefs } = this.state
+    const { onPauseVideo } = this.props
+    onPauseVideo()
+    this.flushAllIntervals(onWatchingVideoRefs)
   }
 
-  onNextFrame = callback => {
-    // works to delay the callback to the last queue, hopefully after the render finished
-    setTimeout(function() {
-      window.requestAnimationFrame(callback)
-    }, 0)
+  _onStartVideo = () => {
+    const { onWatchingVideoRefs } = this.state
+    const { onStartVideo } = this.props
+    this.flushAllIntervals(onWatchingVideoRefs)
+    onStartVideo()
+    this.setState({
+      onWatchingVideoRefs: [...onWatchingVideoRefs, this.onKeepWatchingVideo()],
+    })
   }
-  */
+
+  onKeepWatchingVideo = () => {
+    const { onWatchingVideoRefs } = this.state
+    const { onWatchingVideo } = this.props
+    this.flushAllIntervals(onWatchingVideoRefs)
+    return setInterval(() => onWatchingVideo(), 1000)
+  }
+
+  flushAllIntervals = refs => {
+    refs.forEach(ref => clearInterval(ref))
+  }
+
+  componentDidMount() {
+    const { onUnloadWindow } = this.props
+    window.addEventListener("unload", function(event) {
+      onUnloadWindow()
+      console.log("unloaded")
+    })
+  }
 
   componentWillUnmount() {
-    this.props.onPauseVideo()
+    const { onWatchingVideoRefs } = this.state
+    const { onPauseVideo } = this.props
+    onPauseVideo()
+    this.flushAllIntervals(onWatchingVideoRefs)
   }
 
   render() {
-    const { videoId, repeatSingle, onStartVideo, onPauseVideo } = this.props
+    const { videoId, repeatSingle } = this.props
     const { ready } = this.state
     const opts = {
       height: "95%",
@@ -64,11 +95,11 @@ class VideoPlayer extends React.Component {
         <YouTube
           videoId={videoId}
           opts={opts}
-          onReady={this.onReady}
-          onPlay={onStartVideo}
-          onPause={onPauseVideo}
-          onEnd={onPauseVideo}
-          onError={onPauseVideo}
+          onReady={this._onReady}
+          onPlay={this._onStartVideo}
+          onPause={this._onPauseVideo}
+          onEnd={this._onPauseVideo}
+          onError={this._onPauseVideo}
         />
         <Progress isLoading={!ready} />
       </React.Fragment>

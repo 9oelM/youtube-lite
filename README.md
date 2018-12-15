@@ -1,17 +1,19 @@
-## Youtube Lite. 
+## Youtube Lite: Youtuube that doesn't scale at all. 
 No ads, no distractions. No recommendations. Just find the straight way to what you've gotta watch on youtube and quit youtube. Don't fall into temptations to watch more of more irrelevant, time-wasting videos!
 
 ## To be completed 
 - [x] Calculate videos and total time watched
 - [x] Connect above data with `BottomNav` and `Home` components
 - [x] Mark `Channels` page as under construction
+- [x] Sync data with localStorage (do not sync `timer` as it does not get stringified)
+- [ ] Add clear localStorage option in settings
 - [ ] Make redux containers for "Add to Playlist" button inside `VideoPlaylists.js`
 - [ ] Improve the autocomplete search bar (change to a new component with new logic)
 - [ ] Error handling on all errors
 - [ ] Implement loops and shuffles in playlists
 - [ ] Black & White Theming
 - [ ] Enable dragging on songs in playlist to change the queue or delete them
-- [ ] Sync data with localStorage
+- [ ] Mobile optimization
 
 ## Expected point of completion
 Perhaps late January?

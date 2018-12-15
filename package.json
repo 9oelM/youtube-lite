@@ -26,6 +26,7 @@
     "react-scripts": "1.1.4",
     "react-youtube": "^7.6.0",
     "redux": "^4.0.0",
+    "redux-persist": "^5.10.0",
     "shortid": "^2.2.12",
     "typeface-roboto": "0.0.54",
     "youtube-search": "^1.1.3"
