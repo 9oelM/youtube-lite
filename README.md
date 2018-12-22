@@ -14,6 +14,8 @@ No ads, no distractions. No recommendations. Just find the straight way to what 
 - [ ] Black & White Theming
 - [ ] Enable dragging on songs in playlist to change the queue or delete them
 - [ ] Mobile optimization
+- [ ] Add tests with Jest and fix components that cause buggy tests
+- [ ] Make desktop version with electron
 
 ## Expected point of completion
 Perhaps late January?
