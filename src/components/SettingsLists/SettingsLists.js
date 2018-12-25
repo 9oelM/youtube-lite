@@ -81,7 +81,7 @@ class SettingsLists extends React.Component {
       <div>
         <List>
           <ListItem divider>
-            <ListItemText primary="Delete all data (localStorage)" />
+            <ListItemText primary="Delete all data in localStorage" />
             <ListItemSecondaryAction>
               <Button
                 variant="contained"
