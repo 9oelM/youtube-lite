@@ -6,7 +6,7 @@ No ads, no distractions. No recommendations. Just find the straight way to what 
 - [x] Connect above data with `BottomNav` and `Home` components
 - [x] Mark `Channels` page as under construction
 - [x] Sync data with localStorage (do not sync `timer` as it does not get stringified)
-- [ ] Add clear localStorage option in settings
+- [x] Add clear localStorage option in settings
 - [ ] Make redux containers for "Add to Playlist" button inside `VideoPlaylists.js`
 - [ ] Improve the autocomplete search bar (change to a new component with new logic)
 - [ ] Error handling on all errors

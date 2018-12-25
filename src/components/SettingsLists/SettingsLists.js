@@ -81,6 +81,21 @@ class SettingsLists extends React.Component {
       <div>
         <List>
           <ListItem divider>
+            <ListItemText primary="Delete all data in localStorage" />
+            <ListItemSecondaryAction>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  window.localStorage.clear()
+                  this.handleClick()
+                }}
+              >
+                Delete
+              </Button>
+            </ListItemSecondaryAction>
+          </ListItem>
+          <ListItem divider>
             <ListItemText primary="Show stats bar" />
             <ListItemSecondaryAction>
               <Switch
