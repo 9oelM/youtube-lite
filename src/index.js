@@ -7,7 +7,7 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider"
 import { createMuiTheme } from "@material-ui/core/styles"
 import { PersistGate } from "redux-persist/integration/react"
 import App from "./App"
-import theme from "./Theme"
+import theme from "./theme"
 import registerServiceWorker from "./registerServiceWorker"
 import { store, persistor } from "./store/index"
 
