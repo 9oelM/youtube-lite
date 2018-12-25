@@ -9,13 +9,3 @@ env:
   - CI=true
 install: npm install
 script: CI=true npm test
-# https://gist.github.com/steffencrespo/829d0900f3314acffe462f2e552dd3f6
-before_deploy:
-  - npm install netlify-cli -g
-  - npm run build
-deploy:
-  provider: script
-  script: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p ./build
-  skip_cleanup: true
-  on:
-    branch: master
