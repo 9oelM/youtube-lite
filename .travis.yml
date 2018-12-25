@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "node"
+  - "8"
   - "6.11.2"
 cache:
   directories:
@@ -8,7 +8,7 @@ cache:
 env:
   - CI=true
 install: npm install
-script: npm test
+script: CI=true npm test
 # https://gist.github.com/steffencrespo/829d0900f3314acffe462f2e552dd3f6
 before_deploy:
   - npm install netlify-cli -g
