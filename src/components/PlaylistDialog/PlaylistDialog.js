@@ -57,7 +57,7 @@ class PlaylistDialog extends React.Component {
     } = this.props
     const { inputVisible, inputValue } = this.state
     return (
-      <div style = {{maxHeight: "70%"}}>
+      <div style={{ maxHeight: "70%" }}>
         <Dialog onClose={onClose} open={open}>
           <DialogTitle>Playlists</DialogTitle>
           <div>
