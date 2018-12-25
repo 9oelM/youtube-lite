@@ -8,12 +8,18 @@ No ads, no distractions. No recommendations. Just find the straight way to what 
 - [x] Sync data with localStorage (do not sync `timer` as it does not get stringified)
 - [x] Add clear localStorage option in settings
 - [x] Black & White Theming
+- [x] Fix close & open states for `PlaylistDialog` and add snackbar to confirm action
 - [ ] Make redux containers for "Add to Playlist" button inside `VideoPlaylists.js`
 - [ ] Improve the autocomplete search bar (change to a new component with new logic)
-- [ ] Error handling on all errors
+- [ ] Error handling on edge cases:
+    - [ ] On add playlist action, a name that already exists is entered. 
+    - [ ] Youtube search result gives an error due to some error (network, API Key, ...)
+    - [ ] Wrong API key is entered in `settings`.
 - [ ] Implement loops and shuffles in playlists
+    - [ ] Delay component render until the video currently playing finishes
 - [ ] Enable dragging on songs in playlist to change the queue or delete them
 - [ ] Mobile optimization
+    - [ ] Fix buggy top & bottom nav bars in mobile view  
 - [ ] Add tests with Jest and fix components that cause buggy tests
 - [ ] Make desktop version with electron
 
