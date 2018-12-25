@@ -7,6 +7,9 @@ import ListItemText from "@material-ui/core/ListItemText"
 import Input from "@material-ui/core/Input"
 import Modal from "@material-ui/core/Modal"
 import Button from "@material-ui/core/Button"
+import Snackbar from "@material-ui/core/Snackbar"
+import IconButton from "@material-ui/core/IconButton"
+import CloseIcon from "@material-ui/icons/Close"
 import shortid from "shortid"
 
 class PlaylistDialog extends React.Component {
@@ -15,7 +18,20 @@ class PlaylistDialog extends React.Component {
     this.state = {
       inputVisible: false,
       inputValue: "",
+      snackbarOpen: false,
     }
+  }
+
+  handleSnackbarClose = () => {
+    this.setState({
+      snackbarOpen: false,
+    })
+  }
+
+  handleSnackbarOpen = () => {
+    this.setState({
+      snackbarOpen: true,
+    })
   }
 
   handleChange = () => {
@@ -41,55 +57,83 @@ class PlaylistDialog extends React.Component {
     } = this.props
     const { inputVisible, inputValue } = this.state
     return (
-      <Dialog onClose={onClose} open={open}>
-        <DialogTitle>Playlists</DialogTitle>
-        <div>
-          <List>
-            {playlists.map(item => (
-              <ListItem
-                button
-                onClick={() => {
-                  onAddToPlaylist(video, item.playlistName)
-                }}
-                key={shortid.generate()}
-              >
-                <ListItemText primary={item.playlistName} />
-              </ListItem>
-            ))}
-            <ListItem button onClick={this.handleChange}>
-              <ListItemText primary="Create new playlist" />
-            </ListItem>
-          </List>
-          <Dialog open={inputVisible}>
-            <DialogTitle>Create new playlist</DialogTitle>
+      <div style = {{maxHeight: "70%"}}>
+        <Dialog onClose={onClose} open={open}>
+          <DialogTitle>Playlists</DialogTitle>
+          <div>
             <List>
-              <ListItem className="create-new-playlist">
-                <Input
-                  placeholder="Enter name"
-                  inputProps={{
-                    "aria-label": "Playlist",
+              {playlists.map(item => (
+                <ListItem
+                  button
+                  onClick={() => {
+                    onAddToPlaylist(video, item.playlistName)
+                    onClose()
+                    this.handleSnackbarOpen()
                   }}
-                  onChange={this.handleInputChange}
-                />
-                <div className="create-new-playlist-control">
-                  <Button
-                    color="primary"
-                    onClick={() => {
-                      onAddPlaylist(inputValue)
-                      this.handleChange()
-                    }}
-                  >
-                    Add
-                  </Button>
-                  <Button color="secondary" onClick={this.handleChange}>
-                    Cancel
-                  </Button>
-                </div>
+                  key={shortid.generate()}
+                >
+                  <ListItemText primary={item.playlistName} />
+                </ListItem>
+              ))}
+              <ListItem button onClick={this.handleChange}>
+                <ListItemText primary="Create new playlist" />
               </ListItem>
             </List>
-          </Dialog>
-        </div>
-      </Dialog>
+            <Dialog open={inputVisible}>
+              <DialogTitle>Create new playlist</DialogTitle>
+              <List>
+                <ListItem className="create-new-playlist">
+                  <Input
+                    placeholder="Enter name"
+                    inputProps={{
+                      "aria-label": "Playlist",
+                    }}
+                    onChange={this.handleInputChange}
+                    autoFocus
+                  />
+                  <div className="create-new-playlist-control">
+                    <Button
+                      color="primary"
+                      onClick={() => {
+                        onAddPlaylist(inputValue)
+                        this.handleChange()
+                      }}
+                    >
+                      Add
+                    </Button>
+                    <Button color="secondary" onClick={this.handleChange}>
+                      Cancel
+                    </Button>
+                  </div>
+                </ListItem>
+              </List>
+            </Dialog>
+          </div>
+        </Dialog>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          open={this.state.snackbarOpen}
+          autoHideDuration={6000}
+          onClose={this.handleSnackbarClose}
+          ContentProps={{
+            "aria-describedby": "message-id",
+          }}
+          message={<span id="message-id">Saved to playlist</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              onClick={this.handleSnackbarClose}
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
+      </div>
     )
   }
 }
