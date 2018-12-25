@@ -11,7 +11,7 @@ global.render = render
 global.mount = mount
 global.toJson = toJson
 
-// essential! see src/layout/ContqentGrid.js and src/modules/resize.js
+// essential! see src/layout/ContentGrid.js and src/modules/resize.js
 global.document.getElementById = () => ({
     setAttribute: () => {}
 })
