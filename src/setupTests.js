@@ -12,6 +12,10 @@ global.render = render
 global.mount = mount
 global.toJson = toJson
 
+// essential! see src/layout/ContentGrid.js and src/modules/resize.js
+global.document.getElementById = () => ({
+    setAttribute: () => {}
+})
 // Fail tests on any warning
 console.error = message => {
   throw new Error(message)
