@@ -1,4 +1,6 @@
-## Youtube Lite: Youtuube that doesn't scale at all. 
+![build status](https://travis-ci.org/9oelM/Youtube-Lite.svg?branch=master)
+
+## Youtube Lite: Youtube that _doesn't_ scale. 
 No ads, no distractions. No recommendations. Just find the straight way to what you've gotta watch on youtube and quit youtube. Don't fall into temptations to watch more of more irrelevant, time-wasting videos!
 
 ## To be completed 
