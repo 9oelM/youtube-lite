@@ -14,7 +14,7 @@ No ads, no distractions. No recommendations. Just find the straight way to what 
 - [ ] Error handling on edge cases:
     - [ ] On add playlist action, a name that already exists is entered. 
     - [ ] Youtube search result gives an error due to some error (network, API Key, ...)
-    - [ ]
+    - [ ] Wrong API key is entered in `settings`.
 - [ ] Implement loops and shuffles in playlists
     - [ ] Delay component render until the video currently playing finishes
 - [ ] Enable dragging on songs in playlist to change the queue or delete them
