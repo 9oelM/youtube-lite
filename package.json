@@ -34,7 +34,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom --coverage --verbose --watch",
+    "test": "react-app-rewired test --env=jsdom --coverage --verbose --watchAll",
     "eject": "react-scripts eject",
     "sass": "node-sass-chokidar ./src/styles/source/ -o ./src/styles/output --watch --output-style \"compressed\"",
     "prettier": "onchange '**/*.js' -- prettier --write {{changed}}",
