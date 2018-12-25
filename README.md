@@ -7,11 +7,11 @@ No ads, no distractions. No recommendations. Just find the straight way to what 
 - [x] Mark `Channels` page as under construction
 - [x] Sync data with localStorage (do not sync `timer` as it does not get stringified)
 - [x] Add clear localStorage option in settings
+- [x] Black & White Theming
 - [ ] Make redux containers for "Add to Playlist" button inside `VideoPlaylists.js`
 - [ ] Improve the autocomplete search bar (change to a new component with new logic)
 - [ ] Error handling on all errors
 - [ ] Implement loops and shuffles in playlists
-- [ ] Black & White Theming
 - [ ] Enable dragging on songs in playlist to change the queue or delete them
 - [ ] Mobile optimization
 - [ ] Add tests with Jest and fix components that cause buggy tests
