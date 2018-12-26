@@ -41,9 +41,7 @@
     "sass": "node-sass-chokidar ./src/styles/source/ -o ./src/styles/output --watch --output-style \"compressed\"",
     "prettier": "onchange '**/*.js' -- prettier --write {{changed}}",
     "watch": "npm-run-all --parallel sass prettier",
-    "sw": "npm-run-all --parallel start watch",
-    "predeploy": "CI=\"\" npm run build",
-    "deploy": "gh-pages -d build"
+    "sw": "npm-run-all --parallel start watch"
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
@@ -52,7 +50,6 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
-    "gh-pages": "^2.0.1",
     "gulp": "^4.0.0",
     "gulp-eslint": "^5.0.0",
     "gulp-prettier": "^2.0.0",
