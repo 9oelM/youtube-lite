@@ -9,6 +9,7 @@ install: npm install
 script: 
   - CI=true npm test -- --coverage
   - CI="" npm run build
+  - echo -n "youtube-lite.js.org" > build/CNAME
 after_script: 
   - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
 # https://medium.com/@sumn2u/automate-create-react-app-deployment-to-gh-pages-using-travis-ci-b2a97203680b
