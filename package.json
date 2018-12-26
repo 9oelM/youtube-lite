@@ -42,7 +42,7 @@
     "prettier": "onchange '**/*.js' -- prettier --write {{changed}}",
     "watch": "npm-run-all --parallel sass prettier",
     "sw": "npm-run-all --parallel start watch",
-    "predeploy": "npm run build",
+    "predeploy": "CI=\"\" npm run build",
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
