@@ -8,6 +8,9 @@ cache:
 env:
   - CI=true
 install: npm install
-script: CI=true npm test -- --coverage
-after_script: # Upload coverage reports 
+script: 
+  - CI=true npm test -- --coverage
+  - npm run build
+after_script: 
   - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
+  - npm run deploy
