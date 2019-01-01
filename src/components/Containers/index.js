@@ -86,7 +86,12 @@ export const VideoPlaylistsContainer = connect(
   state => ({
     playlists: state.playlistReducer.playlists,
   }),
-  null
+  dispatch => ({
+    onAddToPlaylist(video, playlistName) {
+      dispatch(addToPlaylist(video, playlistName))
+      console.log("added: " + JSON.stringify(video))
+    },
+  })
 )(VideoPlaylists)
 
 export const SettingsListsContainer = connect(
