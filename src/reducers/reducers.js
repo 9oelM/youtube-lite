@@ -3,7 +3,7 @@ import C from "../actions/constants"
 import storage from "redux-persist/lib/storage"
 import { persistReducer } from "redux-persist"
 
-const Timer = require("easytimer.js")
+const { Timer } = require("easytimer.js")
 const viewReducer = (
   state = {
     isDrawerOpen: false,
