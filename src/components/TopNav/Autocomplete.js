@@ -94,9 +94,6 @@ class Autocomplete extends React.Component {
       inputId = "youtube-autocomplete-input",
       menuId = "youtube-autocomplete-menu",
       itemClassName = "youtube-autocomplete-items",
-      theme = createMuiTheme({
-        primary: blue,
-      }),
       placeholderText = "Search youtube",
       onSearchTrigger,
     } = this.props
@@ -118,7 +115,7 @@ class Autocomplete extends React.Component {
           }) => (
             <div>
               {useMui ? (
-                <MuiThemeProvider theme={theme}>
+                <React.Fragment>
                   <Input
                     {...getInputProps({
                       placeholder: placeholderText,
@@ -153,7 +150,7 @@ class Autocomplete extends React.Component {
                       ))}
                     </Paper>
                   ) : null}
-                </MuiThemeProvider>
+                </React.Fragment>
               ) : (
                 <React.Fragment>
                   <input
