@@ -42,7 +42,10 @@ class SearchResultCard extends React.Component {
           <Card square className="searchResultCardInner">
             <ButtonBase
               onClick={() => {
-                history.push(`/videoPlayerView/Default/${vId}`)
+                history.push({
+                  state: { video: { title, author, img, description, vId } },
+                  pathname: `/videoPlayerView/Default/${vId}`,
+                })
               }}
               className="searchResultCardInnerButton"
             >
