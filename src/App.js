@@ -7,7 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import OuterLayout from "./layout/default"
 
 // pages
-import Home from "./pages/Home"
+import Home from "./pages/Home/Home"
 import SearchResult from "./pages/SearchResult"
 import VideoPlayer from "./pages/VideoPlayer"
 import Settings from "./pages/Settings"
