@@ -89,6 +89,7 @@ class SettingsLists extends React.Component {
                 onClick={() => {
                   window.localStorage.clear()
                   this.handleClick()
+                  window.location.reload(false)
                 }}
               >
                 Delete
