@@ -14,8 +14,9 @@ import shortid from "shortid"
 
 class VideoPlaylists extends React.Component {
   render() {
-    const { playlists, match, history } = this.props
-
+    const { playlists, match, location, history, onAddToPlaylist } = this.props
+    // TODO: location.state.video would be empty if an user directly comes to this page because it is passed down from onclick of SearchResultCard.
+    // NOTE: To use location.state, we need to switch freem HashRouter to BrowserRouter.
     const currentPlaylistIndex = playlists.findIndex(
       elem => elem.playlistName == match.params.playlist
     )
@@ -28,7 +29,13 @@ class VideoPlaylists extends React.Component {
             primary={`Current Playlist: ${currentPlaylist.playlistName}`}
           />
         </ListItem>
-        <ListItem button divider>
+        <ListItem
+          button
+          divider
+          onClick={() =>
+            onAddToPlaylist(location.state.video, currentPlaylist.playlistName)
+          }
+        >
           <ListItemIcon>
             <AddIcon />
           </ListItemIcon>
