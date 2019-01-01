@@ -1,27 +1,18 @@
 const gulp = require('gulp');
 
-
 const run = require('gulp-run-command').default;
-
 
 const prettier = require('gulp-prettier');
 
-
 const eslint = require('gulp-eslint');
-
 
 const sass = require('gulp-sass');
 
-
 const sourcemaps = require('gulp-sourcemaps');
 
-
-const eslintAirbnb = require('eslint-config-airbnb')
 const prettierrc = require('./.prettierrc');
 
-
 const eslintrc = require('./.eslintrc');
-
 
 /*
     customize your paths to get it working.
@@ -41,7 +32,6 @@ function format() {
     .pipe(prettier(prettierrc))
     .pipe(gulp.dest('.'))
 }
-
 
 function lint() {
   return gulp
