@@ -67,18 +67,19 @@ For now, there is no `CONTRIBUTING.md` guideline. Feel free to submit PRs and is
 - [x] Add clear localStorage option in settings
 - [x] Black & White Theming
 - [x] Fix close & open states for `PlaylistDialog` and add snackbar to confirm action
+- [x] Make redux containers for "Add to Playlist" button inside `VideoPlaylists.js`
 - [x] Mobile optimization
     - [x] Fix buggy top & bottom nav bars in mobile view  
-- [ ] Make redux containers for "Add to Playlist" button inside `VideoPlaylists.js`
-- [ ] Improve the autocomplete search bar (change to a new component with new logic)
-- [ ] Error handling on edge cases:
+- [ ] Implement loops and shuffles in playlists
+    - [ ] Change color on clicking loop / shuffle button by using `MuiThemeProvider`. 
+    - [ ] Delay component render until the video currently playing finishes
+- [ ] Enable dragging on songs in playlist to change the queue or delete them
+- [ ] Exception handling on edge cases:
     - [ ] On add playlist action, a name that already exists is entered. 
     - [ ] Youtube search result gives an error due to some error (network, API Key, ...)
     - [ ] Wrong API key is entered in `settings`.
-- [ ] Implement loops and shuffles in playlists
-    - [ ] Delay component render until the video currently playing finishes
-- [ ] Enable dragging on songs in playlist to change the queue or delete them
-
+    - [ ] An existing name of playlist / video is attempted to be added.
+- [ ] Improve the autocomplete search bar (change to a new component with new logic)
 - [ ] Add tests with Jest and fix components that cause buggy tests
 - [ ] Make desktop version with electron
 
