@@ -13,7 +13,7 @@ global.toJson = toJson
 
 // essential! see src/layout/ContentGrid.js and src/modules/resize.js
 global.document.getElementById = () => ({
-    setAttribute: () => {}
+  setAttribute: () => {},
 })
 // Fail tests on any warning
 console.error = message => {
