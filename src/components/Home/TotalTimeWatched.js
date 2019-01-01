@@ -6,7 +6,7 @@ import humanizeTime from "../../modules/humanizeTime"
 const TotalTimeWatched = ({ time }) => {
   const humanizedTime = humanizeTime(time)
   return (
-    <Typography variant="display4" align="left">
+    <Typography variant="h3" align="center">
       {humanizedTime}
     </Typography>
   )

@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography"
 
 const TotalVideosWatched = ({ videoCount }) => {
   return (
-    <Typography variant="display4" align="left">
+    <Typography variant="h3" align="center">
       {videoCount} {videoCount < 2 ? "video" : "videos"}
     </Typography>
   )
