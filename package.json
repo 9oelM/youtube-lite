@@ -33,9 +33,10 @@
     "youtube-search": "^1.1.4"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "gulp",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
+    "lint": "gulp lint",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "eject": "react-scripts eject"
   },
