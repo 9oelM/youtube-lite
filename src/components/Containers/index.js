@@ -116,7 +116,9 @@ export const BottomNavContainer = connect(
 )(BottomNav)
 
 export const VideoPlayerContainer = connect(
-  null,
+  state => ({
+    playlists: state.playlistReducer.playlists,
+  }),
   dispatch => ({
     onStartVideo() {
       dispatch(startVideo())
