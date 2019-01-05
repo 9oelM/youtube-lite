@@ -17,6 +17,9 @@ const theme = createMuiTheme({
       main: "#8c8c8c",
     },
   },
+  typography: {
+    useNextVariants: true,
+  },
 })
 
 class VideoPlayerControlButtons extends React.Component {
