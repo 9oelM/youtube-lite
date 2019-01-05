@@ -1,8 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { withRouter } from "react-router-dom"
 import PropTypes from "prop-types"
 import YouTube from "react-youtube"
 import Progress from "../Progress/Progress"
+import getCurrentPlaylist from "../../modules/getCurrentPlaylist"
 let Timer = require("easytimer.js")
 
 const selectors = {
@@ -19,6 +21,18 @@ class VideoPlayer extends React.Component {
       ready: false,
       onWatchingVideoRefs: [],
       started: false,
+      opts: {
+        height: "95%",
+        width: "100%",
+        playerVars: {
+          // https://developers.google.com/youtube/player_parameters
+          autoplay: 1,
+          loop: 1,
+          rel: 0,
+          playlist: props.videoId,
+        },
+      },
+      video: props.videoId,
     }
   }
 
@@ -51,6 +65,16 @@ class VideoPlayer extends React.Component {
     })
   }
 
+  _onEndVideo = () => {
+    const { playlists, match, history, videoId } = this.props
+    this._onPauseVideo()
+    const currentPlaylist = getCurrentPlaylist(playlists, match)
+    const nextVideoId = this.getNextVideo(currentPlaylist.videos, videoId)
+    history.push({
+      pathname: `/videoPlayerView/Default/${nextVideoId}`,
+    })
+  }
+
   onKeepWatchingVideo = () => {
     const { onWatchingVideoRefs } = this.state
     const { onWatchingVideo } = this.props
@@ -60,6 +84,82 @@ class VideoPlayer extends React.Component {
 
   flushAllIntervals = refs => {
     refs.forEach(ref => clearInterval(ref))
+  }
+
+  getNextVideo = (playlistVideos, currentVideoId) => {
+    const { repeatAll, shuffle } = this.props
+    console.log(`repeatAll: ${repeatAll}, shuffle: ${shuffle}`)
+    if (playlistVideos.length === 0) {
+      console.log("!repeatAll")
+      return currentVideoId
+    } else if (playlistVideos.length === 1) {
+      console.log("!repeatAll")
+      return playlistVideos[0].vId
+    } else if (playlistVideos.length > 1) {
+      switch (true) {
+        case !repeatAll: {
+          console.log("current")
+          return currentVideoId
+        }
+        case repeatAll && shuffle: {
+          const nextRandomVideo = this.selectNextVideo(
+            playlistVideos,
+            currentVideoId,
+            true
+          )
+          console.log("random:" + nextRandomVideo.vId)
+          return nextRandomVideo.vId
+        }
+        case repeatAll && !shuffle: {
+          const nextVideo = this.selectNextVideo(
+            playlistVideos,
+            currentVideoId,
+            false
+          )
+          console.log("notrandom:" + nextVideo.vId)
+          return nextVideo.vId
+        }
+        default: {
+          console.log("default")
+          return currentVideoId
+        }
+      }
+    }
+  }
+
+  selectNextVideo = (playlistVideos, currentVideoId, random) => {
+    if (playlistVideos.length < 2) {
+      throw new Error("playlist's length should be longer than 1")
+    }
+    console.log("selectNExtviedo")
+    if (random) {
+      let done = false
+      while (1) {
+        const index = Math.floor(Math.random() * playlistVideos.length)
+        const nextRandomVideo = playlistVideos[index]
+        // Randomly selected next video is the same as the one being played right now
+        console.log("inside nextRandom:" + nextRandomVideo)
+        done = !(nextRandomVideo.vId == currentVideoId)
+        if (done) {
+          console.log("inside nextRandom:" + nextRandomVideo)
+          return nextRandomVideo
+        }
+      }
+    } else {
+      const currentVideoIndex = playlistVideos.findIndex(
+        video => video.vId === currentVideoId
+      )
+      //  If at the end, play the first video
+      if (currentVideoIndex === playlistVideos.length - 1) {
+        console.log(playlistVideos[0])
+        return playlistVideos[0]
+      }
+      // otherwise play the next one
+      else {
+        console.log(playlistVideos[currentVideoIndex + 1])
+        return playlistVideos[currentVideoIndex + 1]
+      }
+    }
   }
 
   componentDidMount() {
@@ -78,19 +178,8 @@ class VideoPlayer extends React.Component {
   }
 
   render() {
-    const { videoId, repeatSingle } = this.props
-    const { ready } = this.state
-    const opts = {
-      height: "95%",
-      width: "100%",
-      playerVars: {
-        // https://developers.google.com/youtube/player_parameters
-        autoplay: 1,
-        loop: repeatSingle ? 1 : 0,
-        playlist: videoId,
-        rel: 0,
-      },
-    }
+    const { videoId } = this.props
+    const { ready, opts } = this.state
     return (
       <React.Fragment>
         <YouTube
@@ -99,7 +188,7 @@ class VideoPlayer extends React.Component {
           onReady={this._onReady}
           onPlay={this._onStartVideo}
           onPause={this._onPauseVideo}
-          onEnd={this._onPauseVideo}
+          onEnd={this._onEndVideo}
           onError={this._onPauseVideo}
         />
         <Progress isLoading={!ready} />
@@ -112,4 +201,4 @@ VideoPlayer.propTypes = {
   videoId: PropTypes.string.isRequired,
 }
 
-export default VideoPlayer
+export default withRouter(VideoPlayer)

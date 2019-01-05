@@ -11,16 +11,16 @@ import AddIcon from "@material-ui/icons/PlaylistAdd"
 import Grid from "@material-ui/core/Grid"
 import { withStyles } from "@material-ui/core/styles"
 import shortid from "shortid"
+import getCurrentPlaylist from "../../modules/getCurrentPlaylist"
 
 class VideoPlaylists extends React.Component {
   render() {
     const { playlists, match, location, history, onAddToPlaylist } = this.props
     // TODO: location.state.video would be empty if an user directly comes to this page because it is passed down from onclick of SearchResultCard.
     // NOTE: To use location.state, we need to switch freem HashRouter to BrowserRouter.
-    const currentPlaylistIndex = playlists.findIndex(
-      elem => elem.playlistName == match.params.playlist
-    )
-    const currentPlaylist = playlists[currentPlaylistIndex]
+
+    const currentPlaylist = getCurrentPlaylist(playlists, match)
+
     return (
       <Grid id="playlist">
         <ListItem divider>

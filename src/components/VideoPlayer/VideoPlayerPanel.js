@@ -16,6 +16,8 @@ import IconButton from "@material-ui/core/IconButton"
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
 import Drawer from "../Drawer/Drawer"
+import VideoPlayerControlButtons from "./VideoPlayerControlButtons"
+
 import {
   VideoPlaylistsContainer,
   VideoPlayerContainer,
@@ -30,32 +32,25 @@ class VideoPlayerPanel extends React.Component {
     }
   }
 
+  onStateChange = key => {
+    this.setState({
+      [key]: !this.state[key],
+    })
+  }
+
   render() {
     const { vId } = this.props
-    const { shuffle, repeatAll } = this.state
+    const { repeatAll, shuffle } = this.state
     return (
       <Grid className="comfort-grid" style={{ padding: 0, height: "100%" }}>
         <Paper id="video-paper">
           <Grid id="video-wrapper">
-            <VideoPlayerContainer videoId={vId} repeatSingle={!repeatAll} />
-            <Grid style={{ width: "100%" }}>
-              <Button
-                className="control-button"
-                onClick={() => this.setState({ shuffle: !this.state.shuffle })}
-                color={shuffle ? "secondary" : "default"}
-              >
-                <ShuffleIcon />
-              </Button>
-              <Button
-                className="control-button"
-                onClick={() =>
-                  this.setState({ repeatAll: !this.state.repeatAll })
-                }
-                color="secondary"
-              >
-                {repeatAll ? <RepeatIcon /> : <RepeatOneIcon />}
-              </Button>
-            </Grid>
+            <VideoPlayerContainer
+              videoId={vId}
+              repeatAll={repeatAll}
+              shuffle={shuffle}
+            />
+            <VideoPlayerControlButtons onStateChange={this.onStateChange} />
           </Grid>
           <VideoPlaylistsContainer />
         </Paper>
@@ -67,9 +62,4 @@ VideoPlayerPanel.propTypes = {
   vId: PropTypes.string.isRequired,
 }
 
-const playlist = () => (
-  <Button variant="contained">
-    <AddIcon /> Add to playlist
-  </Button>
-)
 export default VideoPlayerPanel
