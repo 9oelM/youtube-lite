@@ -97,4 +97,5 @@ exports.build = _build
 exports.start = start()
 exports.test = test()
 exports.eject = eject()
+exports.lint = lint
 exports.default = gulp.parallel(watch, start())
