@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/9oelM/Youtube-Lite/badge.svg?branch=master)](https://coveralls.io/github/9oelM/Youtube-Lite?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4556af7c8e91ab9c3f37/maintainability)](https://codeclimate.com/github/9oelM/Youtube-Lite/maintainability)
 
-![youtubel lite logo](./public/youtube-lite-logo-256.png)
+[![youtubel lite logo](./public/youtube-lite-logo-256.png)](https://youtube-lite.js.org)
 
 # Youtube Lite: Youtube that _doesn't_ scale. 
 **No ads, no distractions. No recommendations.** Just find the straight way to what you've gotta watch on youtube and quit youtube. Don't fall into temptations to watch more of more irrelevant, time-wasting videos!
@@ -28,10 +28,20 @@ The structure of the project follows a general concensus among react development
 
 ### Start development server and automatically lint and restart server on change
 ```
-gulp
+npm start
 ```
 
-### eslint --fix
+### Test
+```
+npm test
+```
+
+### Lint
+```
+npm run lint
+```
+
+### If you want to `eslint --fix`
 Install things globally:
 ```
 npm install -g eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint^5
@@ -59,7 +69,7 @@ For now, there is no `CONTRIBUTING.md` guideline. Feel free to submit PRs and is
 * [react-youtube](https://github.com/troybetz/react-youtube)
 * [youtube-search](https://github.com/MaxGfeller/youtube-search)
 
-## To be completed 
+## Todo (Alpha)
 - [x] Calculate videos and total time watched
 - [x] Connect above data with `BottomNav` and `Home` components
 - [x] Mark `Channels` page as under construction
@@ -70,10 +80,15 @@ For now, there is no `CONTRIBUTING.md` guideline. Feel free to submit PRs and is
 - [x] Make redux containers for "Add to Playlist" button inside `VideoPlaylists.js`
 - [x] Mobile optimization
     - [x] Fix buggy top & bottom nav bars in mobile view  
-- [ ] Implement loops and shuffles in playlists
-    - [ ] Change color on clicking loop / shuffle button by using `MuiThemeProvider`. 
-    - [ ] Delay component render until the video currently playing finishes
+- [x] Implement loops and shuffles in playlists
+    - [x] Change color on clicking loop / shuffle button by using `MuiThemeProvider`. 
+    - [x] Delay component render until the video currently playing finishes
 - [ ] Enable dragging on songs in playlist to change the queue or delete them
+
+## Todo (Beta)
+- [ ] Refactor
+- [ ] Search again if user directly lands on `searchResult` page
+- [ ] Search for video information if user directly lands on `videoPlayerView` page
 - [ ] Exception handling on edge cases:
     - [ ] On add playlist action, a name that already exists is entered. 
     - [ ] Youtube search result gives an error due to some error (network, API Key, ...)
@@ -83,5 +98,3 @@ For now, there is no `CONTRIBUTING.md` guideline. Feel free to submit PRs and is
 - [ ] Add tests with Jest and fix components that cause buggy tests
 - [ ] Make desktop version with electron
 
-## Expected point of completion of core product :calendar:
-Late January
