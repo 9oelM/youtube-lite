@@ -2,6 +2,8 @@ import { combineReducers } from "redux"
 import C from "../actions/constants"
 import storage from "redux-persist/lib/storage"
 import { persistReducer } from "redux-persist"
+import videoStatsTransforms from "./videoStatsTransforms"
+import isMoreThanOneDay from "../modules/isMoreThanOneDay"
 
 const { Timer } = require("easytimer.js")
 const viewReducer = (
@@ -142,6 +144,7 @@ const videoStatsReducer = (
     timer: new Timer(),
     time: 0,
     videoCount: 0,
+    startDate: new Date().toString(),
   },
   action
 ) => {
@@ -149,6 +152,7 @@ const videoStatsReducer = (
     /*
      * When the user starts the video, it is ESSENTIAL that START_VIDEO fires first, then WATCHING_VIDEO.
      */
+
     case C.START_VIDEO: {
       let recoveredTime = 0
       let config = {}
@@ -176,6 +180,21 @@ const videoStatsReducer = (
     // keeps track of the most updated time
     case C.WATCHING_VIDEO: {
       const elapsedTime = state.timer.getTotalTimeValues().seconds
+      if (isMoreThanOneDay(state.startDate)) {
+        const newTimer = new Timer()
+        newTimer.start({
+          startValues: {
+            seconds: 0,
+          },
+        })
+        return {
+          timer: newTimer,
+          time: 0,
+          videoCount: 0,
+          startDate: new Date().toString(),
+        }
+      }
+
       return {
         ...state,
         time: elapsedTime,
@@ -214,7 +233,8 @@ const rootReducer = combineReducers({
     {
       key: "videoStats",
       storage: storage,
-      whitelist: ["time", "videoCount"],
+      transforms: [videoStatsTransforms],
+      whitelist: ["time", "videoCount", "startDate"],
     },
     videoStatsReducer
   ),
