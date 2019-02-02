@@ -22,11 +22,11 @@ const App = () => (
   <OuterLayout>
     <CssBaseline />
     <Route exact path="/" component={Home} />
-    <Route path="/SearchResultView/:searchWord" component={SearchResult} />
-    <Route path="/VideoPlayerView/:playlist/:id" component={VideoPlayer} />
-    <Route path="/Settings" component={Settings} />
-    <Route path="/About" component={About} />
-    <Route path="/Playlists" component={Playlists} />
+    <Route path="/search-result/:searchWord" component={SearchResult} />
+    <Route path="/videoplayer/:playlist/:id" component={VideoPlayer} />
+    <Route path="/settings" component={Settings} />
+    <Route path="/about" component={About} />
+    <Route path="/playlists" component={Playlists} />
   </OuterLayout>
 )
 
