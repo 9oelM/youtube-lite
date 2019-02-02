@@ -83,8 +83,8 @@ For now, there is no `CONTRIBUTING.md` guideline. Feel free to submit PRs and is
 - [x] Implement loops and shuffles in playlists
     - [x] Change color on clicking loop / shuffle button by using `MuiThemeProvider`. 
     - [x] Delay component render until the video currently playing finishes
+- [x] Delete info on time & video watched after 24 hours 
 - [ ] Enable dragging on songs in playlist to change the queue or delete them
-- [ ] Delete info on time & video watched after 24 hours 
 
 ## Todo (Beta)
 - [ ] Refactor
