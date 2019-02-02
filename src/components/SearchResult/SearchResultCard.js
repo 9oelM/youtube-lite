@@ -44,7 +44,7 @@ class SearchResultCard extends React.Component {
               onClick={() => {
                 history.push({
                   state: { video: { title, author, img, description, vId } },
-                  pathname: `/videoPlayerView/Default/${vId}`,
+                  pathname: `/videoplayer/Default/${vId}`,
                 })
               }}
               className="searchResultCardInnerButton"

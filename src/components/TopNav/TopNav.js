@@ -54,7 +54,7 @@ const TopNav = ({
             onSearchResults={results => onSearchResults(results)}
             onSearchTrigger={searchWord => {
               onSearchTrigger(searchWord)
-              history.push(`/searchResultView/${searchWord}`)
+              history.push(`/search-result/${searchWord}`)
             }}
           />
         </Toolbar>
