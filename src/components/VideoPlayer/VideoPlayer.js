@@ -71,7 +71,7 @@ class VideoPlayer extends React.Component {
     const currentPlaylist = getCurrentPlaylist(playlists, match)
     const nextVideoId = this.getNextVideo(currentPlaylist.videos, videoId)
     history.push({
-      pathname: `/videoPlayerView/Default/${nextVideoId}`,
+      pathname: `/video-player/Default/${nextVideoId}`,
     })
   }
 

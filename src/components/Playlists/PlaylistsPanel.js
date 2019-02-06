@@ -58,7 +58,7 @@ class PlaylistsPanel extends React.Component {
                     style={{ cursor: "pointer" }}
                     onClick={() => {
                       history.push(
-                        `/videoPlayerView/${elem.playlistName}/${video.vId}`
+                        `/video-player/${elem.playlistName}/${video.vId}`
                       )
                     }}
                     key={shortid.generate()}

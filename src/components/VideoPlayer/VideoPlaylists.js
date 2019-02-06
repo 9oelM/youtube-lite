@@ -49,9 +49,7 @@ class VideoPlaylists extends React.Component {
               key={shortid.generate()}
               onClick={() =>
                 history.push(
-                  `/videoPlayerView/${currentPlaylist.playlistName}/${
-                    video.vId
-                  }`
+                  `/video-player/${currentPlaylist.playlistName}/${video.vId}`
                 )
               }
             >
