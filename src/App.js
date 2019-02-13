@@ -1,6 +1,6 @@
 // react & material
 import React from "react"
-import { Route } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import CssBaseline from "@material-ui/core/CssBaseline"
 
 // layout
@@ -13,6 +13,7 @@ import VideoPlayer from "./pages/VideoPlayer"
 import Settings from "./pages/Settings"
 import About from "./pages/About"
 import Playlists from "./pages/Playlists"
+import NotFound from "./pages/NotFound"
 
 // styles
 import "typeface-roboto"
@@ -21,12 +22,15 @@ import "./styles/output/master.css"
 const App = () => (
   <OuterLayout>
     <CssBaseline />
+    <Switch>
     <Route exact path="/" component={Home} />
     <Route path="/search-result/:searchWord" component={SearchResult} />
     <Route path="/video-player/:playlist/:id" component={VideoPlayer} />
     <Route path="/settings" component={Settings} />
     <Route path="/about" component={About} />
     <Route path="/playlists" component={Playlists} />
+    <Route component={NotFound} />
+    </Switch>
   </OuterLayout>
 )
 
