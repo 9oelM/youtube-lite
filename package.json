@@ -2,7 +2,7 @@
   "name": "controlled-youtube",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://youtube-lite.js.org",
   "dependencies": {
     "@material-ui/core": "^3.8.1",
     "@material-ui/icons": "^3.0.1",
