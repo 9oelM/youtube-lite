@@ -7,7 +7,6 @@ import {
   TotalVideosWatchedContainer,
   TotalTimeWatchedContainer,
 } from "../../components/Containers/index"
-import "./Home.sass"
 
 const Home = () => {
   return (
