@@ -7,7 +7,8 @@ import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
 import ButtonBase from "@material-ui/core/ButtonBase"
-import AddIcon from "@material-ui/icons/PlaylistAdd"
+import AddIcon from "@material-ui/icons/Queue"
+import PlayingIcon from "@material-ui/icons/PlaylistPlay"
 import Grid from "@material-ui/core/Grid"
 import { withStyles } from "@material-ui/core/styles"
 import shortid from "shortid"
@@ -24,10 +25,10 @@ class VideoPlaylists extends React.Component {
     return (
       <Grid id="playlist">
         <ListItem divider>
-          <ListItemText
-            align="left"
-            primary={`Current Playlist: ${currentPlaylist.playlistName}`}
-          />
+          <ListItemIcon>
+            <PlayingIcon />
+          </ListItemIcon>
+          <ListItemText primary={currentPlaylist.playlistName} />
         </ListItem>
         <ListItem
           button
