@@ -1,11 +1,12 @@
 import { combineReducers } from "redux"
-import C from "../actions/constants"
 import storage from "redux-persist/lib/storage"
 import { persistReducer } from "redux-persist"
+import C from "../actions/constants"
 import videoStatsTransforms from "./videoStatsTransforms"
 import isMoreThanOneDay from "../modules/isMoreThanOneDay"
 
 const { Timer } = require("easytimer.js")
+
 const viewReducer = (
   state = {
     isDrawerOpen: false,
@@ -51,10 +52,10 @@ const searchReducer = (
 }
 
 const getPlaylistIndex = (playlists, action) =>
-  playlists.findIndex(elem => elem.playlistName == action.playlistName)
+  playlists.findIndex(elem => elem.playlistName === action.playlistName)
 
 const getVideoIndex = (playlists, playlistIndex, action) =>
-  playlists[playlistIndex].videos.findIndex(elem => elem.id == action.videoId)
+  playlists[playlistIndex].videos.findIndex(elem => elem.id === action.videoId)
 
 const playlistReducer = (
   state = {
@@ -68,11 +69,11 @@ const playlistReducer = (
   action
 ) => {
   const playlistIndex = getPlaylistIndex(state.playlists, action)
-  let updatedPlaylist = [...state.playlists]
+  const updatedPlaylist = [...state.playlists]
   switch (action.type) {
     case C.ADD_PLAYLIST:
       const sameNameExists = state.playlists.some(
-        elem => elem.playlistName == action.playlistName
+        elem => elem.playlistName === action.playlistName
       )
       sameNameExists
         ? () => {}
@@ -92,7 +93,7 @@ const playlistReducer = (
     case C.ADD_VIDEO:
       // only add one unique video for a playlist
       updatedPlaylist[playlistIndex].videos.findIndex(
-        elem => elem.vId == action.video.vId
+        elem => elem.vId === action.video.vId
       ) >= 0
         ? () => {}
         : updatedPlaylist[playlistIndex].videos.push(action.video)
@@ -150,7 +151,8 @@ const videoStatsReducer = (
 ) => {
   switch (action.type) {
     /*
-     * When the user starts the video, it is ESSENTIAL that START_VIDEO fires first, then WATCHING_VIDEO.
+     * When the user starts the video, it is ESSENTIAL that
+     * START_VIDEO fires first, then WATCHING_VIDEO.
      */
 
     case C.START_VIDEO: {
@@ -205,12 +207,12 @@ const videoStatsReducer = (
   }
 }
 
-//const persistedVideoStatsReducer =
+// const persistedVideoStatsReducer =
 const rootReducer = combineReducers({
   viewReducer: persistReducer(
     {
       key: "view",
-      storage: storage,
+      storage,
     },
     viewReducer
   ),
@@ -218,21 +220,21 @@ const rootReducer = combineReducers({
   playlistReducer: persistReducer(
     {
       key: "playlist",
-      storage: storage,
+      storage,
     },
     playlistReducer
   ),
   settingsReducer: persistReducer(
     {
       key: "settings",
-      storage: storage,
+      storage,
     },
     settingsReducer
   ),
   videoStatsReducer: persistReducer(
     {
       key: "videoStats",
-      storage: storage,
+      storage,
       transforms: [videoStatsTransforms],
       whitelist: ["time", "videoCount", "startDate"],
     },

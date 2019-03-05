@@ -1,18 +1,9 @@
 import React from "react"
-import ReactDOM from "react-dom"
 import { withRouter } from "react-router-dom"
 import PropTypes from "prop-types"
 import YouTube from "react-youtube"
 import Progress from "../Progress/Progress"
 import getCurrentPlaylist from "../../modules/getCurrentPlaylist"
-let Timer = require("easytimer.js")
-
-const selectors = {
-  frame: "#video-paper > span > iframe",
-  watchMoreClipsButton: "div.ytp-pause-overlay.ytp-scroll-min",
-  endScreen:
-    "div.html5-endscreen.ytp-player-content.videowall-endscreen.ytp-show-tiles",
-}
 
 class VideoPlayer extends React.Component {
   constructor(props) {

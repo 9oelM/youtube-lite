@@ -1,66 +1,71 @@
 import React from "react"
 import PropTypes from "prop-types"
+import RouterPT from "react-router-prop-types"
 import { withRouter } from "react-router-dom"
-import Button from "@material-ui/core/Button"
-import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemIcon from "@material-ui/core/ListItemIcon"
 import ListItemText from "@material-ui/core/ListItemText"
-import ButtonBase from "@material-ui/core/ButtonBase"
 import AddIcon from "@material-ui/icons/Queue"
 import PlayingIcon from "@material-ui/icons/PlaylistPlay"
 import Grid from "@material-ui/core/Grid"
-import { withStyles } from "@material-ui/core/styles"
 import shortid from "shortid"
 import getCurrentPlaylist from "../../modules/getCurrentPlaylist"
 
-class VideoPlaylists extends React.Component {
-  render() {
-    const { playlists, match, location, history, onAddToPlaylist } = this.props
-    // TODO: location.state.video would be empty if an user directly comes to this page because it is passed down from onclick of SearchResultCard.
-    // NOTE: To use location.state, we need to switch freem HashRouter to BrowserRouter.
+const VideoPlaylists = ({
+  playlists,
+  match,
+  location,
+  history,
+  onAddToPlaylist,
+}) => {
+  const currentPlaylist = getCurrentPlaylist(playlists, match)
 
-    const currentPlaylist = getCurrentPlaylist(playlists, match)
+  return (
+    <Grid id="playlist">
+      <ListItem divider>
+        <ListItemIcon>
+          <PlayingIcon />
+        </ListItemIcon>
+        <ListItemText primary={currentPlaylist.playlistName} />
+      </ListItem>
+      <ListItem
+        button
+        divider
+        onClick={() =>
+          onAddToPlaylist(location.state.video, currentPlaylist.playlistName)
+        }
+      >
+        <ListItemIcon>
+          <AddIcon />
+        </ListItemIcon>
+        <ListItemText primary="Add to playlist" />
+      </ListItem>
+      <div id="playlist-container">
+        {currentPlaylist.videos.map(video => (
+          <ListItem
+            divider
+            button
+            key={shortid.generate()}
+            onClick={() =>
+              history.push(
+                `/video-player/${currentPlaylist.playlistName}/${video.vId}`
+              )
+            }
+          >
+            {video.title}
+          </ListItem>
+        ))}
+      </div>
+    </Grid>
+  )
+}
 
-    return (
-      <Grid id="playlist">
-        <ListItem divider>
-          <ListItemIcon>
-            <PlayingIcon />
-          </ListItemIcon>
-          <ListItemText primary={currentPlaylist.playlistName} />
-        </ListItem>
-        <ListItem
-          button
-          divider
-          onClick={() =>
-            onAddToPlaylist(location.state.video, currentPlaylist.playlistName)
-          }
-        >
-          <ListItemIcon>
-            <AddIcon />
-          </ListItemIcon>
-          <ListItemText primary="Add to playlist" />
-        </ListItem>
-        <div id="playlist-container">
-          {currentPlaylist.videos.map(video => (
-            <ListItem
-              divider
-              button
-              key={shortid.generate()}
-              onClick={() =>
-                history.push(
-                  `/video-player/${currentPlaylist.playlistName}/${video.vId}`
-                )
-              }
-            >
-              {video.title}
-            </ListItem>
-          ))}
-        </div>
-      </Grid>
-    )
-  }
+VideoPlaylists.propTypes = {
+  playlists: PropTypes.array.isRequired,
+  match: RouterPT.match.isRequired,
+  location: RouterPT.location.isRequired,
+  history: RouterPT.history.isRequired,
+  onAddToPlaylist: PropTypes.func.isRequired,
 }
 
 export default withRouter(VideoPlaylists)

@@ -1,8 +1,5 @@
 import React from "react"
 import PropTypes from "prop-types"
-import RouterPT from "react-router-prop-types"
-import { withRouter } from "react-router-dom"
-import { withStyles } from "@material-ui/core/styles"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
@@ -13,6 +10,7 @@ class BottomNav extends React.Component {
   componentDidMount() {
     this.interval = setInterval(() => this.setState({ time: Date.now() }), 1000)
   }
+
   // used to prevent memory leaks!
   componentWillUnmount() {
     clearInterval(this.interval)
@@ -20,7 +18,6 @@ class BottomNav extends React.Component {
 
   render() {
     const { settings, time, videoCount } = this.props
-    const humanizedTime = humanizeTime(time)
     const { showStatsBar } = settings
     const elem = showStatsBar ? (
       <div id="bottom-nav">
@@ -31,14 +28,15 @@ class BottomNav extends React.Component {
               color="inherit"
               className="bottom-nav-status"
             >
-              {videoCount} {videoCount < 2 ? "video" : "videos"} &nbsp;|&nbsp;
+              {videoCount + (videoCount < 2 ? " video" : " videos")}
+              &nbsp;|&nbsp;
             </Typography>
             <Typography
               variant="caption"
               color="inherit"
               className="bottom-nav-status"
             >
-              {humanizedTime}
+              {humanizeTime(time)}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -53,6 +51,8 @@ BottomNav.propTypes = {
     apiKey: PropTypes.string,
     showStatsBar: PropTypes.bool,
   }).isRequired,
+  time: PropTypes.number.isRequired,
+  videoCount: PropTypes.number.isRequired,
 }
 
 export default BottomNav

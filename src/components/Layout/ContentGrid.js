@@ -35,6 +35,8 @@ ContentGrid.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  _className: PropTypes.string.isRequired,
 }
 
 export default ContentGrid

@@ -1,6 +1,5 @@
 import * as React from "react"
 import { shallow } from "enzyme"
-import C from "../../../actions/constants"
 import Drawer from "../../../components/Drawer/Drawer"
 import DrawerItems from "../../../components/Drawer/DrawerItems"
 
