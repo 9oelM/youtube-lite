@@ -65,6 +65,10 @@ const TopNav = ({
 
 TopNav.propTypes = {
   classes: PropTypes.object.isRequired,
+  settings: PropTypes.shape({
+    apiKey: PropTypes.string,
+    maxSearchResult: PropTypes.number,
+  }).isRequired,
   onToggle: PropTypes.func.isRequired,
   onSearchResults: PropTypes.func.isRequired,
   onSearchTrigger: PropTypes.func.isRequired,

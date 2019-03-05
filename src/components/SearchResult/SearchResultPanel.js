@@ -11,23 +11,21 @@ import SearchResultCard from "./SearchResultCard"
 const SearchResultPanel = ({ searchResults, match }) => (
   <Paper className="comfort-grid">
     <Grid id="SearchWord">
-      <Typography variant="display1" align="center">{`Results for "${
-        match.params.searchWord
-      }"`}</Typography>
+      <Typography variant="display1" align="center">
+        {`Results for "${match.params.searchWord}"`}
+      </Typography>
     </Grid>
     <Grid spacing={16} container justify="center" id="resultsContainer">
-      {searchResults.map(item => {
-        return (
-          <SearchResultCard
-            key={shortid.generate()}
-            title={item.title}
-            author={item.channelTitle}
-            description={item.description}
-            img={item.thumbnails.medium.url}
-            vId={item.id}
-          />
-        )
-      })}
+      {searchResults.map(item => (
+        <SearchResultCard
+          key={shortid.generate()}
+          title={item.title}
+          author={item.channelTitle}
+          description={item.description}
+          img={item.thumbnails.medium.url}
+          vId={item.id}
+        />
+      ))}
     </Grid>
   </Paper>
 )

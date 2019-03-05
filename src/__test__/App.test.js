@@ -4,6 +4,7 @@ import { shallow, mount } from "enzyme"
 import configureMockStore from "redux-mock-store"
 import { Provider } from "react-redux"
 import App from "../App"
+
 const mockStore = configureMockStore()
 const initialState = {
   viewReducer: {

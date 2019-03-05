@@ -35,6 +35,8 @@ module.exports = Object.assign({}, eslintConfigAirbnb, {
         "react/forbid-prop-types": warn,
         "no-multi-assign": warn,
         "arrow-body-style": warn,
+        "no-confusing-arrow": off,
+        "indent": off,
       },
       "globals": {
         "document": true

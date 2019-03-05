@@ -1,4 +1,3 @@
-import React from "react"
 import { connect } from "react-redux"
 import TopNav from "../TopNav/TopNav"
 import SearchResultPanel from "../SearchResult/SearchResultPanel"
@@ -37,7 +36,6 @@ export const TopNavContainer = connect(
     },
     onSearchResults(results) {
       dispatch(receiveSearch(results))
-      console.log(results)
     },
     onSearchTrigger(searchWord) {
       dispatch(requestSearch(searchWord))
@@ -66,11 +64,9 @@ export const PlaylistDialogContainer = connect(
   dispatch => ({
     onAddToPlaylist(video, playlistName) {
       dispatch(addToPlaylist(video, playlistName))
-      console.log("added: " + JSON.stringify(video))
     },
     onAddPlaylist(playlistName) {
       dispatch(addPlaylist(playlistName))
-      console.log("added playlist: " + playlistName)
     },
   })
 )(PlaylistDialog)
@@ -89,7 +85,6 @@ export const VideoPlaylistsContainer = connect(
   dispatch => ({
     onAddToPlaylist(video, playlistName) {
       dispatch(addToPlaylist(video, playlistName))
-      console.log("added: " + JSON.stringify(video))
     },
   })
 )(VideoPlaylists)

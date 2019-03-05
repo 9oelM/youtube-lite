@@ -1,5 +1,6 @@
 import { createTransform } from "redux-persist"
 import isMoreThanOneDay from "../modules/isMoreThanOneDay"
+
 const { Timer } = require("easytimer.js")
 
 const transforms = createTransform(

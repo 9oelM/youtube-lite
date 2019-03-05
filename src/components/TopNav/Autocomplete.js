@@ -27,7 +27,7 @@ class Autocomplete extends React.Component {
   }
 
   getSearchSuggestions(data = []) {
-    let result = data.map(elem => ({
+    const result = data.map(elem => ({
       text: elem[0],
       id: shortid.generate(),
     }))
@@ -35,16 +35,17 @@ class Autocomplete extends React.Component {
   }
 
   fetchSuggestionResults(query) {
-    const self = this,
-      googleAutoSuggestURL =
-        "//suggestqueries.google.com/complete/search?client=youtube&ds=yt&q="
+    const self = this
 
-    jsonp(`${googleAutoSuggestURL}${query}`, function(error, data) {
+    const googleAutoSuggestURL =
+      "//suggestqueries.google.com/complete/search?client=youtube&ds=yt&q="
+
+    jsonp(`${googleAutoSuggestURL}${query}`, (error, data) => {
       if (error && self.props.onSuggestError) {
         self.props.onSuggestError(error)
         return
       }
-      let searchResult = data[1]
+      const searchResult = data[1]
 
       self.state.searchSuggestions = self.getSearchSuggestions(searchResult)
     }) // use jsonp at your risk
@@ -54,12 +55,12 @@ class Autocomplete extends React.Component {
     const self = this
     const { option } = this.props
 
-    let opt = {
+    const opt = {
       maxResults: 15,
       ...option,
     }
 
-    searchYoutube(searchWord, opt, function(err, results) {
+    searchYoutube(searchWord, opt, (err, results) => {
       if (err && self.props.onSearchError) {
         self.props.onSearchError(err)
         return
