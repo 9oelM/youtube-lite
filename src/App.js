@@ -25,6 +25,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/search-result/:searchWord" component={SearchResult} />
+      <Redirect from="/v/:id" to="/video-player/Default/:id" />
       <Redirect from="/video/:id" to="/video-player/Default/:id" />
       <Route path="/video-player/:playlist/:id" component={VideoPlayer} />
       <Route path="/settings" component={Settings} />
