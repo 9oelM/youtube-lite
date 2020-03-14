@@ -118,7 +118,7 @@ const playlistReducer = (
 const settingsReducer = (
   state = {
     settings: {
-      apiKey: "AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28",
+      apiKey: "AIzaSyDciNSdMC5jkLQuuAvJBAnCR11BpJ7x1NY",
       maxSearchResult: 15,
       showStatsBar: true,
     },
