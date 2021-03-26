@@ -33,7 +33,7 @@ const initialState = {
   },
   settingsReducer: {
     settings: {
-      apiKey: "AIzaSyB8R4Bqkx25_-c58L7v1QaLReVw1FWea28",
+      apiKey: "AIzaSyBS_mShhwnJf4T2C45rbsRLVIwT-vLJKHQ",
       maxSearchResult: 15,
       showStatsBar: true,
     },
