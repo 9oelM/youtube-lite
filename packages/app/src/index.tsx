@@ -1,5 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { Example } from "./components/Example"
+import { ExampleImpure } from "./components/Example"
 
-ReactDOM.render(<Example />, document.getElementById(`root`))
+ReactDOM.render(
+  <ExampleImpure color="#345345" />,
+  document.getElementById(`root`)
+)

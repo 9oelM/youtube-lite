@@ -1,8 +1,8 @@
 import { shallow } from "enzyme"
 import React from "react"
-import { Example } from "."
-describe(`Example`, () => {
-  it(`should render Example component without error`, () => {
-    expect(() => shallow(<Example />)).not.toThrow()
+import { ExamplePure } from "."
+describe(`ExamplePure`, () => {
+  it(`should render ExamplePure component without error`, () => {
+    expect(() => shallow(<ExamplePure color={`#345345`} />)).not.toThrow()
   })
 })
