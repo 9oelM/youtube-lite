@@ -5,7 +5,7 @@ import flow from "lodash.flow"
 export const enhance: <Props>(
   Component: FC<Props>
 ) => (
-  Fallback: FC
+  Fallback?: FC
 ) => React.MemoExoticComponent<({ ...props }: Props) => JSX.Element> = flow(
   memo,
   withErrorBoundary

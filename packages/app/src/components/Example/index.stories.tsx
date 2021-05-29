@@ -1,17 +1,20 @@
 import React from "react"
 
 import { Meta, Story } from "@storybook/react"
-import { ExamplePure, ExamplePureProps } from "."
+import { ExampleImpure, ExampleImpureProps } from "."
 
-const Template: Story<ExamplePureProps> = (args: ExamplePureProps) => (
-  <ExamplePure {...args} />
+const Template: Story<ExampleImpureProps> = (args: ExampleImpureProps) => (
+  <ExampleImpure {...args} />
 )
 
-export const ExamplePure1: Story<ExamplePureProps> = Template.bind({})
+export const ExampleImpure1: Story<ExampleImpureProps> = Template.bind({})
+ExampleImpure1.args = {
+  color: `blue`,
+}
 
 export default {
-  title: `ExamplePure`,
-  component: ExamplePure,
+  title: `Example`,
+  component: ExampleImpure,
   parameters: {
     layout: `centered`,
     actions: {
