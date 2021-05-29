@@ -1,0 +1,15 @@
+{
+  "name": "youtube-lite",
+  "version": "2.0.0-alpha",
+  "description": "\"Youtube that doesn't scale\"",
+  "main": "index.js",
+  "repository": "https://github.com/9oelM/youtube-lite.git",
+  "author": "9oelM <hj923@hotmail.com>",
+  "license": "MIT",
+  "private": false,
+  "workspaces": {
+    "packages": [
+        "packages/*"
+    ]
+  }
+}
