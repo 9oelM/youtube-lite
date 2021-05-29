@@ -28,7 +28,7 @@ export const ExampleImpure: FC<ExampleImpureProps> =
           AxiosResponse<string>,
           AxiosError
         >(
-          axios(
+          axios.get(
             `https://baconipsum.com/api/?type=all-meat&paras=2&start-with-lorem=1`
           )
         )
