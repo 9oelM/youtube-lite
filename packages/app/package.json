@@ -8,7 +8,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "webpack serve --config ./webpack/webpack.config.root.ts --mode development"
+    "dev": "webpack serve --config ./webpack/webpack.config.dev.ts --mode development",
+    "prod": "webpack --config ./webpack/webpack.config.prod.ts --mode production"
   },
   "devDependencies": {
     "@types/react": "^17.0.8",
