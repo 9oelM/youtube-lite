@@ -1,17 +1,17 @@
-import path from 'path'
-import webpack from 'webpack';
-import { commonConfig } from './webpack.config.common';
+import path from "path"
+import webpack from "webpack"
+import { commonConfig } from "./webpack.config.common"
 
 const config: webpack.Configuration = {
-  mode: 'development',
-  devtool: 'inline-source-map',
+  mode: `development`,
+  devtool: `inline-source-map`,
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, `dist`),
     compress: true,
     port: 8080,
-    open: true
+    open: true,
   },
   ...commonConfig,
-};
+}
 
-export default config;
+export default config
