@@ -39,6 +39,10 @@ export const commonConfig: webpack.Configuration = {
   },
   resolve: {
     extensions: [`.tsx`, `.ts`, `.js`],
+    alias: {
+      // absolute path import
+      src: path.resolve(`./src`),
+    },
   },
   output: {
     filename: `bundle.js`,

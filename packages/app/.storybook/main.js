@@ -14,6 +14,13 @@ module.exports = {
     '@storybook/addon-a11y',
   ],
   webpackFinal: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      // Field 'browser' doesn't contain a valid alias configuration
+      // /Users/jm/Documents/Code/youtube-lite/packages/app/Users/jm/Documents/Code/youtube-lite/packages/src/utilities/essentials.jsx doesn't exist
+      // it needs to be under 'app' folder
+      "src": path.resolve('../app/src')
+    }
     config.plugins = [
       ...config.plugins, 
       new ForkTsCheckerWebpackPlugin(),
