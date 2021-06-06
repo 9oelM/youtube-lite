@@ -1,0 +1,28 @@
+name: Test and build
+on: [pull_request, push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      # https://github.com/actions/cache/blob/main/examples.md#node---lerna
+      - name: restore lerna
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - name: install deps and test
+        run: |
+          # remove after stable version released
+          sudo npm i -g npm@7
+          npm i --verbose
+          npm run bootstrap
+          npm run test

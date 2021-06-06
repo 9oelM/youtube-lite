@@ -7,24 +7,28 @@
   "author": "9oelM <hj923@hotmail.com>",
   "license": "MIT",
   "private": false,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "dev:app": "npm run dev -w packages/app",
-    "prod:app": "npm run prod -w packages/app"
+    "dev:app": "lerna run --scope @youtube-lite/app dev",
+    "prod:app": "lerna run --scope @youtube-lite/app prod",
+    "test": "lerna run --scope @youtube-lite/app test"
   },
   "devDependencies": {
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "4.26.0",
     "@typescript-eslint/parser": "4.26.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "7.27.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-react": "7.24.0",
+    "lerna": "^4.0.0",
     "prettier": "2.3.0"
+  },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=7.15.0"
   }
 }
