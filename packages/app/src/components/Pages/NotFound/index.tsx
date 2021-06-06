@@ -1,7 +1,7 @@
 import { x } from "@xstyled/styled-components"
 import React from "react"
 import { FC } from "react"
-import { SF } from "src/styles/styleFragments"
+import { SF, V } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
 import { NotFoundPageFallback } from "./fallback"
 
@@ -19,13 +19,11 @@ export type NotFoundPagePureProps = {}
 export const NotFoundPagePure: FC<NotFoundPagePureProps> =
   enhance<NotFoundPagePureProps>(() => (
     <x.div bg="background" w="100%" h="100%" {...SF.flexStyles}>
-      <x.main {...SF.flexStyles} flexDirection="column" spaceY={20}>
+      <x.main {...SF.flexStyles} flexDirection="column" spaceY={4}>
         <x.p color="text" fontSize="4xl" fontWeight="bold" textAlign="center">
           Oops. Probably a wrong page.
         </x.p>
-        <x.button color="text" bg="accent" p={5} borderRadius="lg">
-          Go back to the main page
-        </x.button>
+        <x.button {...V.buttons.primary}>Go back to the main page</x.button>
       </x.main>
     </x.div>
   ))(NotFoundPageFallback)

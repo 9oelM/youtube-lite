@@ -3,6 +3,7 @@ import type { ColorMode, Theme } from "theme-ui"
 import { DeepRequired } from "ts-essentials"
 // https://theme-ui.com/guides/typescript#exact-theme-type
 const makeTheme = <T extends Theme>(t: T) => t
+const makeXStyledTheme = <T extends typeof defaultTheme>(t: T) => t
 
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -95,17 +96,12 @@ const charismaSunset: Omit<DeepRequired<ColorMode>, `primary` | `highlight`> = {
   secondary: `#ffffff`,
 }
 
-export const youtubeLiteTheme = makeTheme({
+export const youtubeLiteTheme = makeXStyledTheme({
+  ...defaultTheme,
   colors: {
+    ...defaultTheme.colors,
     ...charismaSunset,
-    modes: {
-      charismaSunset,
-    },
   },
-  fontSizes: defaultTheme.fontSizes,
-  // @ts-ignore
-  fontWeights: defaultTheme.fontWeights,
-  radii: defaultTheme.radii,
 })
 
 export type ExactTheme = typeof youtubeLiteTheme

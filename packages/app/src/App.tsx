@@ -18,7 +18,7 @@ export const App: FC = () => {
       <ThemeProvider theme={youtubeLiteTheme}>
         <Router>
           <Switch>
-            <Route path="/main" exact>
+            <Route path="/" exact>
               <ExampleImpure color="#345345" />
             </Route>
             <Route>

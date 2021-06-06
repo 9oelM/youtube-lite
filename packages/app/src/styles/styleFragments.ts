@@ -14,3 +14,18 @@ export const SF = makeStyleFragments({
     display: `flex`,
   },
 })
+
+// variants
+export const V = {
+  buttons: {
+    primary: {
+      bg: { _: `background`, hover: `accent` },
+      color: { _: `accent`, hover: `background` },
+      borderRadius: `lg`,
+      padding: { _: 1.5 },
+      borderColor: { _: `accent`, hover: `` },
+      borderWidth: { _: 2 },
+      transition: `all 0.3s`,
+    },
+  },
+}
