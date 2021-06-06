@@ -10,6 +10,7 @@ const config: webpack.Configuration = {
     compress: true,
     port: 8080,
     open: true,
+    historyApiFallback: true,
   },
   ...commonConfig,
 }
