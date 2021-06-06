@@ -13,6 +13,10 @@ export const SF = makeStyleFragments({
     justifyContent: `center`,
     display: `flex`,
   },
+  fullWH: {
+    width: `100%`,
+    height: `100%`,
+  },
 })
 
 // variants
