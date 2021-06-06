@@ -5,16 +5,24 @@ import { ExampleImpure } from "src/components/Example"
 import { store } from "src/store"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
-import { theme } from "src/styles/theme"
+import { youtubeLiteTheme } from "src/styles/theme"
+import { NotFoundPagePure } from "src/components/Pages/NotFound"
+import { Preflight } from "@xstyled/styled-components"
+import { GlobalStyle } from "src/styles/globalStyle"
 
 export const App: FC = () => {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Preflight />
+      <ThemeProvider theme={youtubeLiteTheme}>
         <Router>
           <Switch>
-            <Route path="/" exact>
+            <Route path="/main" exact>
               <ExampleImpure color="#345345" />
+            </Route>
+            <Route>
+              <NotFoundPagePure />
             </Route>
           </Switch>
         </Router>

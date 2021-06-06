@@ -1,8 +1,10 @@
-import { Theme } from "theme-ui"
-
+import { defaultTheme } from "@xstyled/styled-components"
+import type { ColorMode, Theme } from "theme-ui"
+import { DeepRequired } from "ts-essentials"
 // https://theme-ui.com/guides/typescript#exact-theme-type
 const makeTheme = <T extends Theme>(t: T) => t
 
+// @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const exampleTheme = makeTheme({
   colors: {
@@ -84,6 +86,26 @@ const exampleTheme = makeTheme({
   },
 })
 
-export const theme = makeTheme({})
+// https://coolors.co/000000-14213d-fca311-e5e5e5-ffffff
+const charismaSunset: Omit<DeepRequired<ColorMode>, `primary` | `highlight`> = {
+  background: `#000000`,
+  muted: `#14213d`,
+  accent: `#fca311`,
+  text: `#e5e5e5`,
+  secondary: `#ffffff`,
+}
 
-export type ExactTheme = typeof theme
+export const youtubeLiteTheme = makeTheme({
+  colors: {
+    ...charismaSunset,
+    modes: {
+      charismaSunset,
+    },
+  },
+  fontSizes: defaultTheme.fontSizes,
+  // @ts-ignore
+  fontWeights: defaultTheme.fontWeights,
+  radii: defaultTheme.radii,
+})
+
+export type ExactTheme = typeof youtubeLiteTheme
