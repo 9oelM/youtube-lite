@@ -47,7 +47,7 @@
     "theme-ui": "^0.9.1",
     "ts-essentials": "^2.0.12",
     "ts-jest": "27.0.2",
-    "ts-loader": "9.2.2",
+    "ts-loader": "9.2.3",
     "ts-node": "10.0.0",
     "typescript": "4.3.2",
     "wait-for-expect": "3.0.2",
