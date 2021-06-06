@@ -13,4 +13,23 @@ export const SF = makeStyleFragments({
     justifyContent: `center`,
     display: `flex`,
   },
+  fullWH: {
+    width: `100%`,
+    height: `100%`,
+  },
 })
+
+// variants
+export const V = {
+  buttons: {
+    primary: {
+      bg: { _: `background`, hover: `accent` },
+      color: { _: `accent`, hover: `background` },
+      borderRadius: `lg`,
+      padding: { _: 1.5 },
+      borderColor: { _: `accent`, hover: `` },
+      borderWidth: { _: 2 },
+      transition: `all 0.3s`,
+    },
+  },
+}

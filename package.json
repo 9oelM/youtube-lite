@@ -11,9 +11,9 @@
     "bootstrap": "lerna bootstrap",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "dev:app": "lerna run --scope @youtube-lite/app dev",
-    "prod:app": "lerna run --scope @youtube-lite/app prod",
-    "test": "lerna run --scope @youtube-lite/app test"
+    "dev:app": "lerna run --scope @youtube-lite/app dev --stream",
+    "prod:app": "lerna run --scope @youtube-lite/app prod --stream",
+    "test": "lerna run --scope @youtube-lite/app test --stream"
   },
   "devDependencies": {
     "@types/enzyme-adapter-react-16": "1.0.6",

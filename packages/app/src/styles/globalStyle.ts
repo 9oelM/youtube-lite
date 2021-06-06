@@ -8,4 +8,5 @@ body, html, #root {
 * {
   font-family: Poppins, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
+button:focus {outline:0;}
 `

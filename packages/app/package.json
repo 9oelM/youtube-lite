@@ -59,6 +59,7 @@
     "@fontsource/poppins": "^4.4.2",
     "@xstyled/styled-components": "^3.0.1",
     "axios": "^0.21.1",
+    "connected-react-router": "^6.9.1",
     "lodash.flow": "^3.5.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
