@@ -36,7 +36,7 @@
     "babel-loader": "8.2.2",
     "circular-dependency-plugin": "5.2.2",
     "css-loader": "3.6.0",
-    "dotenv-webpack": "7.0.2",
+    "dotenv-webpack": "7.0.3",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
     "file-loader": "6.2.0",
