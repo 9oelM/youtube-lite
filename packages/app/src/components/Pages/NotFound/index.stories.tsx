@@ -1,21 +1,29 @@
 import React from "react"
 
 import { Meta, Story } from "@storybook/react"
-import { NotFoundPageImpure, NotFoundPageImpureProps } from "."
+import { NotFoundPagePure, NotFoundPagePureProps } from "."
+import { ThemeProvider } from "@xstyled/styled-components"
+import { youtubeLiteTheme } from "src/styles/theme"
+import { noop } from "ts-essentials"
 
-const Template: Story<NotFoundPageImpureProps> = (
-  args: NotFoundPageImpureProps
-) => <NotFoundPageImpure {...args} />
+const Template: Story<NotFoundPagePureProps> = (
+  args: NotFoundPagePureProps
+) => (
+  <ThemeProvider theme={youtubeLiteTheme}>
+    <NotFoundPagePure {...args} />
+  </ThemeProvider>
+)
 
-export const NotFoundPageImpure1: Story<NotFoundPageImpureProps> =
-  Template.bind({})
+export const NotFoundPageImpure1: Story<NotFoundPagePureProps> = Template.bind(
+  {}
+)
 NotFoundPageImpure1.args = {
-  color: `blue`,
+  onGoBackToMainPageClick: noop,
 }
 
 export default {
   title: `NotFoundPage`,
-  component: NotFoundPageImpure,
+  component: NotFoundPagePure,
   parameters: {
     layout: `centered`,
     actions: {

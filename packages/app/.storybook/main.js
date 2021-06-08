@@ -19,7 +19,13 @@ module.exports = {
       // Field 'browser' doesn't contain a valid alias configuration
       // /Users/jm/Documents/Code/youtube-lite/packages/app/Users/jm/Documents/Code/youtube-lite/packages/src/utilities/essentials.jsx doesn't exist
       // it needs to be under 'app' folder
-      "src": path.resolve('../app/src')
+      "src": path.resolve('../app/src'),
+      // https://github.com/storybookjs/storybook/issues/11255#issuecomment-673899817
+      // 'core-js/modules': path.resolve(
+      //     __dirname,
+      //     '..',
+      //     'node_modules/core-js/modules'
+      // ),
     }
     config.plugins = [
       ...config.plugins, 
