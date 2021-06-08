@@ -9,8 +9,8 @@
   "private": false,
   "scripts": {
     "test": "jest --config ./jest/jest.config.ts",
-    "dev": "webpack serve --config ./webpack/webpack.config.dev.ts --mode development",
-    "prod": "webpack --config ./webpack/webpack.config.prod.ts --mode production",
+    "dev": "webpack serve --config ./webpack/webpack.config.dev.ts --mode development --progress",
+    "prod": "webpack --config ./webpack/webpack.config.prod.ts --mode production --progress",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
