@@ -17,8 +17,8 @@
   },
   "devDependencies": {
     "@types/enzyme-adapter-react-16": "1.0.6",
-    "@typescript-eslint/eslint-plugin": "4.26.0",
-    "@typescript-eslint/parser": "4.26.0",
+    "@typescript-eslint/eslint-plugin": "4.26.1",
+    "@typescript-eslint/parser": "4.26.1",
     "enzyme-adapter-react-16": "1.15.6",
     "eslint": "7.28.0",
     "eslint-config-prettier": "8.3.0",
