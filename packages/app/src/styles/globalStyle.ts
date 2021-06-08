@@ -8,5 +8,11 @@ body, html, #root {
 * {
   font-family: Poppins, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
-button:focus {outline:0;}
+*:focus {
+  outline:none;
+}
+// https://stackoverflow.com/questions/12046315/prevent-overscrolling-of-web-page
+body {
+  overscroll-behavior-y: none;
+}
 `

@@ -14,8 +14,8 @@ export const SF = makeStyleFragments({
     display: `flex`,
   },
   fullWH: {
-    width: `100%`,
-    height: `100%`,
+    w: `100%`,
+    h: `100%`,
   },
 })
 
@@ -30,6 +30,26 @@ export const V = {
       borderColor: { _: `accent`, hover: `` },
       borderWidth: { _: 2 },
       transition: `all 0.3s`,
+    },
+  },
+  inputs: {
+    primary: {
+      bg: { _: `background`, focus: `background` },
+      borderColor: { _: `secondary`, focus: `accent` },
+      borderRadius: `lg`,
+      borderStyle: `solid`,
+      padding: 1.5,
+      borderWidth: 2,
+      transition: `all 0.3s`,
+      color: `text`,
+    },
+  },
+  lists: {
+    primary: {
+      color: { _: `text`, hover: `accent` },
+      p: 1.5,
+      cursor: `pointer`,
+      transition: `color 0.3s`,
     },
   },
 }

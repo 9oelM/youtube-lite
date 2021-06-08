@@ -92,8 +92,8 @@ const charismaSunset: Omit<DeepRequired<ColorMode>, `primary` | `highlight`> = {
   background: `#000000`,
   muted: `#14213d`,
   accent: `#fca311`,
-  text: `#e5e5e5`,
-  secondary: `#ffffff`,
+  text: `#92999c`,
+  secondary: `#303436`,
 }
 
 export const youtubeLiteTheme = makeXStyledTheme({
