@@ -1,5 +1,5 @@
 name: Test and build
-on: [pull_request, push]
+on: [pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -26,3 +26,29 @@ jobs:
           npm i --verbose
           npm run bootstrap
           npm run test
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: restore lerna
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - uses: afc163/surge-preview@v1
+        id: preview_step
+        with:
+          surge_token: ${{ secrets.SURGE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dist: packages/app/dist
+          build: |
+            sudo npm i -g npm@7
+            npm i --verbose
+            npm run bootstrap
+            npm run prod:app
+      - name: Get the preview_url
+        run: echo "url => ${{ steps.preview_step.outputs.preview_url }}"

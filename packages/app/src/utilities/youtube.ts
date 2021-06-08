@@ -3,7 +3,7 @@ import { tcAsync } from "src/utilities/essentials"
 // @ts-ignore
 import axiosJsonpAdapter from "axios-jsonp"
 
-export const YOUTUBE_SUGGESTION_URL = `http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q={}`
+export const YOUTUBE_SUGGESTION_URL = `https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q={}`
 
 /**
  *
