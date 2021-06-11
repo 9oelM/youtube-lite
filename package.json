@@ -11,6 +11,7 @@
     "bootstrap": "lerna bootstrap",
     "lint": "eslint . --debug",
     "lint:fix": "eslint . --fix",
+    "lint:ts": "lerna run --scope @youtube-lite/app lint:ts --stream",
     "dev:app": "lerna run --scope @youtube-lite/app dev --stream",
     "prod:app": "lerna run --scope @youtube-lite/app prod --stream",
     "test": "lerna run --scope @youtube-lite/app test --stream"
