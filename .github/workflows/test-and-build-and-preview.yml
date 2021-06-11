@@ -52,6 +52,7 @@ jobs:
           sudo npm i -g npm@7
           npm i --verbose
           npm run lint
+          npm run lint:ts
   preview:
     runs-on: ubuntu-latest
     steps:
