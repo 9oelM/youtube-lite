@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "lint": "eslint .",
+    "lint": "eslint . --debug",
     "lint:fix": "eslint . --fix",
     "dev:app": "lerna run --scope @youtube-lite/app dev --stream",
     "prod:app": "lerna run --scope @youtube-lite/app prod --stream",
