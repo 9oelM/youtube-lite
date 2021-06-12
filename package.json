@@ -14,6 +14,7 @@
     "lint:ts": "lerna run --scope @youtube-lite/app lint:ts --stream",
     "dev:app": "lerna run --scope @youtube-lite/app dev --stream",
     "prod:app": "lerna run --scope @youtube-lite/app prod --stream",
+    "build-storybook:app": "lerna run --scope @youtube-lite/app build-storybook --stream",
     "test": "lerna run --scope @youtube-lite/app test --stream"
   },
   "devDependencies": {
