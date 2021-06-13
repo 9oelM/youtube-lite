@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "jest --config ./jest/jest.config.ts",
+    "test": "jest --config ./jest/jest.config.ts --coverage",
     "lint:ts": "tsc --noEmit -p .",
     "dev": "webpack serve --config ./webpack/webpack.config.dev.ts --mode development --progress",
     "prod": "webpack --config ./webpack/webpack.config.prod.ts --mode production --progress",
