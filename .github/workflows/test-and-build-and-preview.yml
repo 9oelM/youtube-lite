@@ -51,6 +51,7 @@ jobs:
           # remove after stable version released
           sudo npm i -g npm@7
           npm i --verbose
+          npm run bootstrap
           npm run lint
           npm run lint:ts
   preview:
