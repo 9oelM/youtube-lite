@@ -63,13 +63,17 @@
     "axios": "^0.21.1",
     "axios-jsonp": "^1.0.4",
     "connected-react-router": "^6.9.1",
+    "immer": "^8.0.1",
     "lodash.debounce": "^4.0.8",
     "lodash.flow": "^3.5.0",
+    "nanoid": "^3.1.23",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "redux": "^4.1.0",
-    "styled-components": "^5.3.0"
+    "redux-devtools-extension": "^2.13.9",
+    "styled-components": "^5.3.0",
+    "typesafe-actions": "^5.1.0"
   }
 }
