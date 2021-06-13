@@ -3,7 +3,8 @@ import debounce from "lodash.debounce"
 import React, { useEffect, useMemo, useState } from "react"
 import { FC } from "react"
 import { V } from "src/styles/styleFragments"
-import { AsyncStatus, enhance, exhaustiveCheck } from "src/utilities/essentials"
+import { enhance, exhaustiveCheck } from "src/utilities/essentials"
+import { AsyncStatus } from "src/utilities/redux-async/asyncTypes"
 import { requestYoutubeSearchSuggestions } from "src/utilities/youtube"
 import { SearchSuggestionsFallback } from "./fallback"
 
@@ -13,13 +14,13 @@ import { SearchSuggestionsFallback } from "./fallback"
 const SearchSuggestionsUIState: {
   [AsyncStatus.NOT_STARTED]: AsyncStatus.NOT_STARTED
   [AsyncStatus.LOADING]: AsyncStatus.LOADING
-  [AsyncStatus.ERROR]: AsyncStatus.ERROR
+  [AsyncStatus.FAILURE]: AsyncStatus.FAILURE
   NO_SUGGESTIONS: `NO_SUGGESTIONS`
   SHOW_SUGGESTIONS: `SHOW_SUGGESTIONS`
 } = {
   [AsyncStatus.NOT_STARTED]: AsyncStatus.NOT_STARTED,
   [AsyncStatus.LOADING]: AsyncStatus.LOADING,
-  [AsyncStatus.ERROR]: AsyncStatus.ERROR,
+  [AsyncStatus.FAILURE]: AsyncStatus.FAILURE,
   NO_SUGGESTIONS: `NO_SUGGESTIONS`,
   SHOW_SUGGESTIONS: `SHOW_SUGGESTIONS`,
 }
@@ -32,7 +33,7 @@ export type SearchSuggestionsImpureProps = {
 export const SearchSuggestionsImpure: FC<SearchSuggestionsImpureProps> =
   enhance<SearchSuggestionsImpureProps>(({ searchKeyword }) => {
     const [searchSuggestions, setSearchSuggestions] = useState<string[]>([])
-    const [searchSuggestionsAPIStatus, setSearchSuggestionsAPIStatus] =
+    const [searchSuggestionsAsyncStatus, setSearchSuggestionsAsyncStatus] =
       useState<AsyncStatus>(AsyncStatus.NOT_STARTED)
 
     const debouncedRequestYoutubeSearchSuggestions = useMemo(() => {
@@ -43,29 +44,29 @@ export const SearchSuggestionsImpure: FC<SearchSuggestionsImpureProps> =
         )
 
         if (suggestions === null) {
-          setSearchSuggestionsAPIStatus(AsyncStatus.ERROR)
+          setSearchSuggestionsAsyncStatus(AsyncStatus.FAILURE)
 
           return
         }
-        setSearchSuggestionsAPIStatus(AsyncStatus.SUCCESS)
+        setSearchSuggestionsAsyncStatus(AsyncStatus.SUCCESS)
         setSearchSuggestions(suggestions)
       }, 350)
     }, [])
 
     useEffect(() => {
       if (searchKeyword.trim().length > 0) {
-        setSearchSuggestionsAPIStatus(AsyncStatus.LOADING)
+        setSearchSuggestionsAsyncStatus(AsyncStatus.LOADING)
       }
       debouncedRequestYoutubeSearchSuggestions(searchKeyword)
     }, [searchKeyword])
 
     const uiState: keyof typeof SearchSuggestionsUIState = useMemo(() => {
       if (
-        searchSuggestionsAPIStatus === AsyncStatus.NOT_STARTED ||
-        searchSuggestionsAPIStatus === AsyncStatus.LOADING ||
-        searchSuggestionsAPIStatus === AsyncStatus.ERROR
+        searchSuggestionsAsyncStatus === AsyncStatus.NOT_STARTED ||
+        searchSuggestionsAsyncStatus === AsyncStatus.LOADING ||
+        searchSuggestionsAsyncStatus === AsyncStatus.FAILURE
       ) {
-        return searchSuggestionsAPIStatus
+        return searchSuggestionsAsyncStatus
       }
 
       if (searchSuggestions.length === 0) {
@@ -73,13 +74,13 @@ export const SearchSuggestionsImpure: FC<SearchSuggestionsImpureProps> =
       }
 
       return SearchSuggestionsUIState.SHOW_SUGGESTIONS
-    }, [searchSuggestionsAPIStatus, searchSuggestions])
+    }, [searchSuggestionsAsyncStatus, searchSuggestions])
 
     return (
       <SearchSuggestionsPure
         {...{
           searchSuggestions,
-          searchSuggestionsAPIStatus,
+          searchSuggestionsAsyncStatus,
           uiState,
         }}
       />
@@ -108,7 +109,7 @@ export const SearchSuggestionsPure: FC<SearchSuggestionsPureProps> =
       >
         {(() => {
           switch (uiState) {
-            case SearchSuggestionsUIState.ERROR:
+            case SearchSuggestionsUIState.FAILURE:
               return <x.li {...V.lists.primary}>Error</x.li>
             case SearchSuggestionsUIState.LOADING:
               return <x.li {...V.lists.primary}>Loading</x.li>

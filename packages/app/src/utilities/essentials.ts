@@ -46,15 +46,3 @@ export function tcSync<
 export function exhaustiveCheck(x: never): void {
   throw new Error(`${x} should be unreachable`)
 }
-
-export enum AsyncStatus {
-  /**
-   * sometimes you need to make information about that request in advance and
-   * wait until some time to do the actual request.
-   */
-  NOT_STARTED = `NOT_STARTED`,
-  LOADING = `LOADING`,
-  CANCELLED = `CANCELLED`,
-  SUCCESS = `SUCCESS`,
-  ERROR = `ERROR`,
-}

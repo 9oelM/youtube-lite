@@ -1,18 +1,17 @@
-import { connectRouter, RouterState } from "connected-react-router"
-import { AnyAction, CombinedState, combineReducers, Reducer } from "redux"
+import { connectRouter } from "connected-react-router"
+import { combineReducers } from "redux"
+import { asyncReducer } from "src/utilities/redux-async/asyncReducer"
+import { StateType } from "typesafe-actions"
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function createRootReducer(
   history: Parameters<typeof connectRouter>[0]
-): Reducer<
-  CombinedState<{
-    router: RouterState<unknown>
-  }>,
-  AnyAction
-> {
+) {
   return combineReducers({
     router: connectRouter(history),
+    async: asyncReducer,
   })
 }
 
-export type RootState = ReturnType<ReturnType<typeof createRootReducer>>
+export type RootState = StateType<ReturnType<typeof createRootReducer>>
 export type RS = RootState
