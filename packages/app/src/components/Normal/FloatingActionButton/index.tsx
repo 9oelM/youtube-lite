@@ -3,9 +3,9 @@ import { FC } from "react"
 import { enhance } from "src/utilities/essentials"
 import { FloatingActionButtonFallback } from "./fallback"
 import { x } from "@xstyled/styled-components"
-import { Plus } from "@styled-icons/boxicons-regular/Plus"
 import { Minus } from "@styled-icons/boxicons-regular/Minus"
-import { SF, V } from "src/styles/styleFragments"
+import { Add } from "@styled-icons/material-sharp/Add"
+import { V } from "src/styles/styleFragments"
 
 export type Menu = {
   icon: ReactNode
@@ -26,9 +26,9 @@ export const FloatingActionButtonImpure: FC<FloatingActionButtonImpureProps> =
       }, [isActive])
 
     return (
-      <x.div {...SF.transition}>
+      <x.div>
         <FloatingActionButtonPure
-          icon={isActive ? <Minus /> : <Plus />}
+          icon={isActive ? <Minus /> : <Add />}
           onClick={onClickFloatingButton}
           active={true}
           nth={-1}

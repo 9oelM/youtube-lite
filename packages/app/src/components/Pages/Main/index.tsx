@@ -5,9 +5,9 @@ import { FloatingActionButtonImpure } from "src/components/Normal/FloatingAction
 import { SearchInputImpure } from "src/components/Normal/SearchInput"
 import { SF } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
-import { Settings2Outline } from "@styled-icons/evaicons-outline/Settings2Outline"
-import { Playlist } from "@styled-icons/boxicons-solid/Playlist"
-import { InfoCircle } from "@styled-icons/boxicons-regular/InfoCircle"
+import { Settings } from "@styled-icons/material-sharp/Settings"
+import { PlaylistPlay } from "@styled-icons/material-sharp/PlaylistPlay"
+import { Information } from "@styled-icons/ionicons-sharp/Information"
 // import { MainPageFallback } from "./fallback"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -28,19 +28,19 @@ export const MainPagePure: FC<MainPagePureProps> = enhance<MainPagePureProps>(
         <FloatingActionButtonImpure
           menus={[
             {
-              icon: <Playlist />,
+              icon: <PlaylistPlay />,
               onClick: () => {
                 //
               },
             },
             {
-              icon: <Settings2Outline />,
+              icon: <Settings />,
               onClick: () => {
                 //
               },
             },
             {
-              icon: <InfoCircle />,
+              icon: <Information />,
               onClick: () => {
                 //
               },
