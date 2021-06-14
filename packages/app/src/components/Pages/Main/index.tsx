@@ -5,6 +5,8 @@ import { FloatingActionButtonImpure } from "src/components/Normal/FloatingAction
 import { SearchInputImpure } from "src/components/Normal/SearchInput"
 import { SF } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
+import { Settings } from "@styled-icons/feather/Settings"
+import { Bitcoin } from "@styled-icons/boxicons-logos/Bitcoin"
 // import { MainPageFallback } from "./fallback"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -25,13 +27,13 @@ export const MainPagePure: FC<MainPagePureProps> = enhance<MainPagePureProps>(
         <FloatingActionButtonImpure
           menus={[
             {
-              icon: `?`,
+              icon: <Settings />,
               onClick: () => {
                 //
               },
             },
             {
-              icon: `@`,
+              icon: <Bitcoin />,
               onClick: () => {
                 //
               },
