@@ -68,19 +68,27 @@ jobs:
             node_modules
             */*/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - uses: afc163/surge-preview@v1
-        id: preview_step
+      - name: deploy app preview to surge
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo npm i -g npm@7
+          npm i --verbose
+          npm run bootstrap
+          npm run prod:app
+          npx surge ./packages/app/dist "youtube-lite-app-preview-pr-${PR_NUMBER}.surge.sh" --token $SURGE_TOKEN
+      - name: comment the preview link on PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PREVIEW_LINK: youtube-lite-app-preview-pr-${{ github.event.number }}.surge.sh
         with:
-          surge_token: ${{ secrets.SURGE_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          dist: packages/app/dist
-          build: |
-            sudo npm i -g npm@7
-            npm i --verbose
-            npm run bootstrap
-            npm run prod:app
-      - name: Get the preview_url
-        run: echo "url => ${{ steps.preview_step.outputs.preview_url }}"
+          # https://github.com/unsplash/comment-on-pr/issues/29
+          msg: See app preview at https://${{ env.PREVIEW_LINK }}
+          check_for_duplicate_msg: true  # OPTIONAL 
+  # todo: make custom github action. not doing now because i'm feeling too lazy. it just works now
   preview-storybook:
     runs-on: ubuntu-latest
     steps:
@@ -94,16 +102,23 @@ jobs:
             node_modules
             */*/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-      - uses: afc163/surge-preview@v1
-        id: preview_step
+      - name: deploy storybook preview to surge
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo npm i -g npm@7
+          npm i --verbose
+          npm run bootstrap
+          npm run build-storybook:app
+          npx surge ./packages/app/storybook-static "youtube-lite-sb-preview-pr-${PR_NUMBER}.surge.sh" --token $SURGE_TOKEN
+      - name: comment the preview link on PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PREVIEW_LINK: youtube-lite-sb-preview-pr-${{ github.event.number }}.surge.sh
         with:
-          surge_token: ${{ secrets.SURGE_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          dist: packages/app/storybook-static
-          build: |
-            sudo npm i -g npm@7
-            npm i --verbose
-            npm run bootstrap
-            npm run build-storybook:app
-      - name: Get the preview_url
-        run: echo "url => ${{ steps.preview_step.outputs.preview_url }}"
+          # https://github.com/unsplash/comment-on-pr/issues/29
+          msg: See storybook preview at https://${{ env.PREVIEW_LINK }}
+          check_for_duplicate_msg: true  # OPTIONAL 
