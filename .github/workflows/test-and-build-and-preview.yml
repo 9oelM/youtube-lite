@@ -29,6 +29,9 @@ jobs:
           npm i --verbose
           npm run bootstrap
           npm run test
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+
   lint:
     runs-on: ubuntu-latest
     strategy:
