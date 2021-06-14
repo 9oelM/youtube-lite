@@ -10,5 +10,6 @@ const config: Config.InitialOptions = {
   },
   preset: `ts-jest`,
   testEnvironment: `jsdom`,
+  collectCoverageFrom: [`src/**/*.{ts,tsx}`],
 }
 export default config
