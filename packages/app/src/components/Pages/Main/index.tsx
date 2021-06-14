@@ -5,8 +5,9 @@ import { FloatingActionButtonImpure } from "src/components/Normal/FloatingAction
 import { SearchInputImpure } from "src/components/Normal/SearchInput"
 import { SF } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
-import { Settings } from "@styled-icons/feather/Settings"
-import { Bitcoin } from "@styled-icons/boxicons-logos/Bitcoin"
+import { Settings2Outline } from "@styled-icons/evaicons-outline/Settings2Outline"
+import { Playlist } from "@styled-icons/boxicons-solid/Playlist"
+import { InfoCircle } from "@styled-icons/boxicons-regular/InfoCircle"
 // import { MainPageFallback } from "./fallback"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -27,13 +28,19 @@ export const MainPagePure: FC<MainPagePureProps> = enhance<MainPagePureProps>(
         <FloatingActionButtonImpure
           menus={[
             {
-              icon: <Settings />,
+              icon: <Playlist />,
               onClick: () => {
                 //
               },
             },
             {
-              icon: <Bitcoin />,
+              icon: <Settings2Outline />,
+              onClick: () => {
+                //
+              },
+            },
+            {
+              icon: <InfoCircle />,
               onClick: () => {
                 //
               },
