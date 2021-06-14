@@ -10,12 +10,12 @@ export type Menu = {
   onClick: () => void
 }
 
-export type FloatingActionButtonImPureProps = {
+export type FloatingActionButtonImpureProps = {
   menus: Menu[]
 }
 
-export const FloatingActionButtonImPure: FC<FloatingActionButtonImPureProps> =
-  enhance<FloatingActionButtonImPureProps>(({ menus }) => {
+export const FloatingActionButtonImpure: FC<FloatingActionButtonImpureProps> =
+  enhance<FloatingActionButtonImpureProps>(({ menus }) => {
     const [isActive, setIsActive] = useState(false)
 
     const onClickFloatingButton: React.MouseEventHandler<HTMLButtonElement> =
@@ -26,7 +26,7 @@ export const FloatingActionButtonImPure: FC<FloatingActionButtonImPureProps> =
     return (
       <x.div {...SF.transition}>
         <FloatingActionButtonPure
-          icon={isActive ? "-" : "+"}
+          icon={isActive ? `-` : `+`}
           onClick={onClickFloatingButton}
           active={true}
           nth={-1}
@@ -57,9 +57,9 @@ export const FloatingActionButtonPure: FC<FloatingActionButtonPureProps> =
       <x.button
         onClick={onClick}
         {...V.buttons.floating}
-        w={active ? "55" : "0"}
-        h={active ? "55" : "0"}
-        opacity={active ? "1" : "0"}
+        w={active ? `55` : `0`}
+        h={active ? `55` : `0`}
+        opacity={active ? `1` : `0`}
         transform={`translateX(50%) translateY(-${(nth + 1) * 150}%)`}
       >
         {icon}

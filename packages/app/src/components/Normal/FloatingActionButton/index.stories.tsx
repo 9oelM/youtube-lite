@@ -7,24 +7,24 @@ import { x } from "@xstyled/styled-components"
 import { SF } from "src/styles/styleFragments"
 import { FloatingActionButtonImpure, FloatingActionButtonImpureProps } from "."
 
-const Template: Story<FloatingActionButtonImPureProps> = (
-  args: FloatingActionButtonImPureProps
+const Template: Story<FloatingActionButtonImpureProps> = (
+  args: FloatingActionButtonImpureProps
 ) => (
   <ThemeProvider theme={youtubeLiteTheme}>
     <x.div bg="background" {...SF.fullWH} {...SF.flexStyles}>
-      <FloatingActionButtonImPure {...args} />
+      <FloatingActionButtonImpure {...args} />
     </x.div>
 
     {` `}
   </ThemeProvider>
 )
 
-export const Example: Story<FloatingActionButtonImPureProps> = Template.bind({})
+export const Example: Story<FloatingActionButtonImpureProps> = Template.bind({})
 Example.args = {}
 
 export default {
   title: `FloatingActionButtonImpure`,
-  component: FloatingActionButtonImPure,
+  component: FloatingActionButtonImpure,
   parameters: {
     layout: `centered`,
     actions: {
