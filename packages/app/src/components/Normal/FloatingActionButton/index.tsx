@@ -31,8 +31,8 @@ export const FloatingActionButtonImpure: FC<FloatingActionButtonImpureProps> =
     const [isActive, setIsActive] = useState(false)
 
     const onClickFloatingButton = useCallback(() => {
-      setIsActive(!isActive)
-    }, [isActive])
+      setIsActive((prev) => !prev)
+    }, [])
 
     const menus = [
       {
