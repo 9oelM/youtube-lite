@@ -16,7 +16,7 @@ export const NotFoundPageImpure: FC<NotFoundPageImpureProps> =
     const dispatch = useDispatch()
     const onGoBackToMainPageClick: ClickHandler = useCallback(() => {
       dispatch(push(`/`))
-    }, [])
+    }, [dispatch])
 
     return (
       <NotFoundPagePure

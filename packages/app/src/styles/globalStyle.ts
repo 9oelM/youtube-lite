@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 body, html, #root {
   width: 100%;
   height: 100%;
+  background: black;
 }
 * {
   font-family: Poppins, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;

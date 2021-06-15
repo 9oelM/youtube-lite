@@ -1,1 +1,2 @@
-export type ClickHandler = React.MouseEventHandler<HTMLButtonElement>
+export type ClickHandler<HTMLElement = HTMLButtonElement> =
+  React.MouseEventHandler<HTMLElement>

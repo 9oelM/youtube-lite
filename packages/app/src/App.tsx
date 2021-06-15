@@ -11,6 +11,7 @@ import { Preflight } from "@xstyled/styled-components"
 import { GlobalStyle } from "src/styles/globalStyle"
 import configureStore, { history } from "src/redux/store"
 import { MainPageImpure } from "src/components/Pages/Main"
+import { SearchResultPageImpure } from "src/components/Pages/SearchResult"
 
 const store = configureStore()
 
@@ -24,6 +25,10 @@ export const App: FC = () => {
           <Switch>
             <Route path="/" exact>
               <MainPageImpure />
+            </Route>
+            {/* https://www.youtube.com/results?search_query=my+search+query */}
+            <Route path="/results">
+              <SearchResultPageImpure />
             </Route>
             <Route>
               <NotFoundPageImpure />

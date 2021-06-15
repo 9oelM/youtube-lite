@@ -1,7 +1,8 @@
 import { x } from "@xstyled/styled-components"
-import React, { useCallback, useState } from "react"
+import React, { ComponentPropsWithoutRef, useCallback, useState } from "react"
 import { FC } from "react"
 import { SearchSuggestionsImpure } from "src/components/Normal/SearchInput/localFragments/SearchSuggestions"
+import { useBoolean } from "src/hooks/useBoolean"
 import { SF, V } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
 import { SearchInputFallback } from "./fallback"
@@ -12,22 +13,26 @@ export type SearchInputImpureProps = {}
 export const SearchInputImpure: FC<SearchInputImpureProps> =
   enhance<SearchInputImpureProps>(() => {
     const [searchKeyword, setSearchKeyword] = useState<Readonly<string>>(``)
-    const [isFocused, setFocused] = useState<Readonly<boolean>>(true)
+    const [isFocused, onSearchInputFocused, onSearchInputBlurred] =
+      useBoolean(true)
 
     const onSearchInputChange: React.ChangeEventHandler<HTMLInputElement> =
       useCallback((e) => {
         setSearchKeyword(e.target.value)
       }, [])
 
-    const onSearchInputBlurred = useCallback(() => {
-      setFocused(false)
-    }, [])
-    const onSearchInputFocused = useCallback(() => {
-      setFocused(true)
-    }, [])
     const onCutToClipboard = useCallback(() => {
       setSearchKeyword(``)
     }, [])
+
+    /**
+     * this will unmount <SearchSuggestion /> and prevent redirect if blurred too quickly
+     */
+    const onSearchInputBlurredDelayed = useCallback(() => {
+      setTimeout(() => {
+        onSearchInputBlurred()
+      }, 50)
+    }, [onSearchInputBlurred])
 
     return (
       <x.div position={`initial`} w="100%">
@@ -39,7 +44,7 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
         >
           <SearchInputPure
             {...{
-              onSearchInputBlurred,
+              onSearchInputBlurred: onSearchInputBlurredDelayed,
               onSearchInputFocused,
               onCutToClipboard,
               searchKeyword,
@@ -57,11 +62,11 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type SearchInputPureProps = {
   searchKeyword: string
-  onSearchInputBlurred: VoidFunction
-  onSearchInputFocused: VoidFunction
-  onCutToClipboard: VoidFunction
+  onSearchInputBlurred?: VoidFunction
+  onSearchInputFocused?: VoidFunction
+  onCutToClipboard?: VoidFunction
   onSearchInputChange: React.ChangeEventHandler<HTMLInputElement>
-}
+} & Partial<Pick<ComponentPropsWithoutRef<typeof x[`input`]>, `autoFocus`>>
 
 export const SearchInputPure: FC<SearchInputPureProps> =
   enhance<SearchInputPureProps>(
@@ -71,6 +76,7 @@ export const SearchInputPure: FC<SearchInputPureProps> =
       onCutToClipboard,
       onSearchInputFocused,
       onSearchInputBlurred,
+      ...xInputNativeProps
     }) => {
       return (
         <x.input
@@ -84,6 +90,7 @@ export const SearchInputPure: FC<SearchInputPureProps> =
           autoFocus
           pl={3}
           placeholder="Search Youtube"
+          {...xInputNativeProps}
         />
       )
     }
