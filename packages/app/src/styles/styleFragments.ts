@@ -31,6 +31,18 @@ export const V = {
       borderWidth: { _: 2 },
       transition: `all 0.3s`,
     },
+    floating: {
+      position: `absolute`,
+      bottom: `5vh`,
+      right: `10vh`,
+      bg: { _: `background`, hover: `accent` },
+      color: { _: `accent`, hover: `background` },
+      borderRadius: `full`,
+      borderWidth: { _: 2 },
+      transition: `all 0.3s`,
+      outline: { _: `none`, focus: `none` },
+      fontSize: `xl`,
+    },
   },
   inputs: {
     primary: {

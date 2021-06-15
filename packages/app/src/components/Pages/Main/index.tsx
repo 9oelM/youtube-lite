@@ -1,6 +1,7 @@
 import { x } from "@xstyled/styled-components"
 import React from "react"
 import { FC } from "react"
+import { FloatingActionButtonImpure } from "src/components/Normal/FloatingActionButton"
 import { SearchInputImpure } from "src/components/Normal/SearchInput"
 import { SF } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
@@ -21,6 +22,7 @@ export const MainPagePure: FC<MainPagePureProps> = enhance<MainPagePureProps>(
   () => {
     return (
       <x.main {...SF.flexStyles} {...SF.fullWH} bg="background">
+        <FloatingActionButtonImpure />
         <x.section w={2 / 3} minWidth="150px">
           <SearchInputImpure />
         </x.section>
