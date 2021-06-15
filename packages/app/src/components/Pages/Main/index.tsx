@@ -5,9 +5,6 @@ import { FloatingActionButtonImpure } from "src/components/Normal/FloatingAction
 import { SearchInputImpure } from "src/components/Normal/SearchInput"
 import { SF } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
-import { Settings } from "@styled-icons/material-sharp/Settings"
-import { PlaylistPlay } from "@styled-icons/material-sharp/PlaylistPlay"
-import { Information } from "@styled-icons/ionicons-sharp/Information"
 // import { MainPageFallback } from "./fallback"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -25,28 +22,7 @@ export const MainPagePure: FC<MainPagePureProps> = enhance<MainPagePureProps>(
   () => {
     return (
       <x.main {...SF.flexStyles} {...SF.fullWH} bg="background">
-        <FloatingActionButtonImpure
-          menus={[
-            {
-              icon: <PlaylistPlay />,
-              onClick: () => {
-                //
-              },
-            },
-            {
-              icon: <Settings />,
-              onClick: () => {
-                //
-              },
-            },
-            {
-              icon: <Information />,
-              onClick: () => {
-                //
-              },
-            },
-          ]}
-        />
+        <FloatingActionButtonImpure />
         <x.section w={2 / 3} minWidth="150px">
           <SearchInputImpure />
         </x.section>

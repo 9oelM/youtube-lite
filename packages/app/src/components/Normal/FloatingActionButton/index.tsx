@@ -6,24 +6,64 @@ import { x } from "@xstyled/styled-components"
 import { Minus } from "@styled-icons/boxicons-regular/Minus"
 import { Add } from "@styled-icons/material-sharp/Add"
 import { V } from "src/styles/styleFragments"
+import { PlaylistPlay } from "styled-icons/material-sharp"
+import { Settings } from "styled-icons/material-sharp"
+import { Information } from "styled-icons/ionicons-sharp"
 
 export type Menu = {
   icon: ReactNode
-  onClick: () => void
+  menuType: MenuType
+}
+
+enum MenuType {
+  DEFAULT,
+  PLAYLIST,
+  SETTINGS,
+  INFO,
 }
 
 export type FloatingActionButtonImpureProps = {
-  menus: Menu[]
+  //
 }
 
 export const FloatingActionButtonImpure: FC<FloatingActionButtonImpureProps> =
-  enhance<FloatingActionButtonImpureProps>(({ menus }) => {
+  enhance<FloatingActionButtonImpureProps>(() => {
     const [isActive, setIsActive] = useState(false)
 
-    const onClickFloatingButton: React.MouseEventHandler<HTMLButtonElement> =
-      useCallback(() => {
-        setIsActive(!isActive)
-      }, [isActive])
+    const onClickFloatingButton = useCallback(() => {
+      setIsActive(!isActive)
+    }, [isActive])
+
+    const menus = [
+      {
+        icon: <PlaylistPlay />,
+        menuType: MenuType.PLAYLIST,
+      },
+      {
+        icon: <Settings />,
+        menuType: MenuType.SETTINGS,
+      },
+      {
+        icon: <Information />,
+        menuType: MenuType.INFO,
+      },
+    ]
+
+    const onClickMenu = useCallback((menuType?: MenuType) => {
+      switch (menuType) {
+        case MenuType.INFO:
+          break
+
+        case MenuType.PLAYLIST:
+          break
+
+        case MenuType.SETTINGS:
+          break
+
+        default:
+          break
+      }
+    }, [])
 
     return (
       <x.div>
@@ -31,15 +71,16 @@ export const FloatingActionButtonImpure: FC<FloatingActionButtonImpureProps> =
           icon={isActive ? <Minus /> : <Add />}
           onClick={onClickFloatingButton}
           active={true}
-          nth={-1}
+          index={-1}
         />
         {menus.map((menu, idx) => (
           <FloatingActionButtonPure
             key={idx}
             icon={menu.icon}
-            onClick={menu.onClick}
+            onClick={onClickMenu}
             active={isActive}
-            nth={idx}
+            menuType={menu.menuType}
+            index={idx}
           />
         ))}
       </x.div>
@@ -48,23 +89,29 @@ export const FloatingActionButtonImpure: FC<FloatingActionButtonImpureProps> =
 
 export type FloatingActionButtonPureProps = {
   icon: ReactNode
-  onClick: React.MouseEventHandler<HTMLButtonElement>
+  onClick: (menuType?: MenuType) => void
+  menuType?: MenuType
   active: boolean
-  nth: number
+  index: number
 }
 
 export const FloatingActionButtonPure: FC<FloatingActionButtonPureProps> =
-  enhance<FloatingActionButtonPureProps>(({ icon, onClick, active, nth }) => {
-    return (
-      <x.button
-        onClick={onClick}
-        {...V.buttons.floating}
-        w={active ? `55` : `0`}
-        h={active ? `55` : `0`}
-        opacity={active ? `1` : `0`}
-        transform={`translateX(50%) translateY(-${(nth + 1) * 150}%)`}
-      >
-        {icon}
-      </x.button>
-    )
-  })(FloatingActionButtonFallback)
+  enhance<FloatingActionButtonPureProps>(
+    ({ icon, onClick, menuType, active, index }) => {
+      const onClickButton = () => {
+        onClick(menuType)
+      }
+      return (
+        <x.button
+          onClick={onClickButton}
+          {...V.buttons.floating}
+          w={active ? `55` : `0`}
+          h={active ? `55` : `0`}
+          opacity={active ? `1` : `0`}
+          transform={`translateX(50%) translateY(-${(index + 1) * 150}%)`}
+        >
+          {icon}
+        </x.button>
+      )
+    }
+  )(FloatingActionButtonFallback)
