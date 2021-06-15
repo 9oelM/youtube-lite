@@ -2,6 +2,7 @@ import { x } from "@xstyled/styled-components"
 import debounce from "lodash.debounce"
 import React, { useEffect, useMemo, useState } from "react"
 import { FC } from "react"
+import { SearchSuggestionImpure } from "src/components/Normal/SearchInput/localFragments/SearchSuggestion"
 import { V } from "src/styles/styleFragments"
 import { enhance, exhaustiveCheck } from "src/utilities/essentials"
 import { AsyncStatus } from "src/utilities/redux-async/asyncTypes"
@@ -11,7 +12,7 @@ import { SearchSuggestionsFallback } from "./fallback"
 /**
  * Strict typing, for exhausitive check
  */
-const SearchSuggestionsUIState: {
+export const SearchSuggestionsUIState: {
   [AsyncStatus.NOT_STARTED]: AsyncStatus.NOT_STARTED
   [AsyncStatus.LOADING]: AsyncStatus.LOADING
   [AsyncStatus.FAILURE]: AsyncStatus.FAILURE
@@ -58,7 +59,7 @@ export const SearchSuggestionsImpure: FC<SearchSuggestionsImpureProps> =
         setSearchSuggestionsAsyncStatus(AsyncStatus.LOADING)
       }
       debouncedRequestYoutubeSearchSuggestions(searchKeyword)
-    }, [searchKeyword])
+    }, [debouncedRequestYoutubeSearchSuggestions, searchKeyword])
 
     const uiState: keyof typeof SearchSuggestionsUIState = useMemo(() => {
       if (
@@ -117,9 +118,9 @@ export const SearchSuggestionsPure: FC<SearchSuggestionsPureProps> =
               return <x.li {...V.lists.primary}>No results</x.li>
             case SearchSuggestionsUIState.SHOW_SUGGESTIONS:
               return searchSuggestions.map((suggestion, i) => (
-                <x.li {...V.lists.primary} key={i}>
+                <SearchSuggestionImpure key={i} suggestion={suggestion}>
                   {suggestion}
-                </x.li>
+                </SearchSuggestionImpure>
               ))
             case SearchSuggestionsUIState.NOT_STARTED:
               return null
