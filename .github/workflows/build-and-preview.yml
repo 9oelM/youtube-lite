@@ -57,14 +57,13 @@ jobs:
           cp ./packages/app/dist/index.html ./packages/app/dist/200.html
           npx surge ./packages/app/dist "youtube-lite-app-preview-pr-${PR_NUMBER}.surge.sh" --token $SURGE_TOKEN
       - name: comment the preview link on PR
-        uses: unsplash/comment-on-pr@master
+        uses: marocchino/sticky-pull-request-comment@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PREVIEW_LINK: youtube-lite-app-preview-pr-${{ github.event.number }}.surge.sh
         with:
-          # https://github.com/unsplash/comment-on-pr/issues/29
-          msg: See app preview at https://${{ env.PREVIEW_LINK }}
-          check_for_duplicate_msg: true  # OPTIONAL 
+          message: |
+            See app preview at https://${{ env.PREVIEW_LINK }}
   # todo: make custom github action. not doing now because i'm feeling too lazy. it just works now
   preview-storybook:
     runs-on: ubuntu-latest
@@ -91,11 +90,10 @@ jobs:
           npm run build-storybook:app
           npx surge ./packages/app/storybook-static "youtube-lite-sb-preview-pr-${PR_NUMBER}.surge.sh" --token $SURGE_TOKEN
       - name: comment the preview link on PR
-        uses: unsplash/comment-on-pr@master
+        uses: marocchino/sticky-pull-request-comment@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PREVIEW_LINK: youtube-lite-sb-preview-pr-${{ github.event.number }}.surge.sh
         with:
-          # https://github.com/unsplash/comment-on-pr/issues/29
-          msg: See storybook preview at https://${{ env.PREVIEW_LINK }}
-          check_for_duplicate_msg: true  # OPTIONAL 
+          message: |
+            See storybook preview at https://${{ env.PREVIEW_LINK }}
