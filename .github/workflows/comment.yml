@@ -14,7 +14,7 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PREVIEW_LINK: youtube-lite-app-preview-pr-${{ github.event.number }}.surge.sh
+          PREVIEW_LINK: ytlite-${{ github.event.number }}.surge.sh
         with:
           header: app
           message: |
@@ -23,7 +23,7 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PREVIEW_LINK: youtube-lite-sb-preview-pr-${{ github.event.number }}.surge.sh
+          PREVIEW_LINK: ytlitesb-${{ github.event.number }}.surge.sh
         with:
           header: storybook
           message: |
