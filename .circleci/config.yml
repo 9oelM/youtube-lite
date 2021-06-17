@@ -10,11 +10,12 @@ commands:
           name: Combine package-lock.json files to single file
           command: npx lerna la -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
 
+
 version: 2.1
 jobs:
   restore_cache:
     docker: 
-      - image: alpine:3.7
+      - image: node:14.17
     steps:
       - checkout
       - create_concatenated_package_lock:
@@ -32,7 +33,7 @@ jobs:
       - run:
           name: lint
           command: |
-            sudo npm i -g npm@7
+            npm i -g npm@7
             npm i --verbose
             npm run bootstrap
             npm run lint
@@ -43,9 +44,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: lint
+          name: build app preview
           command: |
-            sudo npm i -g npm@7
+            npm i -g npm@7
             npm i --verbose
             npm run bootstrap
             npm run prod:app
@@ -58,13 +59,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: lint
+          name: build storybook preview
           command: |
-            sudo npm i -g npm@7
+            npm i -g npm@7
             npm i --verbose
             npm run bootstrap
             npm run build-storybook:app
             npx surge ./packages/app/storybook-static "youtube-lite-sb-preview-pr-${CIRCLE_PR_NUMBER}.surge.sh" --token $SURGE_TOKEN
+          
 workflows:
   build_and_test:
     jobs:
