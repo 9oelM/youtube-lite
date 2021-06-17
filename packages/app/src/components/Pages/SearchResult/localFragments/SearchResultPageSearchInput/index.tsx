@@ -1,3 +1,4 @@
+import { x } from "@xstyled/styled-components"
 import React, { useCallback, useEffect, useState } from "react"
 import { FC } from "react"
 import { useLocation } from "react-router-dom"
@@ -56,12 +57,16 @@ export const SearchResultPageSearchInputImpure: FC<SearchResultPageSearchInputIm
           }}
         />
         {areSuggestionsOpen ? (
-          <SearchSuggestionsImpure
-            data-testid="search-suggestions"
-            {...{
-              searchKeyword,
-            }}
-          />
+          <x.div position="relative">
+            <x.div position="absolute" w="100%" zIndex={999}>
+              <SearchSuggestionsImpure
+                data-testid="search-suggestions"
+                {...{
+                  searchKeyword,
+                }}
+              />
+            </x.div>
+          </x.div>
         ) : null}
       </>
     )

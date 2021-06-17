@@ -1,0 +1,80 @@
+# https://circleci.com/docs/2.0/caching/#creating-and-building-a-concatenated-package-lock-file
+commands:
+  create_concatenated_package_lock:
+    description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
+    parameters:
+      filename:
+        type: string
+    steps:
+      - run:
+          name: Combine package-lock.json files to single file
+          command: npx lerna la -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
+
+version: 2.1
+jobs:
+  restore_cache:
+    docker: 
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - create_concatenated_package_lock:
+          filename: combined-package-lock.txt
+      ## Use combined-package-lock.text in cache key
+      - restore_cache:
+          keys:
+            - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
+            - v3-deps
+  lint:
+    docker:
+      - image: node:14.17
+    steps:
+      - checkout
+      - run:
+          name: lint
+          command: |
+            sudo npm i -g npm@7
+            npm i --verbose
+            npm run bootstrap
+            npm run lint
+            npm run lint:ts
+  preview_app:
+    docker:
+      - image: node:14.17
+    steps:
+      - checkout
+      - run:
+          name: lint
+          command: |
+            sudo npm i -g npm@7
+            npm i --verbose
+            npm run bootstrap
+            npm run prod:app
+            # https://stackoverflow.com/questions/44491184/react-router-does-not-work-in-production-and-surge-deployments
+            cp ./packages/app/dist/index.html ./packages/app/dist/200.html
+            npx surge ./packages/app/dist "youtube-lite-app-preview-pr-${CIRCLE_PR_NUMBER}.surge.sh" --token $SURGE_TOKEN
+  preview_storybook:
+    docker:
+      - image: node:14.17
+    steps:
+      - checkout
+      - run:
+          name: lint
+          command: |
+            sudo npm i -g npm@7
+            npm i --verbose
+            npm run bootstrap
+            npm run build-storybook:app
+            npx surge ./packages/app/storybook-static "youtube-lite-sb-preview-pr-${CIRCLE_PR_NUMBER}.surge.sh" --token $SURGE_TOKEN
+workflows:
+  build_and_test:
+    jobs:
+      - restore_cache
+      - lint:
+          requires:
+            - restore_cache
+      - preview_app:
+          requires:
+            - restore_cache
+      - preview_storybook:
+          requires:
+            - restore_cache
