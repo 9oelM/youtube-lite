@@ -52,7 +52,7 @@ jobs:
             npm run prod:app
             # https://stackoverflow.com/questions/44491184/react-router-does-not-work-in-production-and-surge-deployments
             cp ./packages/app/dist/index.html ./packages/app/dist/200.html
-            npx surge ./packages/app/dist "youtube-lite-app-preview-pr-${CIRCLE_PR_NUMBER}.surge.sh" --token $SURGE_TOKEN
+            npx surge ./packages/app/dist "ytlite-${CIRCLE_PULL_REQUEST##*/}.surge.sh" --token $SURGE_TOKEN
   preview_storybook:
     docker:
       - image: node:14.17
@@ -65,7 +65,7 @@ jobs:
             npm i --verbose
             npm run bootstrap
             npm run build-storybook:app
-            npx surge ./packages/app/storybook-static "youtube-lite-sb-preview-pr-${CIRCLE_PR_NUMBER}.surge.sh" --token $SURGE_TOKEN
+            npx surge ./packages/app/storybook-static "ytlitesb-${CIRCLE_PULL_REQUEST##*/}.surge.sh" --token $SURGE_TOKEN
           
 workflows:
   build_and_test:
