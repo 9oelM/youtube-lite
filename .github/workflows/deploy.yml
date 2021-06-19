@@ -32,7 +32,7 @@ jobs:
           sudo npm i -g npm@7
           npm i
           npm run bootstrap
-          npm run prod:app
+          npm run app:prod
           # https://stackoverflow.com/questions/44491184/react-router-does-not-work-in-production-and-surge-deployments
           cp ./packages/app/dist/index.html ./packages/app/dist/200.html
 
@@ -65,7 +65,7 @@ jobs:
           sudo npm i -g npm@7
           npm i
           npm run bootstrap
-          npm run build-storybook:app
+          npm run app:build-storybook
 
           if [ "${GITHUB_REF##*/}" = "prod" ]; then
             npx surge ./packages/app/dist "ytlitesb.surge.sh" --token $SURGE_TOKEN
