@@ -12,6 +12,8 @@ commands:
 
 
 version: 2.1
+orbs:
+  shellcheck: circleci/shellcheck@2.2.4
 jobs:
   restore_cache:
     docker: 
@@ -70,8 +72,9 @@ jobs:
 workflows:
   build_and_test_on_pr_only:
     # only run when CI_PULL_REQUEST is defined
-    when: $CI_PULL_REQUEST
+    when: "$CI_PULL_REQUEST"
     jobs:
+      - shellcheck/check
       - restore_cache
       - lint:
           requires:
