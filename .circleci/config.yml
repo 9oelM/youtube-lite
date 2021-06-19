@@ -68,7 +68,9 @@ jobs:
             npx surge ./packages/app/storybook-static "ytlitesb-${CIRCLE_PULL_REQUEST##*/}.surge.sh" --token $SURGE_TOKEN
           
 workflows:
-  build_and_test:
+  build_and_test_on_pr_only:
+    # only run when CI_PULL_REQUEST is defined
+    when: $CI_PULL_REQUEST
     jobs:
       - restore_cache
       - lint:
