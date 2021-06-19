@@ -29,7 +29,7 @@ jobs:
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
           # https://stackoverflow.com/questions/58033366/how-to-get-current-branch-within-github-actions
-          BRANCH: ${GITHUB_REF##*/}
+          BRANCH: "${GITHUB_REF##*/}"
         run: |
           sudo npm i -g npm@7
           npm i
@@ -62,7 +62,7 @@ jobs:
       - name: deploy storybook to surge for dev or prod merge commit
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          BRANCH: ${GITHUB_REF##*/}
+          BRANCH: "${GITHUB_REF##*/}"
 
         run: |
           sudo npm i -g npm@7
