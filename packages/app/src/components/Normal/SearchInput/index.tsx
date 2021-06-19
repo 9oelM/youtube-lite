@@ -1,6 +1,8 @@
 import { x } from "@xstyled/styled-components"
+import { push } from "connected-react-router"
 import React, { ComponentPropsWithoutRef, useCallback, useState } from "react"
 import { FC } from "react"
+import { useDispatch } from "react-redux"
 import { SearchSuggestionsImpure } from "src/components/Normal/SearchInput/localFragments/SearchSuggestions"
 import { useBoolean } from "src/hooks/useBoolean"
 import { SF, V } from "src/styles/styleFragments"
@@ -15,6 +17,7 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
     const [searchKeyword, setSearchKeyword] = useState<Readonly<string>>(``)
     const [isFocused, onSearchInputFocused, onSearchInputBlurred] =
       useBoolean(true)
+    const dispatch = useDispatch()
 
     const onSearchInputChange: React.ChangeEventHandler<HTMLInputElement> =
       useCallback((e) => {
@@ -24,6 +27,16 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
     const onCutToClipboard = useCallback(() => {
       setSearchKeyword(``)
     }, [])
+
+    const onKeyPress: React.KeyboardEventHandler<HTMLInputElement> =
+      useCallback(
+        ({ key }) => {
+          if (key !== `Enter`) return
+
+          dispatch(push(`/results?search_query=${searchKeyword}`))
+        },
+        [dispatch, searchKeyword]
+      )
 
     /**
      * this will unmount <SearchSuggestion /> and prevent redirect if blurred too quickly
@@ -49,6 +62,7 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
               onCutToClipboard,
               searchKeyword,
               onSearchInputChange,
+              onKeyPress,
             }}
           />
           {isFocused && searchKeyword.trim() !== `` ? (
@@ -66,6 +80,7 @@ export type SearchInputPureProps = {
   onSearchInputFocused?: VoidFunction
   onCutToClipboard?: VoidFunction
   onSearchInputChange: React.ChangeEventHandler<HTMLInputElement>
+  onKeyPress: React.KeyboardEventHandler<HTMLInputElement>
 } & Partial<Pick<ComponentPropsWithoutRef<typeof x[`input`]>, `autoFocus`>>
 
 export const SearchInputPure: FC<SearchInputPureProps> =
@@ -76,6 +91,7 @@ export const SearchInputPure: FC<SearchInputPureProps> =
       onCutToClipboard,
       onSearchInputFocused,
       onSearchInputBlurred,
+      onKeyPress,
       ...xInputNativeProps
     }) => {
       return (
@@ -87,6 +103,7 @@ export const SearchInputPure: FC<SearchInputPureProps> =
           onBlur={onSearchInputBlurred}
           onFocus={onSearchInputFocused}
           onCut={onCutToClipboard}
+          onKeyPress={onKeyPress}
           autoFocus
           pl={3}
           placeholder="Search Youtube"
