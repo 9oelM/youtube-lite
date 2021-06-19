@@ -28,8 +28,6 @@ jobs:
       - name: deploy app to surge for dev or prod merge commit
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          # https://stackoverflow.com/questions/58033366/how-to-get-current-branch-within-github-actions
-          BRANCH: "${GITHUB_REF##*/}"
         run: |
           sudo npm i -g npm@7
           npm i
@@ -38,12 +36,13 @@ jobs:
           # https://stackoverflow.com/questions/44491184/react-router-does-not-work-in-production-and-surge-deployments
           cp ./packages/app/dist/index.html ./packages/app/dist/200.html
 
-          if [ "$BRANCH" = "prod" ]; then
+          # https://stackoverflow.com/questions/58033366/how-to-get-current-branch-within-github-actions
+          if [ "${GITHUB_REF##*/}" = "prod" ]; then
             npx surge ./packages/app/dist "ytlite.surge.sh" --token $SURGE_TOKEN
-          elif [ "$BRANCH" = "dev" ]; then
+          elif [ "${GITHUB_REF##*/}" = "dev" ]; then
             npx surge ./packages/app/dist "ytlite-dev.surge.sh" --token $SURGE_TOKEN
           else
-            echo "$BRANCH is not recognized. It should be dev or prod"
+            echo "${GITHUB_REF##*/} is not recognized. It should be dev or prod"
           fi
   # todo: make custom github action. not doing now because i'm feeling too lazy. it just works now
   deploy-storybook:
@@ -62,18 +61,16 @@ jobs:
       - name: deploy storybook to surge for dev or prod merge commit
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          BRANCH: "${GITHUB_REF##*/}"
-
         run: |
           sudo npm i -g npm@7
           npm i
           npm run bootstrap
           npm run build-storybook:app
 
-          if [ "$BRANCH" = "prod" ]; then
+          if [ "${GITHUB_REF##*/}" = "prod" ]; then
             npx surge ./packages/app/dist "ytlitesb.surge.sh" --token $SURGE_TOKEN
-          elif [ "$BRANCH" = "dev" ]; then
+          elif [ "${GITHUB_REF##*/}" = "dev" ]; then
             npx surge ./packages/app/storybook-static "ytlitesb-dev.surge.sh" --token $SURGE_TOKEN
           else
-            echo "$BRANCH is not recognized. It should be dev or prod"
+            echo "${GITHUB_REF##*/} is not recognized. It should be dev or prod"
           fi
