@@ -51,7 +51,7 @@ describe(`asyncReducer`, () => {
   })
 
   it.each([
-    failJob(actionParams),
+    failJob<string, undefined>(actionParams),
     removeJob(actionParams),
     cancelJob(actionParams),
     succeedJob(actionParams),

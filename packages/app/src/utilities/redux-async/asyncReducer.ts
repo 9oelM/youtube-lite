@@ -120,9 +120,13 @@ export const asyncReducer = produce<
 )
 
 function isAsyncActionType<JobAction extends JobActions>(
-  action: Record<string | number | symbol, any> & { type: string },
+  action: Record<string | number | symbol, any> & {
+    type: string
+  },
   jobAction: JobAction
-): action is ReturnType<GeneralJobActionEagerCreator<JobAction, string, any>> {
+): action is ReturnType<
+  GeneralJobActionEagerCreator<JobAction, string, any>
+> & { name: string; id: string; payload?: any } {
   return (
     typeof action.type === `string` &&
     action.type.startsWith(`${REDUX_ASYNC_PREFIX}/${jobAction}`)

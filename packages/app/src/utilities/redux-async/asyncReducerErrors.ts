@@ -4,7 +4,7 @@ import {
   JobActions,
 } from "src/utilities/redux-async/asyncTypes"
 
-export type ErrorDescriptor<Payload = never> = <
+export type ErrorDescriptor<Payload = unknown> = <
   JobName extends string,
   Action extends
     | ReturnType<GeneralJobActionEagerCreator<JobActions, JobName, Payload>>
@@ -12,7 +12,9 @@ export type ErrorDescriptor<Payload = never> = <
         CreateOrStartJobActionEagerCreator<JobActions, JobName, Payload>
       >
 >(
-  action: Action
+  action: Payload extends undefined
+    ? Action
+    : Omit<Action, `payload`> & Partial<{ payload: Payload }>
 ) => void
 
 function makeTypeInferredAsyncReducerErrors<Keys extends string>(

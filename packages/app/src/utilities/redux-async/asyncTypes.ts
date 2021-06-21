@@ -70,7 +70,7 @@ export const asyncActionTypeCreator: <
 ) => ActionTypeCreator<JobAction, JobName> = (jobAction, name) =>
   `${REDUX_ASYNC_PREFIX}/${jobAction}/${name}`
 
-type AsyncJobParams<JobName extends string, Payload = never> = Pick<
+export type AsyncJobParams<JobName extends string, Payload> = Pick<
   AsyncMeta<JobName>,
   `name`
 > &
@@ -78,19 +78,21 @@ type AsyncJobParams<JobName extends string, Payload = never> = Pick<
     payload?: Payload | undefined
   }
 
-type AsyncJobReturns<JobName extends string, Payload = never> = Pick<
-  AsyncMeta<JobName>,
-  `id` | `name`
-> & {
-  payload?: Payload | undefined
-}
+export type AsyncJobReturns<JobName extends string, Payload> =
+  | Pick<AsyncMeta<JobName>, `id` | `name`> &
+      (Payload extends undefined | never
+        ? // eslint-disable-next-line @typescript-eslint/ban-types
+          {}
+        : {
+            payload: Payload
+          })
 
 /**
  * @description used to create `createJob` and `startJob` actions.
  */
 export type CreateOrStartJobActionCreator<JobAction extends JobActions> = <
   JobName extends string,
-  Payload = never
+  Payload
 >(
   params: AsyncJobParams<JobName, Payload>
 ) => AsyncJobReturns<JobName, Payload> & {
@@ -104,7 +106,7 @@ export type CreateOrStartJobActionCreator<JobAction extends JobActions> = <
 export type CreateOrStartJobActionEagerCreator<
   JobAction extends JobActions,
   JobName extends string,
-  Payload = never
+  Payload
 > = (params: AsyncJobParams<JobName, Payload>) => AsyncJobReturns<
   JobName,
   Payload
@@ -118,7 +120,7 @@ export type CreateOrStartJobActionEagerCreator<
  */
 export type GeneralJobActionCreator<JobAction extends JobActions> = <
   JobName extends string,
-  Payload = never
+  Payload
 >(
   params: MarkRequired<AsyncJobParams<JobName, Payload>, `id`>
 ) => AsyncJobReturns<JobName, Payload> & {
@@ -132,22 +134,27 @@ export type GeneralJobActionCreator<JobAction extends JobActions> = <
 export type GeneralJobActionEagerCreator<
   JobAction extends JobActions,
   JobName extends string,
-  Payload = never
+  Payload
 > = (
   params: Omit<MarkRequired<AsyncJobParams<JobName, Payload>, `id`>, `name`>
 ) => AsyncJobReturns<JobName, Payload> & {
   type: ActionTypeCreator<JobAction, JobName>
 }
+
 /**
+ * @description ts-only user defined typeguard
  * @example
  * ```
- *
+ * const action = createJob({ name: `YOUTUBE_LITE`, payload: { is: `awesome` } })
+ * if (isSpecificAsyncActionType(action, JobActions.CREATE, `YOUTUBE_LITE`)) {
+ *  console.log(action.type === `@RA/CREATE/YOUTUBE_LITE`) // true
+ * }
  * ```
  */
 export function isSpecificAsyncActionType<
   JobAction extends JobActions,
   JobName extends string,
-  Payload = never
+  Payload
 >(
   action: Record<string | number | symbol, unknown> & { type: string },
   jobAction: JobAction,
@@ -164,25 +171,45 @@ export function isSpecificAsyncActionType<
 export type CreateOrStartAsyncActionCreatorWithoutNameParameter<
   JobAction extends JobActions,
   JobName extends string,
-  AsyncActionCreator extends CreateOrStartJobActionEagerCreator<
-    JobAction,
-    JobName,
-    Payload
-  >,
-  Payload = never
+  Payload
 > = (
-  params: Omit<Parameters<AsyncActionCreator>[0], `name`>
-) => ReturnType<AsyncActionCreator>
+  params: Payload extends undefined
+    ? Omit<
+        Parameters<
+          CreateOrStartJobActionEagerCreator<JobAction, JobName, Payload>
+        >[0],
+        `name` | `payload`
+      >
+    : MarkRequired<
+        Omit<
+          Parameters<
+            CreateOrStartJobActionEagerCreator<JobAction, JobName, Payload>
+          >[0],
+          `name`
+        >,
+        `payload`
+      >
+) => ReturnType<CreateOrStartJobActionEagerCreator<JobAction, JobName, Payload>>
 
 export type GeneralAsyncActionCreatorWithoutNameParameter<
   JobAction extends JobActions,
   JobName extends string,
-  AsyncActionCreator extends GeneralJobActionEagerCreator<
-    JobAction,
-    JobName,
-    Payload
-  >,
-  Payload = never
+  Payload
 > = (
-  params: Omit<Parameters<AsyncActionCreator>[0], `name`>
-) => ReturnType<AsyncActionCreator>
+  params: Payload extends undefined
+    ? Omit<
+        Parameters<
+          GeneralJobActionEagerCreator<JobAction, JobName, Payload>
+        >[0],
+        `name` | `payload`
+      >
+    : MarkRequired<
+        Omit<
+          Parameters<
+            GeneralJobActionEagerCreator<JobAction, JobName, Payload>
+          >[0],
+          `name`
+        >,
+        `payload`
+      >
+) => ReturnType<GeneralJobActionEagerCreator<JobAction, JobName, Payload>>

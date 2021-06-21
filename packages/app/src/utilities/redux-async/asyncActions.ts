@@ -3,8 +3,6 @@ import {
   CreateOrStartJobActionCreator,
   asyncActionTypeCreator,
   GeneralJobActionCreator,
-  CreateOrStartJobActionEagerCreator,
-  GeneralJobActionEagerCreator,
   JobActions,
   CreateOrStartAsyncActionCreatorWithoutNameParameter,
   GeneralAsyncActionCreatorWithoutNameParameter,
@@ -20,6 +18,7 @@ export const createJob: CreateOrStartJobActionCreator<JobActions.CREATE> = ({
   id = nanoid(),
   name,
   payload,
+  // @ts-ignore
 }) => ({
   id,
   name,
@@ -38,6 +37,7 @@ export const startJob: CreateOrStartJobActionCreator<JobActions.START> = ({
   id = nanoid(),
   name,
   payload,
+  // @ts-ignore
 }) => ({
   id,
   name,
@@ -50,6 +50,7 @@ export const startJob: CreateOrStartJobActionCreator<JobActions.START> = ({
  */
 export const succeedJob: GeneralJobActionCreator<JobActions.SUCCEED> = (
   params
+  // @ts-ignore
 ) => ({
   ...params,
   type: asyncActionTypeCreator(JobActions.SUCCEED, params.name),
@@ -58,6 +59,7 @@ export const succeedJob: GeneralJobActionCreator<JobActions.SUCCEED> = (
 /**
  * @param params.payload insert error object in payload
  */
+// @ts-ignore
 export const failJob: GeneralJobActionCreator<JobActions.FAIL> = (params) => ({
   ...params,
   type: asyncActionTypeCreator(JobActions.FAIL, params.name),
@@ -65,6 +67,7 @@ export const failJob: GeneralJobActionCreator<JobActions.FAIL> = (params) => ({
 
 export const cancelJob: GeneralJobActionCreator<JobActions.CANCEL> = (
   params
+  // @ts-ignore
 ) => ({
   ...params,
   type: asyncActionTypeCreator(JobActions.CANCEL, params.name),
@@ -72,6 +75,7 @@ export const cancelJob: GeneralJobActionCreator<JobActions.CANCEL> = (
 
 export const removeJob: GeneralJobActionCreator<JobActions.REMOVE> = (
   params
+  // @ts-ignore
 ) => ({
   ...params,
   type: asyncActionTypeCreator(JobActions.REMOVE, params.name),
@@ -134,53 +138,43 @@ export const removeJob: GeneralJobActionCreator<JobActions.REMOVE> = (
  */
 export function createJobSet<
   JobName extends string,
-  CreatePayload = never,
-  StartPayload = never,
-  SucceedPayload = never,
-  FailPayload = never,
-  CancelPayload = never,
-  RemovePayload = never
+  CreatePayload = undefined,
+  StartPayload = undefined,
+  SucceedPayload = undefined,
+  FailPayload = undefined,
+  CancelPayload = undefined,
+  RemovePayload = undefined
 >(
   jobName: JobName
 ): {
   create: CreateOrStartAsyncActionCreatorWithoutNameParameter<
     JobActions.CREATE,
     JobName,
-    CreateOrStartJobActionEagerCreator<
-      JobActions.CREATE,
-      JobName,
-      CreatePayload
-    >,
     CreatePayload
   >
   start: CreateOrStartAsyncActionCreatorWithoutNameParameter<
     JobActions.START,
     JobName,
-    CreateOrStartJobActionEagerCreator<JobActions.START, JobName, StartPayload>,
     StartPayload
   >
   succeed: GeneralAsyncActionCreatorWithoutNameParameter<
     JobActions.SUCCEED,
     JobName,
-    GeneralJobActionEagerCreator<JobActions.SUCCEED, JobName, SucceedPayload>,
     SucceedPayload
   >
   fail: GeneralAsyncActionCreatorWithoutNameParameter<
     JobActions.FAIL,
     JobName,
-    GeneralJobActionEagerCreator<JobActions.FAIL, JobName, FailPayload>,
     FailPayload
   >
   cancel: GeneralAsyncActionCreatorWithoutNameParameter<
     JobActions.CANCEL,
     JobName,
-    GeneralJobActionEagerCreator<JobActions.CANCEL, JobName, CancelPayload>,
     CancelPayload
   >
   remove: GeneralAsyncActionCreatorWithoutNameParameter<
     JobActions.REMOVE,
     JobName,
-    GeneralJobActionEagerCreator<JobActions.REMOVE, JobName, RemovePayload>,
     RemovePayload
   >
 } {

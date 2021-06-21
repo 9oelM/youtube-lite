@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom"
 import { SearchResultPageFallback } from "src/components/Pages/SearchResult/fallback"
 import { SearchResultPageSearchInputImpure } from "src/components/Pages/SearchResult/localFragments/SearchResultPageSearchInput"
 import { SearchResultSkeletonLoadingImpure } from "src/components/Pages/SearchResult/localFragments/SearchResultSkeletonLoading"
-import { Jobs } from "src/redux/ducks/async/asyncActions"
+import { YTLAsyncJobs } from "src/redux/ducks/async/asyncActions"
 import { SF } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
 
@@ -28,7 +28,7 @@ export const SearchResultPageImpure: FC<SearchResultPageImpureProps> =
       }
 
       dispatch(
-        Jobs.getSearchResult.start({
+        YTLAsyncJobs.getSearchResult.start({
           payload: {
             searchQuery: queryString,
           },
