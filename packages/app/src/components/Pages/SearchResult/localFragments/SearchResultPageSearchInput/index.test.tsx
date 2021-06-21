@@ -1,7 +1,9 @@
 import { mount } from "enzyme"
 import React from "react"
+import { Provider } from "react-redux"
 import { SearchResultPageSearchInputImpure } from "src/components/Pages/SearchResult/localFragments/SearchResultPageSearchInput"
 import { getByTestId } from "src/test-utilities/utilities"
+import configureStore from "redux-mock-store"
 
 jest.mock(`react-router-dom`, () => ({
   useLocation: jest.fn().mockReturnValue({
@@ -16,9 +18,9 @@ jest.mock(`react-router-dom`, () => ({
 describe(`SearchResultPageSearchInputImpure`, () => {
   it(`should show SearchSuggestions when SearchInput is focused`, () => {
     const c = mount(
-      <div>
+      <Provider store={configureStore()()}>
         <SearchResultPageSearchInputImpure />
-      </div>
+      </Provider>
     )
     expect(getByTestId(c, `search-suggestions`).length).toEqual(0)
     c.find(`input`).simulate(`focus`)
