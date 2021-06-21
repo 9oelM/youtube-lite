@@ -51,7 +51,7 @@ jobs:
             npm i -g npm@7
             npm i --verbose
             npm run bootstrap
-            npm run prod:app
+            npm run app:prod
             # https://stackoverflow.com/questions/44491184/react-router-does-not-work-in-production-and-surge-deployments
             cp ./packages/app/dist/index.html ./packages/app/dist/200.html
             npx surge ./packages/app/dist "ytlite-${CIRCLE_PULL_REQUEST##*/}.surge.sh" --token $SURGE_TOKEN
@@ -66,7 +66,7 @@ jobs:
             npm i -g npm@7
             npm i --verbose
             npm run bootstrap
-            npm run build-storybook:app
+            npm run app:build-storybook
             npx surge ./packages/app/storybook-static "ytlitesb-${CIRCLE_PULL_REQUEST##*/}.surge.sh" --token $SURGE_TOKEN
           
 workflows:

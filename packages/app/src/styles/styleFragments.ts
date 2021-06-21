@@ -62,6 +62,7 @@ export const V = {
       p: 1.5,
       cursor: `pointer`,
       transition: `color 0.3s`,
+      bg: `background`,
     },
   },
 }

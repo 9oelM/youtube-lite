@@ -6,12 +6,12 @@ export enum YTLiteAsyncJobs {
 
 const getSearchResult = createJobSet<
   YTLiteAsyncJobs,
-  never,
+  undefined,
   {
     searchQuery: string
   }
 >(YTLiteAsyncJobs.GET_SEARCH_RESULT)
 
-export const Jobs = {
+export const YTLAsyncJobs = {
   getSearchResult,
 }

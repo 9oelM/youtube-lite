@@ -23,12 +23,12 @@ const loginAsyncJobs = createJobSet<
   {
     oAuthToken: string
   },
-  never,
+  undefined,
   Error,
   {
     previousOAuthToken: string
   },
-  never
+  undefined
 >(AllJobNames.LOGIN)
 
 describe(`createJobSet`, () => {
