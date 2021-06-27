@@ -1,6 +1,11 @@
-import { createJob, failJob } from "src/utilities/redux-async/asyncActions"
+import {
+  createJob,
+  createJobSet,
+  failJob,
+} from "src/utilities/redux-async/asyncActions"
 import {
   asyncActionTypeCreator,
+  getReduxAsyncType,
   isSpecificAsyncActionType,
   JobActions,
   REDUX_ASYNC_PREFIX,
@@ -63,4 +68,21 @@ describe(`isSpecificAsyncActionType`, () => {
       expect(isSpecificAsyncActionType(action, jobAction, jobName)).toBe(true)
     }
   )
+})
+
+describe(`getReduxAsyncType`, () => {
+  const exampleAsyncJob = createJobSet<`EXAMPLE`>(`EXAMPLE`)
+
+  it.each([
+    exampleAsyncJob.cancel,
+    exampleAsyncJob.create,
+    exampleAsyncJob.fail,
+    exampleAsyncJob.remove,
+    exampleAsyncJob.start,
+    exampleAsyncJob.succeed,
+  ])(`should return __REDUX_ASYNC_TYPE__`, (actionCreator) => {
+    expect(getReduxAsyncType(actionCreator)).toEqual(
+      actionCreator.__REDUX_ASYNC_TYPE__
+    )
+  })
 })
