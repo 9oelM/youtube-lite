@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 import { connectRouter } from "connected-react-router"
 import { combineReducers } from "redux"
+import { ephemeralReducer } from "src/redux/ducks/ephemeral"
 import { asyncReducer } from "src/utilities/redux-async/asyncReducer"
 import { StateType } from "typesafe-actions"
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -10,6 +11,7 @@ export function createRootReducer(
   return combineReducers({
     router: connectRouter(history),
     async: asyncReducer,
+    ephemeral: ephemeralReducer,
   })
 }
 

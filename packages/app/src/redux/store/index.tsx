@@ -4,7 +4,12 @@ import { createBrowserHistory } from "history"
 import { routerMiddleware } from "connected-react-router"
 import { createRootReducer } from "src/redux/reducers"
 import { composeWithDevTools } from "redux-devtools-extension"
+import createSagaMiddleware from "redux-saga"
+import { rootSaga } from "src/redux/sagas"
+
 export const history = createBrowserHistory()
+
+const sagaMiddleware = createSagaMiddleware()
 
 export default function configureStore(
   preloadedState?: Parameters<typeof createStore>[1]
@@ -14,11 +19,13 @@ export default function configureStore(
     preloadedState,
     composeWithDevTools(
       applyMiddleware(
-        routerMiddleware(history) // for dispatching history actions
+        routerMiddleware(history), // for dispatching history actions
+        sagaMiddleware
         // ... other middlewares ...
       )
     )
   )
+  sagaMiddleware.run(rootSaga)
 
   return store
 }
