@@ -4,8 +4,8 @@ import {
   asyncActionTypeCreator,
   GeneralJobActionCreator,
   JobActions,
-  CreateOrStartAsyncActionCreatorWithoutNameParameter,
-  GeneralAsyncActionCreatorWithoutNameParameter,
+  CreateOrStartAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType,
+  GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType,
 } from "src/utilities/redux-async/asyncTypes"
 
 /**
@@ -147,71 +147,124 @@ export function createJobSet<
 >(
   jobName: JobName
 ): {
-  create: CreateOrStartAsyncActionCreatorWithoutNameParameter<
+  create: CreateOrStartAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
     JobActions.CREATE,
     JobName,
     CreatePayload
   >
-  start: CreateOrStartAsyncActionCreatorWithoutNameParameter<
+  start: CreateOrStartAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
     JobActions.START,
     JobName,
     StartPayload
   >
-  succeed: GeneralAsyncActionCreatorWithoutNameParameter<
+  succeed: GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
     JobActions.SUCCEED,
     JobName,
     SucceedPayload
   >
-  fail: GeneralAsyncActionCreatorWithoutNameParameter<
+  fail: GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
     JobActions.FAIL,
     JobName,
     FailPayload
   >
-  cancel: GeneralAsyncActionCreatorWithoutNameParameter<
+  cancel: GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
     JobActions.CANCEL,
     JobName,
     CancelPayload
   >
-  remove: GeneralAsyncActionCreatorWithoutNameParameter<
+  remove: GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
     JobActions.REMOVE,
     JobName,
     RemovePayload
   >
 } {
+  const create: CreateOrStartAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+    JobActions.CREATE,
+    JobName,
+    CreatePayload
+  > = (paramsExceptName) =>
+    createJob({
+      ...paramsExceptName,
+      name: jobName,
+    })
+  create.__REDUX_ASYNC_TYPE__ = asyncActionTypeCreator(
+    JobActions.CREATE,
+    jobName
+  )
+
+  const start: CreateOrStartAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+    JobActions.START,
+    JobName,
+    StartPayload
+  > = (paramsExceptName) =>
+    startJob({
+      ...paramsExceptName,
+      name: jobName,
+    })
+  start.__REDUX_ASYNC_TYPE__ = asyncActionTypeCreator(JobActions.START, jobName)
+
+  const succeed: GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+    JobActions.SUCCEED,
+    JobName,
+    SucceedPayload
+  > = (paramsExceptName) =>
+    succeedJob({
+      ...paramsExceptName,
+      name: jobName,
+    })
+  succeed.__REDUX_ASYNC_TYPE__ = asyncActionTypeCreator(
+    JobActions.SUCCEED,
+    jobName
+  )
+
+  const fail: GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+    JobActions.FAIL,
+    JobName,
+    FailPayload
+  > = (paramsExceptName) =>
+    failJob({
+      ...paramsExceptName,
+      name: jobName,
+    })
+  fail.__REDUX_ASYNC_TYPE__ = asyncActionTypeCreator(JobActions.FAIL, jobName)
+
+  const cancel: GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+    JobActions.CANCEL,
+    JobName,
+    CancelPayload
+  > = (paramsExceptName) =>
+    cancelJob({
+      ...paramsExceptName,
+      name: jobName,
+    })
+  cancel.__REDUX_ASYNC_TYPE__ = asyncActionTypeCreator(
+    JobActions.CANCEL,
+    jobName
+  )
+
+  const remove: GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+    JobActions.REMOVE,
+    JobName,
+    RemovePayload
+  > = (paramsExceptName) =>
+    removeJob({
+      ...paramsExceptName,
+      name: jobName,
+    })
+  remove.__REDUX_ASYNC_TYPE__ = asyncActionTypeCreator(
+    JobActions.REMOVE,
+    jobName
+  )
   /**
    * it cannot be `[createJob, startJob, ...].map(() => ...)` because
    * TS cannot infer types correctly
    */
   return {
-    create: (paramsExceptName) =>
-      createJob({
-        ...paramsExceptName,
-        name: jobName,
-      }),
-    start: (paramsExceptName) =>
-      startJob({
-        ...paramsExceptName,
-        name: jobName,
-      }),
-    succeed: (paramsExceptName) =>
-      succeedJob({
-        ...paramsExceptName,
-        name: jobName,
-      }),
-    fail: (paramsExceptName) =>
-      failJob({
-        ...paramsExceptName,
-        name: jobName,
-      }),
-    cancel: (paramsExceptName) =>
-      cancelJob({
-        ...paramsExceptName,
-        name: jobName,
-      }),
-    remove: (paramsExceptName) =>
-      removeJob({
-        ...paramsExceptName,
-        name: jobName,
-      }),
+    create,
+    start,
+    succeed,
+    fail,
+    cancel,
+    remove,
   }
 }

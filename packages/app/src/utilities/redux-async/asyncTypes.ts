@@ -213,3 +213,57 @@ export type GeneralAsyncActionCreatorWithoutNameParameter<
         `payload`
       >
 ) => ReturnType<GeneralJobActionEagerCreator<JobAction, JobName, Payload>>
+
+export type WithReduxAsyncType<
+  JobAction extends JobActions,
+  JobName extends string,
+  T
+> = T & {
+  __REDUX_ASYNC_TYPE__: ActionTypeCreator<JobAction, JobName>
+}
+
+export type GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+  JobAction extends JobActions,
+  JobName extends string,
+  Payload
+> = WithReduxAsyncType<
+  JobAction,
+  JobName,
+  GeneralAsyncActionCreatorWithoutNameParameter<JobAction, JobName, Payload>
+>
+
+export type CreateOrStartAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+  JobAction extends JobActions,
+  JobName extends string,
+  Payload
+> = WithReduxAsyncType<
+  JobAction,
+  JobName,
+  CreateOrStartAsyncActionCreatorWithoutNameParameter<
+    JobAction,
+    JobName,
+    Payload
+  >
+>
+
+export function getReduxAsyncType<
+  ActionCreator extends
+    | CreateOrStartAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+        JobAction,
+        JobName,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        any
+      >
+    | GeneralAsyncActionCreatorWithoutNameParameterAndWithReduxAsyncType<
+        JobAction,
+        JobName,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        any
+      >,
+  JobAction extends JobActions = JobActions,
+  JobName extends string = string
+>(
+  reduxAsyncActionCreator: ActionCreator
+): typeof reduxAsyncActionCreator[`__REDUX_ASYNC_TYPE__`] {
+  return reduxAsyncActionCreator.__REDUX_ASYNC_TYPE__
+}

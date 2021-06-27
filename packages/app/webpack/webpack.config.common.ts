@@ -59,6 +59,12 @@ export const commonConfig: webpack.Configuration = {
       // absolute path import
       src: path.resolve(`./src`),
     },
+    fallback: {
+      fs: false,
+      os: false,
+      path: false,
+      module: false,
+    },
   },
   output: {
     filename: `bundle.js`,
@@ -67,6 +73,9 @@ export const commonConfig: webpack.Configuration = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, `..`, `public`, `index.html`),
+    }),
+    new webpack.ProvidePlugin({
+      process: `process/browser.js`,
     }),
   ],
 }

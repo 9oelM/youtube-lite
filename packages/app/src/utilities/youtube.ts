@@ -3,6 +3,8 @@ import { tcAsync } from "src/utilities/essentials"
 // @ts-ignore
 import axiosJsonpAdapter from "axios-jsonp"
 
+export const YOUTUBE_API_KEY = `AIzaSyBS_mShhwnJf4T2C45rbsRLVIwT-vLJKHQ`
+export const YOUTUBE_SEARCH_URL = `https://www.googleapis.com/youtube/v3/search`
 export const YOUTUBE_SUGGESTION_URL = `https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q={}`
 
 /**
@@ -36,8 +38,6 @@ export async function requestYoutubeSearchSuggestions(
     !youtubeSuggestionResult ||
     !Array.isArray(youtubeSuggestionResult.data[1])
   ) {
-    console.log(youtubeSuggestionError)
-
     return null
   }
 

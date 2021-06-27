@@ -7,18 +7,19 @@ import { V } from "src/styles/styleFragments"
 import { enhance, exhaustiveCheck } from "src/utilities/essentials"
 import { AsyncStatus } from "src/utilities/redux-async/asyncTypes"
 import { requestYoutubeSearchSuggestions } from "src/utilities/youtube"
+import { DeepReadonly } from "ts-essentials"
 import { SearchSuggestionsFallback } from "./fallback"
 
 /**
  * Strict typing, for exhausitive check
  */
-export const SearchSuggestionsUIState: {
+export const SearchSuggestionsUIState: DeepReadonly<{
   [AsyncStatus.NOT_STARTED]: AsyncStatus.NOT_STARTED
   [AsyncStatus.LOADING]: AsyncStatus.LOADING
   [AsyncStatus.FAILURE]: AsyncStatus.FAILURE
   NO_SUGGESTIONS: `NO_SUGGESTIONS`
   SHOW_SUGGESTIONS: `SHOW_SUGGESTIONS`
-} = {
+}> = {
   [AsyncStatus.NOT_STARTED]: AsyncStatus.NOT_STARTED,
   [AsyncStatus.LOADING]: AsyncStatus.LOADING,
   [AsyncStatus.FAILURE]: AsyncStatus.FAILURE,

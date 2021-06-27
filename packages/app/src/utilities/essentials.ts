@@ -21,7 +21,7 @@ export async function tcAsync<T, Throws = Error>(
 
     return [null, response]
   } catch (error) {
-    return [error]
+    return [error] as [Throws]
   }
 }
 
@@ -39,7 +39,7 @@ export function tcSync<
 
     return [null, data]
   } catch (e) {
-    return [e]
+    return [e] as [Throws]
   }
 }
 
