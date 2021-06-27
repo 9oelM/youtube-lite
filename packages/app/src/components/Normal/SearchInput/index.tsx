@@ -1,6 +1,13 @@
 import { x } from "@xstyled/styled-components"
 import { push } from "connected-react-router"
-import React, { ComponentPropsWithoutRef, useCallback, useState } from "react"
+import React, {
+  ComponentPropsWithoutRef,
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 import { FC } from "react"
 import { useDispatch } from "react-redux"
 import { SearchSuggestionsImpure } from "src/components/Normal/SearchInput/localFragments/SearchSuggestions"
@@ -38,14 +45,23 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
         [dispatch, searchKeyword]
       )
 
+    const onSearchInputBlurredTimeout: MutableRefObject<null | number> =
+      useRef(null)
     /**
      * this will unmount <SearchSuggestion /> and prevent redirect if blurred too quickly
      */
     const onSearchInputBlurredDelayed = useCallback(() => {
-      setTimeout(() => {
+      onSearchInputBlurredTimeout.current = window.setTimeout(() => {
         onSearchInputBlurred()
       }, 50)
     }, [onSearchInputBlurred])
+
+    useEffect(() => {
+      return () => {
+        if (onSearchInputBlurredTimeout.current)
+          window.clearTimeout(onSearchInputBlurredTimeout.current)
+      }
+    }, [])
 
     return (
       <x.div position={`initial`} w="100%">

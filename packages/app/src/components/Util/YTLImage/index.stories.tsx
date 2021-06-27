@@ -3,7 +3,7 @@ import React from "react"
 import { Meta, Story } from "@storybook/react"
 import { youtubeLiteTheme } from "src/styles/theme"
 import { ThemeProvider } from "@xstyled/styled-components"
-import { YTLImage, YTLImageProps } from "src/components/Util/Image"
+import { YTLImage, YTLImageProps } from "src/components/Util/YTLImage"
 
 const Template: Story<YTLImageProps> = (args: YTLImageProps) => (
   <ThemeProvider theme={youtubeLiteTheme}>
