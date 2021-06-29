@@ -13,6 +13,13 @@ const config: webpack.Configuration = {
     historyApiFallback: true,
   },
   ...commonConfig,
+  plugins: [
+    // @ts-ignore
+    ...commonConfig.plugins,
+    new webpack.DefinePlugin({
+      "process.env.DEPLOY_TARGET": JSON.stringify(`DEV`),
+    }),
+  ],
 }
 
 export default config
