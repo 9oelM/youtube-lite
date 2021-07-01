@@ -12,7 +12,7 @@ import {
   YTLAsyncJobs,
   YTLiteAsyncJobs,
 } from "src/redux/ducks/async/asyncActions"
-import { latestRequestByNameSelector } from "src/redux/ducks/async/asyncSelectors"
+import { latestAsyncJobByNameSelector } from "src/redux/ducks/async/asyncSelectors"
 import { RootState } from "src/redux/reducers"
 // import { YTLAsyncJobs } from "src/redux/ducks/async/asyncActions"
 import { SF } from "src/styles/styleFragments"
@@ -30,8 +30,9 @@ export const SearchResultPageImpure: FC<SearchResultPageImpureProps> =
 
     const getSearchResultStatus: AsyncStatus | undefined = useSelector(
       (s: RootState) =>
-        latestRequestByNameSelector(s, YTLiteAsyncJobs.GET_SEARCH_RESULT)
-          ?.status
+        latestAsyncJobByNameSelector(s, {
+          name: YTLiteAsyncJobs.GET_SEARCH_RESULT,
+        })?.status
     )
 
     useEffect(() => {

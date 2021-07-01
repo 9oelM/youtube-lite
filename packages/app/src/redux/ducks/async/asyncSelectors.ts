@@ -1,9 +1,9 @@
 import {
-  createEarliestRequestByNameSelector,
-  createLatestRequestByNameSelector,
+  createEarliestAsyncJobByNameSelector,
+  createLatestAsyncJobByNameSelector,
 } from "src/utilities/redux-async/asyncSelectors"
 
-export const earliestRequestByNameSelector =
-  createEarliestRequestByNameSelector()
+export const earliestAsyncJobByNameSelector =
+  createEarliestAsyncJobByNameSelector()
 
-export const latestRequestByNameSelector = createLatestRequestByNameSelector()
+export const latestAsyncJobByNameSelector = createLatestAsyncJobByNameSelector()
