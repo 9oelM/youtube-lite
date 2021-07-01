@@ -2,13 +2,12 @@ import React from "react"
 
 import { Meta, Story } from "@storybook/react"
 import { NameImpure, NameImpureProps } from "."
-import { youtubeLiteTheme } from "src/styles/theme"
-import { ThemeProvider } from "@xstyled/styled-components"
+import { WithCustomTheme } from "src/utilities/storybook"
 
 const Template: Story<NameImpureProps> = (args: NameImpureProps) => (
-  <ThemeProvider theme={youtubeLiteTheme}>
+  <WithCustomTheme>
     <NameImpure {...args} />
-  </ThemeProvider>
+  </WithCustomTheme>
 )
 
 export const Example: Story<NameImpureProps> = Template.bind({})

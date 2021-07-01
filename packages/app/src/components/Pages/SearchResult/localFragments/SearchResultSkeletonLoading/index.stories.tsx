@@ -5,15 +5,14 @@ import {
   SearchResultSkeletonLoadingPure,
   SearchResultSkeletonLoadingPureProps,
 } from "."
-import { youtubeLiteTheme } from "src/styles/theme"
-import { ThemeProvider } from "@xstyled/styled-components"
+import { WithCustomTheme } from "src/utilities/storybook"
 
 const Template: Story<SearchResultSkeletonLoadingPureProps> = (
   args: SearchResultSkeletonLoadingPureProps
 ) => (
-  <ThemeProvider theme={youtubeLiteTheme}>
+  <WithCustomTheme>
     <SearchResultSkeletonLoadingPure {...args} />
-  </ThemeProvider>
+  </WithCustomTheme>
 )
 
 export const Example: Story<SearchResultSkeletonLoadingPureProps> =
