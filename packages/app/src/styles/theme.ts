@@ -89,7 +89,7 @@ const exampleTheme = makeTheme({
 
 // https://coolors.co/000000-14213d-fca311-e5e5e5-ffffff
 const charismaSunset: Omit<DeepRequired<ColorMode>, `primary` | `highlight`> = {
-  background: `#000000`,
+  background: `#1A1B1B`,
   muted: `#14213d`,
   accent: `#fca311`,
   text: `#92999c`,
