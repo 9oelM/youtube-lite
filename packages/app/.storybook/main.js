@@ -12,6 +12,7 @@ module.exports = {
     "@storybook/addon-essentials",
     '@storybook/addon-storysource',
     '@storybook/addon-a11y',
+    'storybook-dark-mode'
   ],
   webpackFinal: (config) => {
     config.resolve.alias = {
