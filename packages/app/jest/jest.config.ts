@@ -10,6 +10,12 @@ const config: Config.InitialOptions = {
   },
   preset: `ts-jest`,
   testEnvironment: `jsdom`,
-  collectCoverageFrom: [`src/**/*.{ts,tsx}`],
+  collectCoverageFrom: [
+    `src/**/*.{ts,tsx}`,
+    `!src/**/*.stories.tsx`,
+    `!src/**/fallback.tsx`,
+    `!src/{styles,mock,webpack,types}/**/*`,
+    `!src/utilities/storybook/**/*`,
+  ],
 }
 export default config
