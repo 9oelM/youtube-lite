@@ -1,22 +1,32 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from "react"
 
 import { Meta, Story } from "@storybook/react"
 import { SearchResultCardPure, SearchResultCardPureProps } from "."
-import { youtubeLiteTheme } from "src/styles/theme"
-import { ThemeProvider } from "@xstyled/styled-components"
+import { WithCustomTheme } from "src/utilities/storybook"
+import { Mock } from "src/mock"
+import { x } from "@xstyled/styled-components"
+import { SF } from "src/styles/styleFragments"
+import { decodeHtml } from "src/utilities/html"
 
 const Template: Story<SearchResultCardPureProps> = (
   args: SearchResultCardPureProps
 ) => (
-  <ThemeProvider theme={youtubeLiteTheme}>
-    <SearchResultCardPure {...args} />
-  </ThemeProvider>
+  <WithCustomTheme>
+    <x.div {...SF.fullWH} {...SF.flexStyles} bg="true-gray-800">
+      <SearchResultCardPure {...args} />
+    </x.div>
+  </WithCustomTheme>
 )
 
 export const Example: Story<SearchResultCardPureProps> = Template.bind({})
 Example.args = {
-  thumbnail: `https://picsum.photos/seed/picsum/300/200`,
-  title: `test`,
+  // @ts-ignore
+  thumbnail: Mock.youtubeSearchResult.items[0]!.snippet.thumbnails.high.url,
+  title: decodeHtml(Mock.youtubeSearchResult.items[0]!.snippet.title)!,
+  description: decodeHtml(
+    Mock.youtubeSearchResult.items[0]!.snippet.description
+  )!,
 }
 
 export default {

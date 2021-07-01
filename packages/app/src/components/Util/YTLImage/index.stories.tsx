@@ -1,14 +1,13 @@
 import React from "react"
 
 import { Meta, Story } from "@storybook/react"
-import { youtubeLiteTheme } from "src/styles/theme"
-import { ThemeProvider } from "@xstyled/styled-components"
 import { YTLImage, YTLImageProps } from "src/components/Util/YTLImage"
+import { WithCustomTheme } from "src/utilities/storybook"
 
 const Template: Story<YTLImageProps> = (args: YTLImageProps) => (
-  <ThemeProvider theme={youtubeLiteTheme}>
+  <WithCustomTheme>
     <YTLImage {...args} />
-  </ThemeProvider>
+  </WithCustomTheme>
 )
 
 export const Example: Story<YTLImageProps> = Template.bind({})

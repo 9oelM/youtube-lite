@@ -2,16 +2,15 @@ import React from "react"
 
 import { Meta, Story } from "@storybook/react"
 import { NotFoundPagePure, NotFoundPagePureProps } from "."
-import { ThemeProvider } from "@xstyled/styled-components"
-import { youtubeLiteTheme } from "src/styles/theme"
 import { noop } from "ts-essentials"
+import { WithCustomTheme } from "src/utilities/storybook"
 
 const Template: Story<NotFoundPagePureProps> = (
   args: NotFoundPagePureProps
 ) => (
-  <ThemeProvider theme={youtubeLiteTheme}>
+  <WithCustomTheme>
     <NotFoundPagePure {...args} />
-  </ThemeProvider>
+  </WithCustomTheme>
 )
 
 export const NotFoundPageImpure1: Story<NotFoundPagePureProps> = Template.bind(

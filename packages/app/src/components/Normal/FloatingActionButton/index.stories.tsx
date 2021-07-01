@@ -1,22 +1,21 @@
 import React from "react"
 
 import { Meta, Story } from "@storybook/react"
-import { ThemeProvider } from "styled-components"
-import { youtubeLiteTheme } from "src/styles/theme"
 import { x } from "@xstyled/styled-components"
 import { SF } from "src/styles/styleFragments"
 import { FloatingActionButtonImpure, FloatingActionButtonImpureProps } from "."
+import { WithCustomTheme } from "src/utilities/storybook"
 
 const Template: Story<FloatingActionButtonImpureProps> = (
   args: FloatingActionButtonImpureProps
 ) => (
-  <ThemeProvider theme={youtubeLiteTheme}>
+  <WithCustomTheme>
     <x.div bg="background" {...SF.fullWH} {...SF.flexStyles}>
       <FloatingActionButtonImpure {...args} />
     </x.div>
 
     {` `}
-  </ThemeProvider>
+  </WithCustomTheme>
 )
 
 export const Example: Story<FloatingActionButtonImpureProps> = Template.bind({})

@@ -12,7 +12,7 @@ import {
   YTLAsyncJobs,
   YTLiteAsyncJobs,
 } from "src/redux/ducks/async/asyncActions"
-import { latestRequestByNameSelector } from "src/redux/ducks/async/asyncSelectors"
+import { latestAsyncJobByNameSelector } from "src/redux/ducks/async/asyncSelectors"
 import { RootState } from "src/redux/reducers"
 // import { YTLAsyncJobs } from "src/redux/ducks/async/asyncActions"
 import { SF } from "src/styles/styleFragments"
@@ -30,8 +30,9 @@ export const SearchResultPageImpure: FC<SearchResultPageImpureProps> =
 
     const getSearchResultStatus: AsyncStatus | undefined = useSelector(
       (s: RootState) =>
-        latestRequestByNameSelector(s, YTLiteAsyncJobs.GET_SEARCH_RESULT)
-          ?.status
+        latestAsyncJobByNameSelector(s, {
+          name: YTLiteAsyncJobs.GET_SEARCH_RESULT,
+        })?.status
     )
 
     useEffect(() => {
@@ -83,7 +84,33 @@ export const SearchResultPagePure: FC<SearchResultPagePureProps> =
               return <SearchResultSkeletonLoadingImpure />
             }
             case AsyncStatus.FAILURE: {
-              return <x.div>oops. request failed</x.div>
+              return (
+                <x.section
+                  maxW={{ _: 0.9, md: 0.7 }}
+                  {...SF.flexStyles}
+                  flexDirection="column"
+                  divideY={15}
+                  divideColor="background"
+                >
+                  <x.p color="red-500" textAlign="center">
+                    Request failed.
+                  </x.p>
+                  <x.p color="text" textAlign="center">
+                    This may be because the API key Youtube Lite is providing
+                    has reached the maximum quota for today.{` `}
+                  </x.p>
+                  <x.p
+                    textDecoration="underline"
+                    cursor="pointer"
+                    color={{ _: `text`, hover: `accent` }}
+                    transition="color 0.3s"
+                    textAlign="center"
+                  >
+                    To prevent this kind of issue in the future, consider adding
+                    your own API key.
+                  </x.p>
+                </x.section>
+              )
             }
             case AsyncStatus.SUCCESS: {
               return (

@@ -2,21 +2,20 @@ import React from "react"
 
 import { Meta, Story } from "@storybook/react"
 import { SearchInputImpure, SearchInputImpureProps } from "."
-import { ThemeProvider } from "styled-components"
-import { youtubeLiteTheme } from "src/styles/theme"
 import { x } from "@xstyled/styled-components"
 import { SF } from "src/styles/styleFragments"
+import { WithCustomTheme } from "src/utilities/storybook"
 
 const Template: Story<SearchInputImpureProps> = (
   args: SearchInputImpureProps
 ) => (
-  <ThemeProvider theme={youtubeLiteTheme}>
+  <WithCustomTheme>
     <x.div bg="background" {...SF.fullWH} {...SF.flexStyles}>
       <SearchInputImpure {...args} />
     </x.div>
 
     {` `}
-  </ThemeProvider>
+  </WithCustomTheme>
 )
 
 export const Example: Story<SearchInputImpureProps> = Template.bind({})
