@@ -9,8 +9,13 @@ export const YOUTUBE_API_KEY = (() => {
   }
 
   switch (process.env[`DEPLOY_TARGET`]) {
+    // for local dev development
     case `DEV`:
       return `AIzaSyD2q5pHwhNyrjXRlzrJ7A8M17blcFt_UXI`
+    // for deployed dev website
+    case `DEPLOY_DEV`:
+      return `AIzaSyA6gin34M0yCThGyx9K2Cqjpsibjrupj7A`
+    // for production website
     case `PROD`:
       return `AIzaSyBS_mShhwnJf4T2C45rbsRLVIwT-vLJKHQ`
     default:

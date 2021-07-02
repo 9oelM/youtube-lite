@@ -32,7 +32,14 @@ jobs:
           sudo npm i -g npm@7
           npm i
           npm run bootstrap
-          npm run app:prod
+          # https://stackoverflow.com/questions/58033366/how-to-get-current-branch-within-github-actions
+          if [ "${GITHUB_REF##*/}" = "prod" ]; then
+            npm run app:prod
+          elif [ "${GITHUB_REF##*/}" = "dev" ]; then
+            npm run app:deploydev
+          else
+            echo "${GITHUB_REF##*/} is not recognized. It should be dev or prod"
+          fi
           # https://stackoverflow.com/questions/44491184/react-router-does-not-work-in-production-and-surge-deployments
           cp ./packages/app/dist/index.html ./packages/app/dist/200.html
 

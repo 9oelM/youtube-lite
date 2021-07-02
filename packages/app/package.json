@@ -10,8 +10,9 @@
   "scripts": {
     "test": "jest --config ./jest/jest.config.ts --coverage",
     "lint:ts": "tsc --noEmit -p .",
-    "dev": "webpack serve --config ./webpack/webpack.config.dev.ts --mode development --progress",
-    "prod": "webpack --config ./webpack/webpack.config.prod.ts --mode production --progress",
+    "build:localdev": "webpack serve --config ./webpack/webpack.config.dev.ts --mode development --progress",
+    "build:deploydev": "webpack --config ./webpack/webpack.config.deploy-dev.ts --mode development --progress",
+    "build:prod": "webpack --config ./webpack/webpack.config.prod.ts --mode production --progress",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
