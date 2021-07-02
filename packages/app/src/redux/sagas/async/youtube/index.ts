@@ -1,9 +1,9 @@
 import axios from "axios"
+import { ENV } from "src/environment"
 import { YTLAsyncJobs } from "src/redux/ducks/async/asyncActions"
 import { YoutubeSearchListResponse } from "src/types/youtube"
 import { tcAsync } from "src/utilities/essentials"
 import { getReduxAsyncType } from "src/utilities/redux-async/asyncTypes"
-import { YOUTUBE_API_KEY, YOUTUBE_SEARCH_URL } from "src/utilities/youtube"
 import { call, put, takeLatest } from "typed-redux-saga"
 import { ActionType } from "typesafe-actions"
 
@@ -17,7 +17,7 @@ export function* searchVideosFromYoutubeFromQueryString(
     [`part`, `snippet`],
     // ~50
     [`maxResults`, `50`],
-    [`key`, YOUTUBE_API_KEY],
+    [`key`, ENV.YOUTUBE_API_KEY],
     [`type`, `video`],
     [`type`, `playist`],
   ])
@@ -27,7 +27,7 @@ export function* searchVideosFromYoutubeFromQueryString(
   // https://www.googleapis.com/youtube/v3/search?q=%EB%AC%B4%ED%95%9C%EB%8F%84%EC%A0%84&part=snippet&maxResults=15&key=AIzaSyBS_mShhwnJf4T2C45rbsRLVIwT-vLJKHQ&type=video&type=playist
   const [ytSearchError, ytSearchResponse] = yield* call(() =>
     tcAsync(
-      axios.get<YoutubeSearchListResponse>(YOUTUBE_SEARCH_URL, {
+      axios.get<YoutubeSearchListResponse>(ENV.YOUTUBE_SEARCH_URL, {
         params,
       })
     )
