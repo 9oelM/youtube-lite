@@ -1,3 +1,6 @@
+// to recognize axios-jsonp typing: https://github.com/TypeStrong/ts-loader/issues/639
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+///<reference path="../custom.d.ts"/>
 import axios from "axios"
 import { tcAsync } from "src/utilities/essentials"
 import axiosJsonpAdapter from "axios-jsonp"
