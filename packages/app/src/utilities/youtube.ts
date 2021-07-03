@@ -1,25 +1,10 @@
+// to recognize axios-jsonp typing: https://github.com/TypeStrong/ts-loader/issues/639
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+///<reference path="../custom.d.ts"/>
 import axios from "axios"
 import { tcAsync } from "src/utilities/essentials"
-// @ts-ignore
 import axiosJsonpAdapter from "axios-jsonp"
-
-export const YOUTUBE_API_KEY = (() => {
-  if (!process.env[`DEPLOY_TARGET`]) {
-    throw new Error(`process.env.DEPLOY_TARGET undefined`)
-  }
-
-  switch (process.env[`DEPLOY_TARGET`]) {
-    case `DEV`:
-      return `AIzaSyD2q5pHwhNyrjXRlzrJ7A8M17blcFt_UXI`
-    case `PROD`:
-      return `AIzaSyBS_mShhwnJf4T2C45rbsRLVIwT-vLJKHQ`
-    default:
-      throw new Error(`process.env.DEPLOY_TARGET undefined`)
-  }
-})()
-
-export const YOUTUBE_SEARCH_URL = `https://www.googleapis.com/youtube/v3/search`
-export const YOUTUBE_SUGGESTION_URL = `https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q={}`
+import { ENV } from "src/environment"
 
 /**
  *
@@ -29,10 +14,8 @@ export const YOUTUBE_SUGGESTION_URL = `https://suggestqueries.google.com/complet
 export async function requestYoutubeSearchSuggestions(
   searchKeyword: string
 ): Promise<string[] | null> {
-  const youtubeSuggestionURLWithSearchKeyword = YOUTUBE_SUGGESTION_URL.replace(
-    `{}`,
-    searchKeyword
-  )
+  const youtubeSuggestionURLWithSearchKeyword =
+    ENV.YOUTUBE_SUGGESTION_URL.replace(`{}`, searchKeyword)
 
   const [youtubeSuggestionError, youtubeSuggestionResult] = await tcAsync(
     axios.get<

@@ -55,6 +55,7 @@ module.exports = {
     return config;
   },
   core: {
+    // https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#from-version-62x-to-630
     builder: "webpack5",
   }
 }

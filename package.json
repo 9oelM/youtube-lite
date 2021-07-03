@@ -12,8 +12,9 @@
     "lint": "eslint . --debug",
     "lint:fix": "eslint . --fix",
     "lint:ts": "lerna run --scope @youtube-lite/app lint:ts --stream",
-    "app:dev": "lerna run --scope @youtube-lite/app dev --stream",
-    "app:prod": "lerna run --scope @youtube-lite/app prod --stream",
+    "app:localdev": "lerna run --scope @youtube-lite/app build:localdev --stream",
+    "app:deploydev": "lerna run --scope @youtube-lite/app build:deploydev --stream",
+    "app:prod": "lerna run --scope @youtube-lite/app build:prod --stream",
     "app:build-storybook": "lerna run --scope @youtube-lite/app build-storybook --stream",
     "app:storybook": "lerna run --scope @youtube-lite/app storybook --stream",
     "test": "lerna run --scope @youtube-lite/app test --stream"
