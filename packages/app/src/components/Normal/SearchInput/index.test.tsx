@@ -14,7 +14,7 @@ describe(`SearchInputPure`, () => {
     { callback: onCutToClipboard, event: `cut` },
     { callback: onSearchInputFocused, event: `focus` },
     { callback: onSearchInputBlurred, event: `blur` },
-    { callback: onKeyPress, event: `keypress` },
+    { callback: onKeyPress, event: `keydown` },
   ])(`$event event should call $callback`, ({ callback, event }) => {
     expect(callback).toHaveBeenCalledTimes(0)
     const c = mount(

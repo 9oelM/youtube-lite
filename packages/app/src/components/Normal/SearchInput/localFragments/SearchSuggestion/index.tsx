@@ -10,35 +10,50 @@ import { enhance } from "src/utilities/essentials"
 
 export type SearchSuggestionImpureProps = {
   suggestion: string
+  isForcefullyFocused?: boolean
 }
 
 export const SearchSuggestionImpure: FC<SearchSuggestionImpureProps> =
-  enhance<SearchSuggestionImpureProps>(({ suggestion }) => {
-    const dispatch = useDispatch()
-    const onSuggestionClick = useCallback(() => {
-      dispatch(push(`/results?search_query=${suggestion}`))
-    }, [dispatch, suggestion])
+  enhance<SearchSuggestionImpureProps>(
+    ({ suggestion, isForcefullyFocused = false }) => {
+      const dispatch = useDispatch()
+      const onSuggestionClick = useCallback(() => {
+        dispatch(push(`/results?search_query=${suggestion}`))
+      }, [dispatch, suggestion])
 
-    return (
-      <SearchSuggestionPure
-        {...{
-          suggestion,
-          onSuggestionClick,
-        }}
-      />
-    )
-  })(NullFallback)
+      return (
+        <SearchSuggestionPure
+          {...{
+            suggestion,
+            onSuggestionClick,
+            isForcefullyFocused,
+          }}
+        />
+      )
+    }
+  )(NullFallback)
 
 export type SearchSuggestionPureProps = {
   suggestion: string
   onSuggestionClick: ClickHandler<HTMLLIElement>
+  isForcefullyFocused?: boolean
 }
 
 export const SearchSuggestionPure: FC<SearchSuggestionPureProps> =
-  enhance<SearchSuggestionPureProps>(({ suggestion, onSuggestionClick }) => {
-    return (
-      <x.li {...V.lists.primary} onClick={onSuggestionClick}>
-        {suggestion}
-      </x.li>
-    )
-  })(NullFallback)
+  enhance<SearchSuggestionPureProps>(
+    ({ suggestion, onSuggestionClick, isForcefullyFocused = false }) => {
+      return (
+        <x.li
+          {...V.lists.primary}
+          color={
+            isForcefullyFocused
+              ? V.lists.primary.color.hover
+              : V.lists.primary.color
+          }
+          onClick={onSuggestionClick}
+        >
+          {suggestion}
+        </x.li>
+      )
+    }
+  )(NullFallback)

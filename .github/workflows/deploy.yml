@@ -28,14 +28,18 @@ jobs:
       - name: deploy app to surge for dev or prod merge commit
         env:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          YOUTUBE_API_KEY_FOR_DEPLOY_DEV: ${{ secrets.YOUTUBE_API_KEY_FOR_DEPLOY_DEV }}
+          YOUTUBE_API_KEY_FOR_PROD: ${{ secrets.YOUTUBE_API_KEY_FOR_PROD }}
         run: |
           sudo npm i -g npm@7
           npm i
           npm run bootstrap
           # https://stackoverflow.com/questions/58033366/how-to-get-current-branch-within-github-actions
           if [ "${GITHUB_REF##*/}" = "prod" ]; then
+            echo "YOUTUBE_API_KEY=${YOUTUBE_API_KEY_FOR_PROD}" >> .env
             npm run app:prod
           elif [ "${GITHUB_REF##*/}" = "dev" ]; then
+            echo "YOUTUBE_API_KEY=${YOUTUBE_API_KEY_FOR_DEPLOY_DEV}" >> .env
             npm run app:deploydev
           else
             echo "${GITHUB_REF##*/} is not recognized. It should be dev or prod"

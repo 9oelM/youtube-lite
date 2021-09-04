@@ -3,6 +3,7 @@
 ///<reference path="../custom.d.ts"/>
 import axios from "axios"
 import { tcAsync } from "src/utilities/essentials"
+// @ts-ignore
 import axiosJsonpAdapter from "axios-jsonp"
 import { ENV } from "src/environment"
 
