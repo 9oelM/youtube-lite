@@ -1,6 +1,7 @@
 import path from "path"
 import webpack from "webpack"
 import HtmlWebpackPlugin from "html-webpack-plugin"
+import Dotenv from "dotenv-webpack"
 
 export const commonConfig: webpack.Configuration = {
   entry: `./src/index.tsx`,
@@ -76,6 +77,15 @@ export const commonConfig: webpack.Configuration = {
     }),
     new webpack.ProvidePlugin({
       process: `process/browser.js`,
+    }),
+    new Dotenv({
+      // .env at project root
+      path: path.resolve(__dirname, `../../../.env`), // load this now instead of the ones in '.env'
+      // safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
+      // allowEmptyValues: true, // allow empty variables (e.g. `FOO=`) (treat it as empty string, rather than missing)
+      // systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
+      // silent: true, // hide any errors
+      // defaults: false, // load '.env.defaults' as the default values if empty.
     }),
   ],
 }

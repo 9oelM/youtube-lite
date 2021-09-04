@@ -5,3 +5,4 @@ const Adapter = require(`enzyme-adapter-react-16`)
 
 Enzyme.configure({ adapter: new Adapter() })
 process.env.DEPLOY_TARGET = `DEV`
+process.env.YOUTUBE_API_KEY = `DUMMY`
