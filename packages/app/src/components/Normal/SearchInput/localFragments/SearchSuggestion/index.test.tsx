@@ -7,6 +7,8 @@ import {
 import configureStore from "redux-mock-store"
 import { Provider } from "react-redux"
 import { push } from "connected-react-router"
+import renderer from "react-test-renderer"
+import { V } from "src/styles/styleFragments"
 
 describe(`SearchSuggestionPure`, () => {
   const suggestion = `youtube lite`
@@ -35,6 +37,21 @@ describe(`SearchSuggestionPure`, () => {
       />
     )
     expect(c.text()).toEqual(suggestion)
+  })
+
+  it(`should show a hover color when isForcefullyFocused === true`, () => {
+    const tree = renderer
+      .create(
+        <SearchSuggestionPure
+          {...{
+            suggestion,
+            onSuggestionClick,
+            isForcefullyFocused: true,
+          }}
+        />
+      )
+      .toJSON()
+    expect(tree).toHaveStyleRule(`color`, V.lists.primary.color.hover)
   })
 })
 

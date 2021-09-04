@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React, { FC, useCallback } from "react"
 import { ComponentPropsWithRef, useState } from "react"
 import { SearchSuggestionsImpure } from "src/components/Normal/SearchInput/localFragments/SearchSuggestions"

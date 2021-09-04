@@ -43,14 +43,12 @@ export function useSearchSuggestions({
 
         switch (key) {
           case `ArrowDown`: {
-            if (!searchKeyword) break
             setCurrentFocusedSuggestionIndex((prev) => {
               return prev === null ? 1 : prev + 1
             })
             break
           }
           case `ArrowUp`: {
-            if (!searchKeyword) break
             setCurrentFocusedSuggestionIndex((prev) => {
               if (prev === null || searchSuggestions.length === 0) return 0
 
@@ -73,6 +71,7 @@ export function useSearchSuggestions({
         searchKeyword,
         searchSuggestions,
         setSuggestionsOpenFalse,
+        setSuggestionsOpenTrue,
       ]
     )
 

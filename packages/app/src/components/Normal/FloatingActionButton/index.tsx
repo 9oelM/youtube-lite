@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React, { ReactNode, useCallback, useMemo, useState } from "react"
 import { FC } from "react"
 import { enhance } from "src/utilities/essentials"
