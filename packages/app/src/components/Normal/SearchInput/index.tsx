@@ -1,5 +1,4 @@
 import { x } from "@xstyled/styled-components"
-import { push } from "connected-react-router"
 import React, {
   ComponentPropsWithoutRef,
   MutableRefObject,
@@ -9,9 +8,9 @@ import React, {
   useState,
 } from "react"
 import { FC } from "react"
-import { useDispatch } from "react-redux"
 import { SearchSuggestionsImpure } from "src/components/Normal/SearchInput/localFragments/SearchSuggestions"
 import { useBoolean } from "src/hooks/useBoolean"
+import { useSearchSuggestions } from "src/hooks/useSearchSuggestions"
 import { SF, V } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
 import { SearchInputFallback } from "./fallback"
@@ -24,7 +23,6 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
     const [searchKeyword, setSearchKeyword] = useState<Readonly<string>>(``)
     const [isFocused, onSearchInputFocused, onSearchInputBlurred] =
       useBoolean(true)
-    const dispatch = useDispatch()
 
     const onSearchInputChange: React.ChangeEventHandler<HTMLInputElement> =
       useCallback((e) => {
@@ -34,16 +32,6 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
     const onCutToClipboard = useCallback(() => {
       setSearchKeyword(``)
     }, [])
-
-    const onKeyPress: React.KeyboardEventHandler<HTMLInputElement> =
-      useCallback(
-        ({ key }) => {
-          if (key !== `Enter`) return
-
-          dispatch(push(`/results?search_query=${searchKeyword}`))
-        },
-        [dispatch, searchKeyword]
-      )
 
     const onSearchInputBlurredTimeout: MutableRefObject<null | number> =
       useRef(null)
@@ -63,6 +51,18 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
       }
     }, [])
 
+    const {
+      onKeyPressSearchInput,
+      currentFocusedSuggestionIndex,
+      onSetCurrentFocusedSuggestionIndex,
+      onSetSearchSuggestions,
+      searchSuggestions,
+    } = useSearchSuggestions({
+      searchKeyword,
+      setSuggestionsOpenFalse: onSearchInputBlurred,
+      setSuggestionsOpenTrue: onSearchInputFocused,
+    })
+
     return (
       <x.div position={`initial`} w="100%">
         <x.section
@@ -78,11 +78,19 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
               onCutToClipboard,
               searchKeyword,
               onSearchInputChange,
-              onKeyPress,
+              onKeyPress: onKeyPressSearchInput,
             }}
           />
           {isFocused && searchKeyword.trim() !== `` ? (
-            <SearchSuggestionsImpure searchKeyword={searchKeyword} />
+            <SearchSuggestionsImpure
+              {...{
+                searchSuggestions,
+                onSetSearchSuggestions,
+                searchKeyword,
+                onSetCurrentFocusedSuggestionIndex,
+                currentFocusedSuggestionIndex,
+              }}
+            />
           ) : null}
         </x.section>
       </x.div>
@@ -119,7 +127,7 @@ export const SearchInputPure: FC<SearchInputPureProps> =
           onBlur={onSearchInputBlurred}
           onFocus={onSearchInputFocused}
           onCut={onCutToClipboard}
-          onKeyPress={onKeyPress}
+          onKeyDown={onKeyPress}
           autoFocus
           pl={3}
           placeholder="Search Youtube"

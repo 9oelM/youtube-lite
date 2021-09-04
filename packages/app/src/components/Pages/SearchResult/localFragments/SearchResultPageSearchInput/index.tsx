@@ -1,13 +1,12 @@
 import { x } from "@xstyled/styled-components"
-import { push } from "connected-react-router"
 import React, { useCallback, useEffect, useState } from "react"
 import { FC } from "react"
-import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { SearchInputPure } from "src/components/Normal/SearchInput"
 import { SearchSuggestionsImpure } from "src/components/Normal/SearchInput/localFragments/SearchSuggestions"
 import { NullFallback } from "src/components/Util/WithErrorBoundary"
 import { useBoolean } from "src/hooks/useBoolean"
+import { useSearchSuggestions } from "src/hooks/useSearchSuggestions"
 import { enhance } from "src/utilities/essentials"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -23,7 +22,6 @@ export const SearchResultPageSearchInputImpure: FC<SearchResultPageSearchInputIm
       setSuggestionsOpenTrue,
       setSuggestionsOpenFalse,
     ] = useBoolean(false)
-    const dispatch = useDispatch()
 
     useEffect(() => {
       setSearchKeyword(queryString ?? ``)
@@ -47,15 +45,17 @@ export const SearchResultPageSearchInputImpure: FC<SearchResultPageSearchInputIm
       setSearchKeyword(``)
     }, [])
 
-    const onKeyPress: React.KeyboardEventHandler<HTMLInputElement> =
-      useCallback(
-        ({ key }) => {
-          if (key !== `Enter`) return
-
-          dispatch(push(`/results?search_query=${searchKeyword}`))
-        },
-        [dispatch, searchKeyword]
-      )
+    const {
+      onKeyPressSearchInput,
+      currentFocusedSuggestionIndex,
+      onSetCurrentFocusedSuggestionIndex,
+      onSetSearchSuggestions,
+      searchSuggestions,
+    } = useSearchSuggestions({
+      searchKeyword,
+      setSuggestionsOpenFalse,
+      setSuggestionsOpenTrue,
+    })
 
     return (
       <>
@@ -66,7 +66,7 @@ export const SearchResultPageSearchInputImpure: FC<SearchResultPageSearchInputIm
             onSearchInputChange,
             onSearchInputBlurred: setSuggestionsOpenFalseDelayed,
             onSearchInputFocused: setSuggestionsOpenTrue,
-            onKeyPress,
+            onKeyPress: onKeyPressSearchInput,
             autoFocus: false,
           }}
         />
@@ -77,6 +77,10 @@ export const SearchResultPageSearchInputImpure: FC<SearchResultPageSearchInputIm
                 data-testid="search-suggestions"
                 {...{
                   searchKeyword,
+                  currentFocusedSuggestionIndex,
+                  onSetCurrentFocusedSuggestionIndex,
+                  onSetSearchSuggestions,
+                  searchSuggestions,
                 }}
               />
             </x.div>

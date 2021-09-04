@@ -25,8 +25,8 @@ export type SearchResultPageImpureProps = {}
 export const SearchResultPageImpure: FC<SearchResultPageImpureProps> =
   enhance<SearchResultPageImpureProps>(() => {
     const query = new URLSearchParams(useLocation().search)
-    const dispatch = useDispatch()
     const queryString = query.get(`search_query`)
+    const dispatch = useDispatch()
 
     const getSearchResultStatus: AsyncStatus | undefined = useSelector(
       (s: RootState) =>
