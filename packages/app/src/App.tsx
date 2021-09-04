@@ -12,6 +12,7 @@ import { GlobalStyle } from "src/styles/globalStyle"
 import configureStore, { history } from "src/redux/store"
 import { MainPageImpure } from "src/components/Pages/Main"
 import { SearchResultPageImpure } from "src/components/Pages/SearchResult"
+import { WatchPageImpure } from "src/components/Pages/Watch"
 
 const store = configureStore()
 
@@ -29,6 +30,9 @@ export const App: FC = () => {
             {/* https://www.youtube.com/results?search_query=my+search+query */}
             <Route path="/results">
               <SearchResultPageImpure />
+            </Route>
+            <Route path="/watch">
+              <WatchPageImpure />
             </Route>
             <Route>
               <NotFoundPageImpure />
