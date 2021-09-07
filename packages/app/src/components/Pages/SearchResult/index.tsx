@@ -91,6 +91,7 @@ export const SearchResultPagePure: FC<SearchResultPagePureProps> =
                   flexDirection="column"
                   divideY={15}
                   divideColor="background"
+                  data-testid="search-result-page-pure-failure"
                 >
                   <x.p color="red-500" textAlign="center">
                     Request failed.
@@ -115,6 +116,7 @@ export const SearchResultPagePure: FC<SearchResultPagePureProps> =
             case AsyncStatus.SUCCESS: {
               return (
                 <x.section
+                  data-testid="search-result-page-pure-success"
                   w={{ _: 2.8 / 3, md: 2.5 / 3, lg: 2 / 3 }}
                   overflowY="auto"
                 >
