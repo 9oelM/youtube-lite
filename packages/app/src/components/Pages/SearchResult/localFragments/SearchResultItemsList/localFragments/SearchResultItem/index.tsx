@@ -59,6 +59,7 @@ export const SearchResultCardPure: FC<SearchResultCardPureProps> =
     ({ onClickSearchResultItem, thumbnail, title, description }) => {
       return (
         <x.article
+          data-testid="search-result-card-pure"
           boxShadow={{ _: `xl`, hover: `2xl` }}
           w="100%"
           bg={{ _: `true-gray-800`, hover: `true-gray-700` }}
@@ -80,6 +81,7 @@ export const SearchResultCardPure: FC<SearchResultCardPureProps> =
           onClick={onClickSearchResultItem}
         >
           <x.img
+            data-testid="search-result-card-pure-thumbnail"
             src={thumbnail}
             objectFit="contain"
             maxW={`200px`}

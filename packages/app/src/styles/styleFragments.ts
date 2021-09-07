@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { x } from "@xstyled/styled-components"
 import { ComponentPropsWithRef } from "react"
 
