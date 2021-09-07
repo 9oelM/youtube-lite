@@ -1,5 +1,12 @@
 import { x } from "@xstyled/styled-components"
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react"
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import { FC } from "react"
 import { useLocation } from "react-router"
 import { SF } from "src/styles/styleFragments"
@@ -9,6 +16,7 @@ import { WatchPageFallback } from "./fallback"
 import { SearchResultPageSearchInputImpure } from "src/components/Pages/SearchResult/localFragments/SearchResultPageSearchInput"
 import ReactYoutubePlayer from "react-player/lazy"
 import { reactYoutubePlayerStyles } from "src/components/Pages/Watch/styles"
+import { LoaderAlt } from "@styled-icons/boxicons-regular/LoaderAlt"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type WatchPageImpureProps = {}
@@ -17,9 +25,17 @@ export const WatchPageImpure: FC<WatchPageImpureProps> =
   enhance<WatchPageImpureProps>(() => {
     const query = new URLSearchParams(useLocation().search)
     const videoIdQueryString = query.get(`v`)
-    const [_videoPlayerStatus, setVideoPlayerStatus] = useState<AsyncStatus>(
-      AsyncStatus.NOT_STARTED
+    const [videoPlayerStatus, setVideoPlayerStatus] = useState<AsyncStatus>(
+      AsyncStatus.LOADING
     )
+
+    const onVideoPlayerReady = useCallback(() => {
+      setVideoPlayerStatus(AsyncStatus.SUCCESS)
+    }, [])
+    const onVideoPlayerError = useCallback(() => {
+      setVideoPlayerStatus(AsyncStatus.FAILURE)
+    }, [])
+
     const playerRef = useRef<ReactYoutubePlayer>(null)
     const [playerWrapperDimensions, setPlayerWrapperDimensions] = useState({
       width: 0,
@@ -64,9 +80,14 @@ export const WatchPageImpure: FC<WatchPageImpureProps> =
     }
     return (
       <WatchPagePure
-        videoId={videoIdQueryString}
-        playerRef={playerRef}
-        playerWrapperDimensions={playerWrapperDimensions}
+        {...{
+          videoId: videoIdQueryString,
+          playerRef,
+          playerWrapperDimensions,
+          onVideoPlayerError,
+          onVideoPlayerReady,
+          videoPlayerStatus,
+        }}
       />
     )
   })(WatchPageFallback)
@@ -74,6 +95,9 @@ export const WatchPageImpure: FC<WatchPageImpureProps> =
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type WatchPagePureProps = {
   videoId: string
+  videoPlayerStatus: AsyncStatus
+  onVideoPlayerReady: VoidFunction
+  onVideoPlayerError: VoidFunction
   playerRef: React.RefObject<ReactYoutubePlayer> | null
   playerWrapperDimensions: {
     width: number
@@ -83,7 +107,38 @@ export type WatchPagePureProps = {
 
 export const WatchPagePure: FC<WatchPagePureProps> =
   enhance<WatchPagePureProps>(
-    ({ videoId, playerRef, playerWrapperDimensions }) => {
+    ({
+      videoId,
+      playerRef,
+      playerWrapperDimensions,
+      onVideoPlayerError,
+      onVideoPlayerReady,
+      videoPlayerStatus,
+    }) => {
+      const spinningLoaderAnimation = useMemo(
+        () => (
+          <x.article {...SF.flexStyles} flexDirection="column" spaceY={2}>
+            <x.div
+              animation="0.5s x-spin linear infinite"
+              h={{
+                _: `2rem`,
+                md: `2.5rem`,
+                lg: `3rem`,
+              }}
+              w={{
+                _: `2rem`,
+                md: `2.5rem`,
+                lg: `3rem`,
+              }}
+            >
+              <LoaderAlt height="100%" width="100%" color="text" />
+            </x.div>
+            <x.p color="text">Loading</x.p>
+          </x.article>
+        ),
+        []
+      )
+
       return (
         <x.main
           {...SF.flexStyles}
@@ -104,14 +159,40 @@ export const WatchPagePure: FC<WatchPagePureProps> =
                 playerWrapperDimensions.height / 2
               }px + 27px)`}
             />
+            {(() => {
+              switch (videoPlayerStatus) {
+                case AsyncStatus.LOADING:
+                  return spinningLoaderAnimation
+                case AsyncStatus.FAILURE:
+                  return (
+                    <x.article>
+                      Failed to load Youtube player due to a network problem.
+                    </x.article>
+                  )
+                default:
+                  return null
+              }
+            })()}
             <ReactYoutubePlayer
               // @ts-ignore
               ref={playerRef}
-              width="70%"
-              height="35vw"
+              onError={onVideoPlayerError}
+              onReady={onVideoPlayerReady}
+              config={{
+                youtube: {
+                  playerVars: { autoplay: 1 },
+                },
+              }}
+              width={`66.6666666%`}
+              height="60vh"
               controls
               loop
-              style={reactYoutubePlayerStyles}
+              style={{
+                ...reactYoutubePlayerStyles,
+                display:
+                  // prevent the player from completely unmounting
+                  videoPlayerStatus === AsyncStatus.SUCCESS ? `block` : `none`,
+              }}
               url={`https://www.youtube.com/watch?v=${videoId}`}
             />
           </x.section>
