@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export const youtubeSearchResponseMock = {
   kind: `youtube#searchListResponse`,
   etag: `RkUUT2Cz-1tFsUSy9rbfqUFE1JU`,

@@ -29,6 +29,7 @@ export const SearchResultSkeletonLoadingPure: FC<SearchResultSkeletonLoadingPure
         flexDirection="column"
         justifyContent="space-around"
         overflow="hidden"
+        data-testid="search-result-skeleton-loading-pure"
       >
         {[0, 1, 2, 3, 4, 5].map((num) => {
           return (

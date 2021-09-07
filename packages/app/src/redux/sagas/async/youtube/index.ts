@@ -10,8 +10,7 @@ import { ActionType } from "typesafe-actions"
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function* searchVideosFromYoutubeFromQueryString(
   action: ActionType<typeof YTLAsyncJobs[`getSearchResult`][`start`]>
-): any {
-  console.log(action)
+) {
   const params = new URLSearchParams([
     [`q`, action.payload.searchQuery],
     [`part`, `snippet`],
