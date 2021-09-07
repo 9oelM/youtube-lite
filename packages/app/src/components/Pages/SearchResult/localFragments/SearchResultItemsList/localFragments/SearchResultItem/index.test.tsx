@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { push } from "connected-react-router"
 import { mount } from "enzyme"
 import React from "react"
-import { SearchResultCardPure } from "src/components/Pages/SearchResult/localFragments/SearchResultItemsList/localFragments/SearchResultItem"
+import { Provider } from "react-redux"
+import {
+  SearchResultCardImpure,
+  SearchResultCardPure,
+} from "src/components/Pages/SearchResult/localFragments/SearchResultItemsList/localFragments/SearchResultItem"
 import { Mock } from "src/mock"
-import { getByTestId } from "src/test-utilities/utilities"
+import { configureMockStore, getByTestId } from "src/test-utilities/utilities"
 import { YoutubeSearchItem } from "src/types/youtube"
 
 describe(`SearchResultCardPure`, () => {
@@ -44,5 +49,68 @@ describe(`SearchResultCardPure`, () => {
         .at(0)
         .prop(`src`)
     ).toEqual(props.thumbnail)
+  })
+})
+
+describe(`SearchResultCardImpure`, () => {
+  it(`should not display anything when youtubeSearchResultItem is undefined`, () => {
+    const props = {
+      index: 9999999999999999,
+    }
+    const mockedStore = configureMockStore()({
+      ephemeral: {
+        youtubeSearchResultItems: [],
+      },
+    })
+
+    const Component = (
+      <Provider store={mockedStore}>
+        <SearchResultCardImpure {...props} />
+      </Provider>
+    )
+    const wrapper = mount(Component)
+    expect(wrapper.html()).toBe(``)
+  })
+  it(`should display non-null html when youtubeSearchResultItem defined`, () => {
+    const props = {
+      index: 0,
+    }
+    const mockedStore = configureMockStore()({
+      ephemeral: {
+        youtubeSearchResultItems: Mock.youtubeSearchResult.items,
+      },
+    })
+
+    const Component = (
+      <Provider store={mockedStore}>
+        <SearchResultCardImpure {...props} />
+      </Provider>
+    )
+    const wrapper = mount(Component)
+    expect(wrapper.html()).not.toBe(``)
+  })
+  it(`should call onClickSearchResultItem without early return when youtueSearchItem defined`, () => {
+    const mockedStore = configureMockStore()({
+      ephemeral: {
+        youtubeSearchResultItems: Mock.youtubeSearchResult.items,
+      },
+    })
+
+    const Component = (
+      <Provider store={mockedStore}>
+        <SearchResultCardImpure
+          {...{
+            index: 0,
+          }}
+        />
+      </Provider>
+    )
+    const wrapper = mount(Component)
+
+    getByTestId(wrapper, `search-result-card-pure`).at(0).simulate(`click`)
+
+    expect(mockedStore.getActions()).toEqual([push(expect.anything())])
+    const [pushAction]: ReturnType<typeof push>[] = mockedStore.getActions()
+    expect(String(pushAction?.payload.args).startsWith(`/watch?v=`)).toBe(true)
   })
 })
