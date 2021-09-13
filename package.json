@@ -26,7 +26,7 @@
     "enzyme-adapter-react-16": "1.15.6",
     "eslint": "7.30.0",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-prettier": "3.4.0",
+    "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "lerna": "4.0.0",
