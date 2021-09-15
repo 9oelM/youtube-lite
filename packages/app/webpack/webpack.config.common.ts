@@ -8,7 +8,7 @@ export const commonConfig: webpack.Configuration = {
   // https://webpack.js.org/plugins/split-chunks-plugin/
   optimization: {
     splitChunks: {
-      chunks: `async`,
+      chunks: `all`,
       minSize: 20000,
       minRemainingSize: 0,
       minChunks: 1,
@@ -68,7 +68,7 @@ export const commonConfig: webpack.Configuration = {
     },
   },
   output: {
-    filename: `bundle.js`,
+    filename: `[name].[hash].js`,
     path: path.resolve(__dirname, `..`, `dist`),
   },
   plugins: [
