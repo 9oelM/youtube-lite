@@ -3,8 +3,11 @@ import { commonConfig } from "./webpack.config.common"
 import devConfig from "./webpack.config.dev"
 
 const config: webpack.Configuration = {
-  mode: `development`,
-  devtool: `inline-source-map`,
+  // for minification
+  mode: `production`,
+  // https://webpack.js.org/guides/production/#source-mapping
+  // Avoid inline-*** and eval-*** use in production as they can increase bundle size and reduce the overall performance.
+  devtool: `source-map`,
   devServer: devConfig.devServer,
   ...commonConfig,
   plugins: [

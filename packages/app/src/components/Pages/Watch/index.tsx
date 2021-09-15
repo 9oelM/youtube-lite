@@ -1,14 +1,19 @@
 import { x } from "@xstyled/styled-components"
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react"
+import React, { useMemo } from "react"
 import { FC } from "react"
-import { useLocation } from "react-router"
+import { useLocation } from "react-router-dom"
 import { SF } from "src/styles/styleFragments"
 import { enhance } from "src/utilities/essentials"
 import { AsyncStatus } from "src/utilities/redux-async/asyncTypes"
 import { WatchPageFallback } from "./fallback"
 import { SearchResultPageSearchInputImpure } from "src/components/Pages/SearchResult/localFragments/SearchResultPageSearchInput"
-import ReactYoutubePlayer from "react-player/lazy"
 import { reactYoutubePlayerStyles } from "src/components/Pages/Watch/styles"
+import { SpinningLoaderAnimationPure } from "src/components/Pages/Watch/localFragments/SpinningLoaderAnimation"
+import { VideoPlayerImpure } from "src/components/Pages/Watch/localFragments/VideoPlayer"
+import { reactYoutubePlayerOptions } from "src/constants/reactYoutubePlayer"
+import { useManageVideoPlayingStatus } from "src/components/Pages/Watch/localHooks"
+import { useDispatch } from "react-redux"
+import { push } from "connected-react-router"
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type WatchPageImpureProps = {}
@@ -17,56 +22,23 @@ export const WatchPageImpure: FC<WatchPageImpureProps> =
   enhance<WatchPageImpureProps>(() => {
     const query = new URLSearchParams(useLocation().search)
     const videoIdQueryString = query.get(`v`)
-    const [_videoPlayerStatus, setVideoPlayerStatus] = useState<AsyncStatus>(
-      AsyncStatus.NOT_STARTED
-    )
-    const playerRef = useRef<ReactYoutubePlayer>(null)
-    const [playerWrapperDimensions, setPlayerWrapperDimensions] = useState({
-      width: 0,
-      height: 0,
+    const dispatch = useDispatch()
+
+    const manageVideoPlayingProps = useManageVideoPlayingStatus({
+      videoIdQueryString,
     })
 
-    useLayoutEffect(() => {
-      document.addEventListener(`click`, (e) => {
-        console.log(e)
-      })
-      // @ts-ignore
-      const playerWrapper: HTMLDivElement = playerRef?.current.wrapper
-      function onPlayerWrapperResize() {
-        console.log(playerWrapper.offsetWidth)
-        console.log(playerWrapper.offsetHeight)
-        setPlayerWrapperDimensions({
-          width: playerWrapper.offsetWidth,
-          height: playerWrapper.offsetHeight,
-        })
-      }
-      onPlayerWrapperResize()
-
-      const playerWrapperResizeObserver = new ResizeObserver(
-        onPlayerWrapperResize
-      )
-
-      playerWrapperResizeObserver.observe(playerWrapper)
-
-      return () => {
-        playerWrapperResizeObserver.disconnect()
-      }
-    }, [])
-
-    useEffect(() => {
-      if (videoIdQueryString) return
-
-      setVideoPlayerStatus(AsyncStatus.FAILURE)
-    }, [videoIdQueryString])
-
     if (!videoIdQueryString) {
+      dispatch(push(`/`))
+
       return <x.section>Failed to play video</x.section>
     }
     return (
       <WatchPagePure
-        videoId={videoIdQueryString}
-        playerRef={playerRef}
-        playerWrapperDimensions={playerWrapperDimensions}
+        {...{
+          videoId: videoIdQueryString,
+          ...manageVideoPlayingProps,
+        }}
       />
     )
   })(WatchPageFallback)
@@ -74,16 +46,28 @@ export const WatchPageImpure: FC<WatchPageImpureProps> =
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type WatchPagePureProps = {
   videoId: string
-  playerRef: React.RefObject<ReactYoutubePlayer> | null
-  playerWrapperDimensions: {
-    width: number
-    height: number
-  }
+  videoPlayerStatus: AsyncStatus
+  onVideoPlayerReady: VoidFunction
+  onVideoPlayerError: VoidFunction
 }
 
 export const WatchPagePure: FC<WatchPagePureProps> =
   enhance<WatchPagePureProps>(
-    ({ videoId, playerRef, playerWrapperDimensions }) => {
+    ({
+      videoId,
+      onVideoPlayerError,
+      onVideoPlayerReady,
+      videoPlayerStatus,
+    }) => {
+      const reactYoutubePlayerInlineStyle = useMemo(() => {
+        return {
+          ...reactYoutubePlayerStyles,
+          display:
+            // prevent the player from completely unmounting
+            videoPlayerStatus === AsyncStatus.SUCCESS ? `block` : `none`,
+        }
+      }, [videoPlayerStatus])
+
       return (
         <x.main
           {...SF.flexStyles}
@@ -95,24 +79,26 @@ export const WatchPagePure: FC<WatchPagePureProps> =
             <SearchResultPageSearchInputImpure />
           </x.nav>
           <x.section {...SF.fullWH} {...SF.flexStyles}>
-            <x.div
-              w="70%"
-              h={`60px`}
-              border="1px solid transparent"
-              position="absolute"
-              top={`calc(50% - 25px - ${
-                playerWrapperDimensions.height / 2
-              }px + 27px)`}
-            />
-            <ReactYoutubePlayer
-              // @ts-ignore
-              ref={playerRef}
-              width="70%"
-              height="35vw"
-              controls
-              loop
-              style={reactYoutubePlayerStyles}
-              url={`https://www.youtube.com/watch?v=${videoId}`}
+            {(() => {
+              switch (videoPlayerStatus) {
+                case AsyncStatus.LOADING:
+                  return <SpinningLoaderAnimationPure />
+                case AsyncStatus.FAILURE:
+                  return (
+                    <x.article {...SF.flexStyles}>
+                      Failed to load Youtube player due to a network problem.
+                    </x.article>
+                  )
+                default:
+                  return null
+              }
+            })()}
+            <VideoPlayerImpure
+              videoId={videoId}
+              onError={onVideoPlayerError}
+              onReady={onVideoPlayerReady}
+              style={reactYoutubePlayerInlineStyle}
+              config={reactYoutubePlayerOptions}
             />
           </x.section>
         </x.main>

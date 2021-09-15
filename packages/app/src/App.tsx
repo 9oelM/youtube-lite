@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { FC } from "react"
 import { Provider } from "react-redux"
 import { Switch, Route } from "react-router-dom"
@@ -10,9 +10,22 @@ import { NotFoundPageImpure } from "src/components/Pages/NotFound"
 import { Preflight } from "@xstyled/styled-components"
 import { GlobalStyle } from "src/styles/globalStyle"
 import configureStore, { history } from "src/redux/store"
-import { MainPageImpure } from "src/components/Pages/Main"
-import { SearchResultPageImpure } from "src/components/Pages/SearchResult"
-import { WatchPageImpure } from "src/components/Pages/Watch"
+
+const LazyMainPageImpure = React.lazy(() =>
+  import(`src/components/Pages/Main`).then((module) => ({
+    default: module.MainPageImpure,
+  }))
+)
+const LazySearchResultPageImpure = React.lazy(() =>
+  import(`src/components/Pages/SearchResult`).then((module) => ({
+    default: module.SearchResultPageImpure,
+  }))
+)
+const LazyWatchPageImpure = React.lazy(() =>
+  import(`src/components/Pages/Watch`).then((module) => ({
+    default: module.WatchPageImpure,
+  }))
+)
 
 const store = configureStore()
 
@@ -23,21 +36,23 @@ export const App: FC = () => {
         <GlobalStyle />
         <Preflight />
         <ThemeProvider theme={youtubeLiteTheme}>
-          <Switch>
-            <Route path="/" exact>
-              <MainPageImpure />
-            </Route>
-            {/* https://www.youtube.com/results?search_query=my+search+query */}
-            <Route path="/results">
-              <SearchResultPageImpure />
-            </Route>
-            <Route path="/watch">
-              <WatchPageImpure />
-            </Route>
-            <Route>
-              <NotFoundPageImpure />
-            </Route>
-          </Switch>
+          <Suspense fallback={<></>}>
+            <Switch>
+              <Route path="/" exact>
+                <LazyMainPageImpure />
+              </Route>
+              {/* https://www.youtube.com/results?search_query=my+search+query */}
+              <Route path="/results">
+                <LazySearchResultPageImpure />
+              </Route>
+              <Route path="/watch">
+                <LazyWatchPageImpure />
+              </Route>
+              <Route>
+                <NotFoundPageImpure />
+              </Route>
+            </Switch>
+          </Suspense>
         </ThemeProvider>
       </ConnectedRouter>
     </Provider>
