@@ -7,9 +7,9 @@ import { x } from "@xstyled/styled-components"
 import { Minus } from "@styled-icons/boxicons-regular/Minus"
 import { Add } from "@styled-icons/material-sharp/Add"
 import { V } from "src/styles/styleFragments"
-import { PlaylistPlay } from "styled-icons/material-sharp"
-import { Settings } from "styled-icons/material-sharp"
-import { Information } from "styled-icons/ionicons-sharp"
+import { PlaylistPlay } from "@styled-icons/material-sharp"
+import { Settings } from "@styled-icons/material-sharp"
+import { Information } from "@styled-icons/ionicons-sharp"
 
 export type Menu = {
   icon: ReactNode
