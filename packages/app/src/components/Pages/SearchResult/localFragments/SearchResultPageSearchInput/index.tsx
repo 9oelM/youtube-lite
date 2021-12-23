@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom"
 import { SearchInputPure } from "src/components/Normal/SearchInput"
 import { SearchSuggestionsImpure } from "src/components/Normal/SearchInput/localFragments/SearchSuggestions"
 import { NullFallback } from "src/components/Util/WithErrorBoundary"
+import { SEARCH_SUGGESTIONS_DISAPPEAR_TIMEOUT_MS } from "src/constants/global"
 import { useBoolean } from "src/hooks/useBoolean"
 import { useSearchSuggestions } from "src/hooks/useSearchSuggestions"
 import { enhance } from "src/utilities/essentials"
@@ -33,7 +34,7 @@ export const SearchResultPageSearchInputImpure: FC<SearchResultPageSearchInputIm
     const setSuggestionsOpenFalseDelayed = useCallback(() => {
       setTimeout(() => {
         setSuggestionsOpenFalse()
-      }, 50)
+      }, SEARCH_SUGGESTIONS_DISAPPEAR_TIMEOUT_MS)
     }, [setSuggestionsOpenFalse])
 
     const onSearchInputChange: React.ChangeEventHandler<HTMLInputElement> =
