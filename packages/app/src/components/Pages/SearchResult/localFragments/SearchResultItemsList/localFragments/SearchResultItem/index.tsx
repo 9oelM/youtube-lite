@@ -85,6 +85,7 @@ export const SearchResultCardPure: FC<SearchResultCardPureProps> =
             src={thumbnail}
             objectFit="contain"
             maxW={`200px`}
+            minWidth={`200px`}
             loading="lazy"
             borderRadius={6}
           />
