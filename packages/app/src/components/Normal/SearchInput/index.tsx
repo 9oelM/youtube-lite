@@ -9,6 +9,7 @@ import React, {
 } from "react"
 import { FC } from "react"
 import { SearchSuggestionsImpure } from "src/components/Normal/SearchInput/localFragments/SearchSuggestions"
+import { SEARCH_SUGGESTIONS_DISAPPEAR_TIMEOUT_MS } from "src/constants/global"
 import { useBoolean } from "src/hooks/useBoolean"
 import { useSearchSuggestions } from "src/hooks/useSearchSuggestions"
 import { SF, V } from "src/styles/styleFragments"
@@ -41,7 +42,7 @@ export const SearchInputImpure: FC<SearchInputImpureProps> =
     const onSearchInputBlurredDelayed = useCallback(() => {
       onSearchInputBlurredTimeout.current = window.setTimeout(() => {
         onSearchInputBlurred()
-      }, 50)
+      }, SEARCH_SUGGESTIONS_DISAPPEAR_TIMEOUT_MS)
     }, [onSearchInputBlurred])
 
     useEffect(() => {

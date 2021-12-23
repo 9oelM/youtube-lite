@@ -7,7 +7,7 @@ const config: webpack.Configuration = {
   mode: `production`,
   // https://webpack.js.org/guides/production/#source-mapping
   // Avoid inline-*** and eval-*** use in production as they can increase bundle size and reduce the overall performance.
-  devtool: `source-map`,
+  devtool: `eval`,
   devServer: devConfig.devServer,
   ...commonConfig,
   plugins: [
