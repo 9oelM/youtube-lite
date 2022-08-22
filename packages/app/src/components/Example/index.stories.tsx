@@ -9,7 +9,7 @@ const Template: Story<ExampleImpureProps> = (args: ExampleImpureProps) => (
 
 export const ExampleImpure1: Story<ExampleImpureProps> = Template.bind({})
 ExampleImpure1.args = {
-  color: `blue`,
+  color: `red`,
 }
 
 export default {

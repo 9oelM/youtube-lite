@@ -71,15 +71,19 @@ export type ExamplePureProps = {
 }
 
 export const ExamplePure: FC<ExamplePureProps> = enhance<ExamplePureProps>(
-  ({ color, children }) => (
-    <div>
-      <p
-        style={{
-          color,
-        }}
-      >
-        {children}
-      </p>
-    </div>
-  )
+  ({ color, children }) => {
+    throw new Error(`ExamplePure should not be rendered`)
+
+    return (
+      <div>
+        <p
+          style={{
+            color,
+          }}
+        >
+          {children}
+        </p>
+      </div>
+    )
+  }
 )(ExampleFallback)
