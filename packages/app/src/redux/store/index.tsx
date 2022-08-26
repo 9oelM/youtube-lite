@@ -1,13 +1,13 @@
 /* istanbul ignore file */
 import { applyMiddleware, createStore, Store } from "redux"
-import { createBrowserHistory } from "history"
+import { createHashHistory } from "history"
 import { routerMiddleware } from "connected-react-router"
 import { createRootReducer } from "src/redux/reducers"
 import { composeWithDevTools } from "redux-devtools-extension"
 import createSagaMiddleware from "redux-saga"
 import { rootSaga } from "src/redux/sagas"
 
-export const history = createBrowserHistory()
+export const history = createHashHistory()
 
 const sagaMiddleware = createSagaMiddleware()
 
