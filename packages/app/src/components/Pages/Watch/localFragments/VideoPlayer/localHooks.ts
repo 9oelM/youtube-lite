@@ -13,7 +13,8 @@ export function useManageVideoPlayerLook() {
   })
   useLayoutEffect(() => {
     async function manageVideoPlayerLook() {
-      if (!playerRef?.current) {
+      // @ts-ignore
+      if (!playerRef?.current.wrapper) {
         await new Promise((resolve) => {
           const i = setInterval(() => {
             if (playerRef?.current) {
