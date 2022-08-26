@@ -3,32 +3,34 @@ import webpack from "webpack"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 import Dotenv from "dotenv-webpack"
 
-export const commonConfig: webpack.Configuration = {
-  entry: `./src/index.tsx`,
-  // https://webpack.js.org/plugins/split-chunks-plugin/
-  optimization: {
-    splitChunks: {
-      chunks: `all`,
-      minSize: 20000,
-      minRemainingSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 30,
-      maxInitialRequests: 30,
-      enforceSizeThreshold: 50000,
-      cacheGroups: {
-        defaultVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          reuseExistingChunk: true,
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true,
+const optimization: webpack.Configuration[`optimization`] = {
+  runtimeChunk: `multiple`,
+  splitChunks: {
+    chunks: `all`,
+    name: `shared`,
+    cacheGroups: {
+      vendor: {
+        test: /[\\/]node_modules[\\/]/,
+        //@ts-ignore
+        name(module) {
+          // get the name. E.g. node_modules/packageName/not/this/part.js
+          // or node_modules/packageName
+          const packageName = module.context.match(
+            /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+          )[1]
+
+          // npm package names are URL-safe, but some servers don't like @ symbols
+          return `npm.${packageName.replace(`@`, ``)}`
         },
       },
     },
   },
+}
+
+export const commonConfig: webpack.Configuration = {
+  entry: `./src/index.tsx`,
+  // https://webpack.js.org/plugins/split-chunks-plugin/
+  optimization,
   module: {
     rules: [
       {
